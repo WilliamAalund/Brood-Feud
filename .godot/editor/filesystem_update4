@@ -1,12 +1,1 @@
-res://Characters/Object_Food/object_food.tscn
-res://Levels/Control.gd
-res://Levels/Main Level.tscn
-res://Characters/Player_Potion/player_potion.tscn
-res://Characters/Player_Potion/player_potion.gd
-res://Levels/Demo Level.tscn
-res://Assets/Player_Potion/player_potion.tscn
-res://Assets/Object_Satiation_Manager/Main Level.tscn
-res://Assets/Object_Satiation_Manager/Satiation_Manager.tscn
-res://Assets/Object_Food/object_food.tscn
-res://Assets/Object_Satiation_Manager/Control.gd
 res://Levels/Hunger Demo.tscn
