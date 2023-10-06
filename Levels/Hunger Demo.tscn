@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://47g27ob781ks"]
+
+[ext_resource type="PackedScene" uid="uid://di5tsn67yt3vc" path="res://Assets/Object_Food/object_food.tscn" id="1_c18rm"]
+[ext_resource type="PackedScene" uid="uid://jp3vkphpatwu" path="res://Assets/Player_Potion/player_potion.tscn" id="2_0t5y8"]
+[ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Assets/Object_Satiation_Manager/Satiation_Manager.tscn" id="3_tqbfv"]
+
+[node name="Demo Level" type="Node2D"]
+
+[node name="object_food" parent="." instance=ExtResource("1_c18rm")]
+position = Vector2(491, 300)
+
+[node name="PlayerPotion" parent="." instance=ExtResource("2_0t5y8")]
+position = Vector2(354, 302)
+
+[node name="HungerControl" parent="." instance=ExtResource("3_tqbfv")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 35.0
+offset_top = 34.0
+offset_right = 698.0
+offset_bottom = 294.0
+text = "Demo for satiation mechanics
+WASD - move potion sprite
+Meter - Satiation level, max value is 100
+Godot - food object, touch it with player potion to restore satiation
+Click button to restore hunger
+
+- As long as any Area2D node that collides with the food object 
+is in the \"eater\" group, the food will be eaten
+- So to merge with another project, just import the assets and put whatever Area2D 
+object is eating it in the \"eater\" group"
+
+[connection signal="food_eaten" from="object_food" to="HungerControl" method="_on_object_food_food_eaten"]

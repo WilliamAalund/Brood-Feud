@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://di5tsn67yt3vc"]
+
+[ext_resource type="Texture2D" uid="uid://pcpg3edo3nkg" path="res://icon.svg" id="1_si4hf"]
+
+[sub_resource type="GDScript" id="GDScript_egfrn"]
+script/source = "extends Node2D
+
+signal food_eaten
+
+func _on_area_2d_area_entered(area): # Initiates signal that food item has been eaten.
+	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
+		emit_signal(\"food_eaten\") 
+		queue_free() # Deletes entity.
+
+
+func _on_food_eaten():
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77j0b"]
+
+[node name="object_food" type="Node2D"]
+script = SubResource("GDScript_egfrn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.19209e-07, 0)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("1_si4hf")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_77j0b")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
