@@ -1,22 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://buc4ei3c7xex1"]
+[gd_scene load_steps=9 format=3 uid="uid://buc4ei3c7xex1"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Player_Potion/player_potion.gd" id="1_j7v4r"]
-[ext_resource type="Texture2D" uid="uid://n3deer2hdrs8" path="res://Visuals/Placeholder Graphics/potion.png" id="2_axvjb"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="2_bxva0"]
+[ext_resource type="Script" path="res://Sub Scenes/Player_Potion/player_head.gd" id="3_eg2jv"]
+[ext_resource type="Texture2D" uid="uid://puopyleeq7w4" path="res://Visuals/Placeholder Graphics/ProtoHead.png" id="3_q3pcf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mb7bo"]
-size = Vector2(24, 24)
+[sub_resource type="CircleShape2D" id="CircleShape2D_yqvkn"]
+radius = 15.5322
 
-[node name="PlayerPotion" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_j1d5r"]
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8hd72"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lqft6"]
+radius = 9.0
+height = 26.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_j7v4r")
 
-[node name="Area2D" type="Area2D" parent="." groups=["eater"]]
+[node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["player"]]
-shape = SubResource("RectangleShape2D_mb7bo")
+position = Vector2(0.5, 4.37114e-08)
+rotation = -3.14159
+shape = SubResource("CircleShape2D_yqvkn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 scale = Vector2(1, 0.989341)
-shape = SubResource("RectangleShape2D_mb7bo")
+shape = SubResource("CircleShape2D_j1d5r")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" groups=["player"]]
-texture = ExtResource("2_axvjb")
+texture = ExtResource("2_bxva0")
+
+[node name="head" type="CharacterBody2D" parent="." groups=["player"]]
+script = ExtResource("3_eg2jv")
+angle_padding = 90
+
+[node name="Area2D" type="Area2D" parent="head" groups=["eater"]]
+position = Vector2(0, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="head/Area2D"]
+shape = SubResource("CapsuleShape2D_8hd72")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="head" groups=["player"]]
+position = Vector2(0, -30)
+shape = SubResource("CapsuleShape2D_lqft6")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="head/CollisionShape2D" groups=["player"]]
+texture = ExtResource("3_q3pcf")

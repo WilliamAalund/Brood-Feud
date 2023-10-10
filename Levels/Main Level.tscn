@@ -10,7 +10,7 @@
 [node name="object_nest" parent="." instance=ExtResource("2_1iti4")]
 position = Vector2(479, 262)
 
-[node name="PlayerPotion" parent="." instance=ExtResource("1_gwq81")]
+[node name="Player" parent="." instance=ExtResource("1_gwq81")]
 position = Vector2(474, 270)
 
 [node name="HungerControl" parent="." instance=ExtResource("3_ckkx0")]
