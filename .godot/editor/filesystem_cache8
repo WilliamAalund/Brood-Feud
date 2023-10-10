@@ -1,4 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
+<<<<<<< refs/remotes/origin/main
 ::res://::1696915218
 LICENSE.md::TextFile::-1::1696341547::0::1::::<><>::
 README.md::TextFile::-1::1696341547::0::1::::<><>::
@@ -30,3 +31,34 @@ large_potion.png::CompressedTexture2D::4351173357571615035::1696909088::16969090
 potion.png::CompressedTexture2D::970447076153338353::1696909088::1696909088::1::::<><>::
 protoBody.png::CompressedTexture2D::1964551149883103179::1696910548::1696910556::1::::<><>::
 ProtoHead.png::CompressedTexture2D::1094998312199990921::1696912718::1696912738::1::::<><>::
+=======
+::res://::1696909418
+LICENSE.md::TextFile::-1::1695933699::0::1::::<><>::
+README.md::TextFile::-1::1695933699::0::1::::<><>::
+::res://Levels/::1696909368
+Main Level.tscn::PackedScene::5125530937687886872::1696909368::0::1::::<><>::uid://buc4ei3c7xex1::::res://Sub Scenes/Player_Potion/player_potion.tscn<>uid://bshdn3dwrgrbt::::res://Sub Scenes/Object_Nest/object_nest.tscn<>uid://dmuddbset2mpi::::res://Sub Scenes/Object_Satiation_Manager/Satiation_Manager.tscn<>uid://di5tsn67yt3vc::::res://Sub Scenes/Object_Food/object_food.tscn
+::res://Levels/Demo Levels/::1696908634
+Collision Demo.tscn::PackedScene::5237759885442993399::1696908484::0::1::::<><>::uid://buc4ei3c7xex1
+Hunger Demo.tscn::PackedScene::2101950774488874998::1696908634::0::1::::<><>::uid://di5tsn67yt3vc
+Nest Boundary Demo.tscn::PackedScene::222683424514838992::1696908634::0::1::::<><>::uid://bshdn3dwrgrbt
+::res://Sub Scenes/::1696908509
+::res://Sub Scenes/Dummy Collider/::1696908663
+Dummy Collider.tscn::PackedScene::646580696450773402::1696908663::0::1::::<><>::uid://pcpg3edo3nkg
+::res://Sub Scenes/Object_Food/::1696908663
+object_food.tscn::PackedScene::7783890632137480724::1696908663::0::1::::<><>::uid://b280gpbrngh3h
+::res://Sub Scenes/Object_Nest/::1696908663
+object_nest.tscn::PackedScene::3664477356065935289::1696908663::0::1::::<><>::uid://ndt5ew10f15g
+::res://Sub Scenes/Object_Satiation_Manager/::1696903338
+Control.gd::GDScript::-1::1696541640::0::1::::<>Control<>::
+Satiation_Manager.tscn::PackedScene::8043003318714938686::1696903338::0::1::::<><>::
+::res://Sub Scenes/Player_Potion/::1696908663
+player_potion.gd::GDScript::-1::1696887724::0::1::::<>CharacterBody2D<>::
+player_potion.tscn::PackedScene::3796094711503583152::1696908663::0::1::::<><>::res://Sub Scenes/Player_Potion/player_potion.gd<>uid://n3deer2hdrs8
+::res://Visuals/::1696908563
+::res://Visuals/Art Assets/::1696908563
+::res://Visuals/Placeholder Graphics/::1696908663
+circle.png::CompressedTexture2D::919855542530364770::1696887464::1696908663::1::::<><>::
+icon.svg::CompressedTexture2D::1057884356722684206::1696183691::1696908663::1::::<><>::
+large_potion.png::CompressedTexture2D::4351173357571615035::1696541640::1696908663::1::::<><>::
+potion.png::CompressedTexture2D::970447076153338353::1696541640::1696908663::1::::<><>::
+>>>>>>> Added editor layout changes
