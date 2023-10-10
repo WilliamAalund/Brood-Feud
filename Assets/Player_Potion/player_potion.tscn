@@ -9,10 +9,14 @@ size = Vector2(24, 24)
 [node name="PlayerPotion" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_fdu72")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["player"]]
-texture = ExtResource("2_c2hqf")
-
 [node name="Area2D" type="Area2D" parent="." groups=["eater"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["player"]]
 shape = SubResource("RectangleShape2D_mb7bo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
+scale = Vector2(1, 0.989341)
+shape = SubResource("RectangleShape2D_mb7bo")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" groups=["player"]]
+texture = ExtResource("2_c2hqf")

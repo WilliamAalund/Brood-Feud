@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgvhe06gris0n"]
+
+[ext_resource type="PackedScene" uid="uid://jp3vkphpatwu" path="res://Assets/Player_Potion/player_potion.tscn" id="1_3ld2o"]
+[ext_resource type="PackedScene" uid="uid://jhhdbt17g05k" path="res://Assets/Dummy Collider/Dummy Collider.tscn" id="2_2ovsx"]
+
+[node name="Collision Demo" type="Node2D"]
+
+[node name="PlayerPotion" parent="." instance=ExtResource("1_3ld2o")]
+position = Vector2(289, 215)
+
+[node name="Dummy Collider" parent="." instance=ExtResource("2_2ovsx")]
+position = Vector2(-1, 0)

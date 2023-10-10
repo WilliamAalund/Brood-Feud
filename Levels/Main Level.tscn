@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfa30ma1dxdgy"]
+
+[ext_resource type="PackedScene" uid="uid://jp3vkphpatwu" path="res://Assets/Player_Potion/player_potion.tscn" id="1_gwq81"]
+[ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Assets/Object_Nest/object_nest.tscn" id="2_1iti4"]
+[ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Assets/Object_Satiation_Manager/Satiation_Manager.tscn" id="3_ckkx0"]
+[ext_resource type="PackedScene" uid="uid://di5tsn67yt3vc" path="res://Assets/Object_Food/object_food.tscn" id="4_5fww3"]
+
+[node name="Game Level" type="Node2D"]
+
+[node name="object_nest" parent="." instance=ExtResource("2_1iti4")]
+position = Vector2(479, 262)
+
+[node name="PlayerPotion" parent="." instance=ExtResource("1_gwq81")]
+position = Vector2(474, 270)
+
+[node name="HungerControl" parent="." instance=ExtResource("3_ckkx0")]
+
+[node name="object_food" parent="." instance=ExtResource("4_5fww3")]
+position = Vector2(605, 196)
+
+[connection signal="food_eaten" from="object_food" to="HungerControl" method="_on_object_food_food_eaten"]

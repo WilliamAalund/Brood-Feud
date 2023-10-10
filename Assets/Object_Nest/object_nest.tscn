@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bshdn3dwrgrbt"]
+
+[ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://art/circle.png" id="1_cdbf3"]
+
+[node name="object_nest" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_cdbf3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(4, 2)
+build_mode = 1
+polygon = PackedVector2Array(-253, 21, -253, -25, -235, -100, -207, -149, -160, -198, -99, -236, -26, -251, 18, -251, 93, -233, 156, -195, 207, -138, 234, -83, 245, -24, 245, 20, 229, 93, 190, 157, 136, 207, 72, 241, -9, 249, -48, 245, -83, 236, -119, 221, -156, 198, -186, 171, -213, 140, -238, 89)
