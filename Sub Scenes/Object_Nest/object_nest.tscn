@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bshdn3dwrgrbt"]
 
-[ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://art/circle.png" id="1_cdbf3"]
+[ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://Visuals/Placeholder Graphics/circle.png" id="1_cdbf3"]
 
 [node name="object_nest" type="Node2D"]
 

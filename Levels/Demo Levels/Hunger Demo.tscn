@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://47g27ob781ks"]
 
-[ext_resource type="PackedScene" uid="uid://di5tsn67yt3vc" path="res://Assets/Object_Food/object_food.tscn" id="1_ltjxd"]
-[ext_resource type="PackedScene" uid="uid://jp3vkphpatwu" path="res://player_potion.tscn" id="2_flw7o"]
-[ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Assets/Object_Satiation_Manager/Satiation_Manager.tscn" id="3_elxgk"]
+[ext_resource type="PackedScene" uid="uid://di5tsn67yt3vc" path="res://Sub Scenes/Object_Food/object_food.tscn" id="1_ltjxd"]
+[ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Sub Scenes/Player_Potion/player_potion.tscn" id="2_flw7o"]
+[ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Object_Satiation_Manager/Satiation_Manager.tscn" id="3_elxgk"]
 
 [node name="Demo Level" type="Node2D"]
 

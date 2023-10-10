@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n3deer2hdrs8"
-path="res://.godot/imported/potion.png-95d683ab0b8dea4c05195d064da52cd4.ctex"
+uid="uid://ndt5ew10f15g"
+path="res://.godot/imported/circle.png-dff43b245a95a1f9efd719289f353f7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/potion.png"
-dest_files=["res://.godot/imported/potion.png-95d683ab0b8dea4c05195d064da52cd4.ctex"]
+source_file="res://Visuals/Placeholder Graphics/circle.png"
+dest_files=["res://.godot/imported/circle.png-dff43b245a95a1f9efd719289f353f7e.ctex"]
 
 [params]
 

@@ -1,14 +1,1 @@
-res://Levels/Hunger Demo.tscn
-res://player_potion.tscn
-res://Levels/Nest Boundary Demo.tscn
-res://Assets/Object_Nest/object_nest.tscn
-res://Assets/Player_Potion/player_potion.tscn
-res://Assets/Object_Food/object_food.tscn
-res://Assets/Dummy Collider/Dummy Collider.tscn
-res://Levels/Collision Demo.tscn
-res://Levels/Game Level.tscn
 res://Levels/Main Level.tscn
-res://Levels/Demo Levels/Hunger Demo.tscn
-res://Levels/Demo Levels/Nest Boundary Demo.tscn
-res://Levels/Demo Levels/Collision Demo.tscn
-res://Assets/Object_Satiation_Manager/Satiation_Manager.tscn

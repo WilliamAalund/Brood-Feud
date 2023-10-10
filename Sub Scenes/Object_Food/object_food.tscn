@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://di5tsn67yt3vc"]
 
-[ext_resource type="Texture2D" uid="uid://b280gpbrngh3h" path="res://art/large_potion.png" id="1_pijcd"]
+[ext_resource type="Texture2D" uid="uid://b280gpbrngh3h" path="res://Visuals/Placeholder Graphics/large_potion.png" id="1_pijcd"]
 
 [sub_resource type="GDScript" id="GDScript_egfrn"]
 script/source = "extends Node2D
