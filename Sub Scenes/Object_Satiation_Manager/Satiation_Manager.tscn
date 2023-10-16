@@ -34,6 +34,9 @@ func _on_timer_timeout(): # Increments satiation value
 
 func _on_object_food_food_eaten(): # Function called when object_food transmits food_eaten signal.
 	eat() 
+
+func _on_object_food_spawner_child_food_eaten(): # Function called when Object_Food_Spawn transmits signal.
+	eat()
 "
 
 [node name="HungerControl" type="Control"]
@@ -66,6 +69,7 @@ wait_time = 0.05
 autostart = true
 
 [node name="Button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 128.275
 offset_top = 99.102

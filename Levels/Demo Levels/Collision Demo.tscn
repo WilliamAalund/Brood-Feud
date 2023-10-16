@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgvhe06gris0n"]
 
-[ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Assets/Player_Potion/player_potion.tscn" id="1_3ld2o"]
-[ext_resource type="PackedScene" uid="uid://jhhdbt17g05k" path="res://Assets/Dummy Collider/Dummy Collider.tscn" id="2_2ovsx"]
+[ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Sub Scenes/Player_Potion/player_potion.tscn" id="1_3ld2o"]
+[ext_resource type="PackedScene" uid="uid://jhhdbt17g05k" path="res://Sub Scenes/Dummy Collider/Dummy Collider.tscn" id="2_2ovsx"]
 
 [node name="Collision Demo" type="Node2D"]
 

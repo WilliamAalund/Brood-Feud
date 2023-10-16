@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6f2ildgxylks"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Object_Food_Spawner/Object_Food_Spawner.gd" id="1_fm74n"]
+
+[node name="Object_Food_Spawner" type="Node2D"]
+script = ExtResource("1_fm74n")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 146.0
+offset_top = 140.0
+offset_right = 289.0
+offset_bottom = 171.0
+text = "Press to add food
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

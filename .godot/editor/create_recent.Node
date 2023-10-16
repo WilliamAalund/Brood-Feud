@@ -1,4 +1,11 @@
+Label
+Camera2D
+Timer
+ProgressBar
 Sprite2D
+Button
+Node2D
+Control
 CollisionShape2D
 Area2D
 CharacterBody2D

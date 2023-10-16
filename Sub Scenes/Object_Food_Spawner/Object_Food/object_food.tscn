@@ -1,20 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://di5tsn67yt3vc"]
 
-[ext_resource type="Texture2D" uid="uid://b280gpbrngh3h" path="res://Visuals/Placeholder Graphics/large_potion.png" id="1_pijcd"]
+[ext_resource type="Texture2D" uid="uid://b280gpbrngh3h" path="res://Visuals/Placeholder Graphics/large_potion.png" id="1_0unrj"]
 
 [sub_resource type="GDScript" id="GDScript_egfrn"]
 script/source = "extends Node2D
 
 signal food_eaten
 
+func _ready():
+	print(\"Food at: \", self.position)
+	
+		
+func _enter_tree(): #Connecting signal to parent node (which should be Object_Food_Spawner) must be done in this function, rather than _ready()
+	if get_parent().has_method(\"on_food_eaten\"): # Confirms that correct parent node exists, preventing a crash
+		#print(\"connected food to object food spawner\")
+		var parent_node = get_parent() # Creates callable object (directly connecting to get_parent() causes a type error)
+		connect(\"food_eaten\", parent_node.on_food_eaten)
+
+
 func _on_area_2d_area_entered(area): # Initiates signal that food item has been eaten.
 	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
+		#print(\"Food emitting food_eaten\")
 		emit_signal(\"food_eaten\") 
 		queue_free() # Deletes entity.
-
-
-func _on_food_eaten():
-	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_77j0b"]
@@ -23,8 +31,7 @@ func _on_food_eaten():
 script = SubResource("GDScript_egfrn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.833333, 0.833333)
-texture = ExtResource("1_pijcd")
+texture = ExtResource("1_0unrj")
 
 [node name="Area2D" type="Area2D" parent="."]
 
