@@ -63,6 +63,8 @@ func _on_timer_timeout(): # State machine(?) Every time a second passes,
 			print("Predator approaches nest")
 			predApproached = true
 			
+			
+			
 func headToNest():
 	emit_signal("toggle_predator_presence")
 	await get_tree().create_timer(LandingTime).timeout
