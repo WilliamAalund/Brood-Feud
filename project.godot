@@ -17,7 +17,6 @@ config/icon="res://Visuals/Placeholder Graphics/icon.svg"
 
 [display]
 
-window/size/viewport_height=649
 window/stretch/mode="canvas_items"
 window/stretch/scale=1.25
 
