@@ -1,11 +1,1 @@
-res://Levels/Main Level.tscn
 res://Sub Scenes/Object_Predator/Predator.gd
-res://Sub Scenes/Object_Momma_Bird/Momma_Bird.gd
-res://Sub Scenes/Object_Food_Spawner/Object_Food_Spawner.tscn
-res://Sub Scenes/Player_Potion/player_potion.tscn
-res://Sub Scenes/Object_Food_Spawner/Object_Food/object_food.tscn
-res://Levels/Demo Levels/Food Spawn Demo.tscn
-res://Sub Scenes/Object_Satiation_Manager/Satiation_Manager.tscn
-res://Sub Scenes/Object_Momma_Bird/Momma_Bird.tscn
-res://Levels/Demo Levels/Momma Bird Demo.tscn
-res://Sub Scenes/Object_Predator/Predator.tscn

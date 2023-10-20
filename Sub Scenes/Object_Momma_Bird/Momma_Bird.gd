@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @export var SecondsToReturn = 10
 @export var FoodToDrop = 3
 @export var DropInterval = 4 # Time momma bird takes between dropping food
@@ -52,7 +51,5 @@ func momReturns(): # Hand
 	emit_signal("toggle_mom_presence")
 	print("Momma bird leaves")
 	
-
-
 func _on_predator_toggle_predator_presence():
 	predatorIsHome = !predatorIsHome

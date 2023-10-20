@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqc0vbl1gl11m"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Object_AI_Bird/AI_Bird.gd" id="1_67y3l"]
+[ext_resource type="Texture2D" uid="uid://n3deer2hdrs8" path="res://Visuals/Placeholder Graphics/potion.png" id="1_mpu1f"]
+
+[node name="AI_Bird" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_67y3l")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+debug_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_mpu1f")
