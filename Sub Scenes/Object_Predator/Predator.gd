@@ -30,7 +30,7 @@ func _ready(): # Momma bird starts off invisible
 
 func approachCheck() -> bool:
 	var check = randi_range(predAggro, MaxPredAggro)
-	print("Approach check:", check)
+	print("Predator : Approach check: ", check)
 	if check == MaxPredAggro:
 		return true
 	else:
@@ -39,7 +39,7 @@ func approachCheck() -> bool:
 
 func headCheck() -> bool:
 	if momIsHome:
-		print("Predator cannot head to nest: momma bird is watching")
+		print("Predator : cannot head to nest: momma bird is watching")
 		return false
 	return randi_range(1, 100) > 40
 
@@ -53,14 +53,14 @@ func _on_timer_timeout(): # State machine(?) Every time a second passes,
 	if predAggro % 10 == 0 and !isHome:
 		if predApproached:
 			if headCheck():
-				print("Predator heads to nest")
+				print("Predator : heads to nest")
 				isHome = true
 				# Run evil predator functions
 				headToNest()
 			else: if momIsHome:
 				pass # Preserves aggression level. Bird will not completely reset: just wait for another chance
 		else: if approachCheck():
-			print("Predator approaches nest")
+			print("Predator : approaches nest")
 			predApproached = true
 			
 			
@@ -71,7 +71,7 @@ func headToNest():
 	var predSprite = get_child(0)
 	predSprite.visible = isHome
 	await get_tree().create_timer(StayLength).timeout
-	print("Predator leaves")
+	print("Predator : leaves nest")
 	isHome = false
 	predSprite.visible = isHome
 	predApproached = false

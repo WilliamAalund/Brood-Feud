@@ -8,7 +8,7 @@ script/source = "extends Node2D
 signal food_eaten
 
 func _ready():
-	print(\"Food at: \", self.position)
+	print(\"Food     : spawned at: \", self.position)
 	
 		
 func _enter_tree(): #Connecting signal to parent node (which should be Object_Food_Spawner) must be done in this function, rather than _ready()
@@ -17,12 +17,12 @@ func _enter_tree(): #Connecting signal to parent node (which should be Object_Fo
 		var parent_node = get_parent() # Creates callable object (directly connecting to get_parent() causes a type error)
 		connect(\"food_eaten\", parent_node.on_food_eaten)
 
-
 func _on_area_2d_area_entered(area): # Initiates signal that food item has been eaten.
 	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
 		#print(\"Food emitting food_eaten\")
 		emit_signal(\"food_eaten\") 
 		queue_free() # Deletes entity.
+
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_77j0b"]

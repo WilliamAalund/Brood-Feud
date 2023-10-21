@@ -11,18 +11,18 @@ script/source = "extends Control # Script for HungerControl Node
 func eat(): # Function called to increase satiation when you eat. Potential mechanic where eating too much could have a drawback?
 	if satiation + foodRestore > 100:
 		satiation = 100
-		print(\"Satiation maxed out\")
+		print(\"Satiation: maxed out\")
 	else:
 		satiation += foodRestore
-		print(\"Satiation increased by {}\".format(foodRestore))
+		print(\"Satiation: increased by {}\".format(foodRestore))
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:
 		satiation = 0
-		print(\"Satiation equals 0\")
+		print(\"Satiation: equals 0\")
 	else:
 		satiation -= value
-		print(\"Satiation decreased by {}\".format(value))
+		print(\"Satiation: decreased by {}\".format(value))
 
 func _on_button_pressed(): #Function tied to button node.
 	eat() 

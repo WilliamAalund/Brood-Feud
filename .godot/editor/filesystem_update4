@@ -15,3 +15,5 @@ res://Sub Scenes/Bird Manager/BirdControl.tscn
 res://Sub Scenes/Bird Manager/BirdControl.gd
 res://Sub Scenes/Object_AI_Bird/AI_Bird.gd
 res://Sub Scenes/Object_AI_Bird/AI_BirdCharacterBody.gd
+res://Sub Scenes/Player_Potion/player_potion.gd
+res://Sub Scenes/Player_Potion/player_head.gd
