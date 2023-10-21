@@ -1,18 +1,9 @@
-extends CharacterBody2D
+extends Node2D
 
-var speed = 50
-var accel = 7
 
-@onready var nav: NavigationAgent2D = $NavigationAgent2D
+var Player_Pos
 
-func _physics_process(delta):
-	var direction = Vector3()
-	
-	nav.target_position = get_global_mouse_position()
-	
-	direction = nav.get_next_path_position() - global_position
-	direction = direction.normalized()
-	
-	velocity = velocity.lerp(direction * speed , accel * delta)
-	
-	move_and_slide()
+
+
+func _on_bird_control_ai_bird_move(target_position):
+	$CharacterBody2D.target = target_position # Replace with function body.

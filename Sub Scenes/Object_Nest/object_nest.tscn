@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://Visuals/Placeholder Graphics/circle.png" id="1_cdbf3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cyoeg"]
-vertices = PackedVector2Array(35, -254, 28, -262, 155, -198, 55, 246, -13, 250, -110, 232, -169, 186, -230, 100, -250, -23, -219, -115, -154, -200, -100, -230, -34, -254, 222, -120, 249, -11, 236, 104, 162, 183, 108, 227)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 2, 13, 14, 15, 16, 17)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(28, -262, 155, -198, 222, -120, 249, -11, 236, 104, 162, 183, 108, 227, 55, 246, -13, 250, -110, 232, -169, 186, -230, 100, -250, -23, -219, -115, -154, -200, -100, -230, -34, -254, 35, -254)])
+vertices = PackedVector2Array(86, -237, 155, -198, 222, -120, 249, -11, 236, 104, 162, 183, 108, 227, 55, 246, -13, 250, -110, 232, -169, 186, -230, 100, -250, -23, -219, -115, -154, -200, -100, -230, -34, -254, 35, -254)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(86, -237, 155, -198, 222, -120, 249, -11, 236, 104, 162, 183, 108, 227, 55, 246, -13, 250, -110, 232, -169, 186, -230, 100, -250, -23, -219, -115, -154, -200, -100, -230, -34, -254, 35, -254)])
 cell_size = 41.86
 
 [node name="object_nest" type="Node2D"]
