@@ -1,39 +1,37 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfa30ma1dxdgy"]
 
-[ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Object_Nest/object_nest.tscn" id="2_1iti4"]
-[ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Object_Satiation_Manager/Satiation_Manager.tscn" id="3_ckkx0"]
-[ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Object_Food_Spawner/Object_Food_Spawner.tscn" id="5_slw61"]
-[ext_resource type="PackedScene" uid="uid://d14fg5rt0e8f4" path="res://Sub Scenes/Object_Momma_Bird/Momma_Bird.tscn" id="5_ucfnu"]
-[ext_resource type="PackedScene" uid="uid://bx0asr7ljxkpl" path="res://Sub Scenes/Object_Predator/Predator.tscn" id="6_h57gx"]
-[ext_resource type="PackedScene" uid="uid://dwitdkiendap8" path="res://Sub Scenes/Bird Manager/BirdControl.tscn" id="7_jxroq"]
+[ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="2_1iti4"]
+[ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn" id="3_ckkx0"]
+[ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn" id="5_slw61"]
+[ext_resource type="PackedScene" uid="uid://cudu6vf7uwwve" path="res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn" id="5_ucfnu"]
+[ext_resource type="PackedScene" uid="uid://bx0asr7ljxkpl" path="res://Sub Scenes/Process_Predator/Process_Predator.tscn" id="6_63o2m"]
+[ext_resource type="PackedScene" uid="uid://dwitdkiendap8" path="res://Sub Scenes/Manager_Birds/Manager_Birds.tscn" id="7_jxroq"]
 
 [node name="Game Level" type="Node2D"]
 
-[node name="object_nest" parent="." instance=ExtResource("2_1iti4")]
+[node name="Environment_Nest" parent="." instance=ExtResource("2_1iti4")]
 position = Vector2(0, 70)
 
-[node name="HungerControl" parent="." instance=ExtResource("3_ckkx0")]
+[node name="Manager_Satiation" parent="." instance=ExtResource("3_ckkx0")]
 offset_left = 72.0
 offset_top = 147.0
 offset_right = 571.0
 offset_bottom = 316.0
-idleRate = 0.04
 
-[node name="Object_Food_Spawner" parent="." instance=ExtResource("5_slw61")]
+[node name="Helper_Food_Spawner" parent="." instance=ExtResource("5_slw61")]
 position = Vector2(0, 70)
 
-[node name="Momma_Bird" parent="." instance=ExtResource("5_ucfnu")]
+[node name="Process_Momma_Bird" parent="." instance=ExtResource("5_ucfnu")]
 position = Vector2(-289, -80)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-2, 68)
 
-[node name="Predator" parent="." instance=ExtResource("6_h57gx")]
-position = Vector2(-309, 245)
-
 [node name="BirdControl" parent="." instance=ExtResource("7_jxroq")]
 
-[connection signal="child_food_eaten" from="Object_Food_Spawner" to="HungerControl" method="_on_object_food_spawner_child_food_eaten"]
-[connection signal="mom_drops_food" from="Momma_Bird" to="Object_Food_Spawner" method="_on_momma_bird_mom_drops_food"]
-[connection signal="toggle_mom_presence" from="Momma_Bird" to="Predator" method="_on_momma_bird_toggle_mom_presence"]
-[connection signal="toggle_predator_presence" from="Predator" to="Momma_Bird" method="_on_predator_toggle_predator_presence"]
+[node name="Process_Predator" parent="." instance=ExtResource("6_63o2m")]
+position = Vector2(-315, 237)
+
+[connection signal="child_food_eaten" from="Helper_Food_Spawner" to="Manager_Satiation" method="_on_object_food_spawner_child_food_eaten"]
+[connection signal="mom_drops_food" from="Process_Momma_Bird" to="Helper_Food_Spawner" method="_on_momma_bird_mom_drops_food"]
+[connection signal="toggle_predator_presence" from="Process_Predator" to="Process_Momma_Bird" method="_on_process_predator_toggle_predator_presence"]

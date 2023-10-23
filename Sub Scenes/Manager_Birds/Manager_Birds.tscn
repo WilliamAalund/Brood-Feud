@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwitdkiendap8"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Manager_Birds/BirdControl.gd" id="1_nqp0i"]
+[ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Sub Scenes/Player_Bird/Player_Bird.tscn" id="2_loup2"]
+[ext_resource type="PackedScene" uid="uid://cqc0vbl1gl11m" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn" id="3_aebak"]
+
+[node name="BirdControl" type="Node2D"]
+script = ExtResource("1_nqp0i")
+
+[node name="Player" parent="." instance=ExtResource("2_loup2")]
+
+[node name="AI_Bird" parent="." instance=ExtResource("3_aebak")]
+position = Vector2(1, 51)
+
+[connection signal="AI_Bird_Move" from="." to="AI_Bird" method="_on_bird_control_ai_bird_move"]

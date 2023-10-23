@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cudu6vf7uwwve"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Process_Momma_Bird/Momma_Bird.gd" id="1_44ueo"]
+[ext_resource type="Texture2D" uid="uid://16qwckh3r6x7" path="res://Visuals/Placeholder Graphics/mommabirdplaceholder.png" id="2_gvgd0"]
+
+[node name="Momma_Bird" type="Node2D"]
+script = ExtResource("1_44ueo")
+SecondsToReturn = 25
+DropInterval = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.41)
+texture = ExtResource("2_gvgd0")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -67.0
+offset_top = -83.0
+offset_right = 67.0
+offset_bottom = -56.0
+max_value = 5.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -65.0
+offset_top = -105.0
+offset_right = -16.0
+offset_bottom = -79.0
+text = "Mama"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
