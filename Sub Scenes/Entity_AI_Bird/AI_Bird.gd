@@ -3,14 +3,16 @@ extends Node2D
 @export var starvationThreshold = 30
 @export var angryThreshold = 5
 
-# State variable is in the CharacterBody2D Node
+const idleVal = 0.04
+
+# State variable is in the child CharacterBody2D Node
 # TODO: Implement aggroVal raising, aggroTarger, momHome, isSunspot, noticedPredator, and isStupid
 var aggroVal = 0 # Bird begins with no aggro value
 var aggroTarget
-var momHome # TODO: Find way to alert bird that momma bird is home
+#var momHome = get_parent().momIsHome # TODO: Find way to alert bird that momma bird is home
 var isSunspot
 var noticedPredator
-var isStupid
+var isStupid = false
 
 var Player_Pos # Variable to store the location of the player
 #TODO: Make sure
@@ -41,7 +43,7 @@ func updatedState():
 	else: if aggroVal >= angryThreshold: # If the bird isn't starving, it will respond to
 # aggression from the player, as well as from other birds.
 		return 3
-	else: if momHome or satiationValue < starvationThreshold: # If the bird isn't dead,
+	else: if get_parent().momIsHome or satiationValue < starvationThreshold: # If the bird isn't dead,
 # if there is no predator, if the bird isnt angry, and mom is home or the bird is
 # starving, it will look for food.
 		return 2
@@ -59,4 +61,10 @@ func _on_bird_control_ai_bird_move(target_position):
 
 func _on_timer_timeout():
 	$CharacterBody2D.state = updatedState()
-	print("AI bird  : state updated to: " + str($CharacterBody2D.state))
+	$Debug_AI_State.text = str($CharacterBody2D.state)
+	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
+
+
+func _on_bird_control_ai_bird_increment_hunger():
+	satiationValue -= idleVal
+	$Debug_Satiation_Label.text = str(satiationValue).substr(0,5)

@@ -30,7 +30,8 @@ func _ready(): # Momma bird starts off invisible
 
 func approachCheck() -> bool:
 	var check = randi_range(predAggro, MaxPredAggro)
-	print("Predator : Approach check: ", check)
+	$Debug_Roll.text = str(check)
+	#print("Predator : Approach check: ", check)
 	if check == MaxPredAggro:
 		return true
 	else:

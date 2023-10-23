@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfa30ma1dxdgy"]
+[gd_scene load_steps=8 format=3 uid="uid://cfa30ma1dxdgy"]
 
 [ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="2_1iti4"]
 [ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn" id="3_ckkx0"]
 [ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn" id="5_slw61"]
 [ext_resource type="PackedScene" uid="uid://cudu6vf7uwwve" path="res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn" id="5_ucfnu"]
 [ext_resource type="PackedScene" uid="uid://bx0asr7ljxkpl" path="res://Sub Scenes/Process_Predator/Process_Predator.tscn" id="6_63o2m"]
+[ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="7_ipasa"]
 [ext_resource type="PackedScene" uid="uid://dwitdkiendap8" path="res://Sub Scenes/Manager_Birds/Manager_Birds.tscn" id="7_jxroq"]
 
 [node name="Game Level" type="Node2D"]
@@ -32,6 +33,14 @@ position = Vector2(-2, 68)
 [node name="Process_Predator" parent="." instance=ExtResource("6_63o2m")]
 position = Vector2(-315, 237)
 
+[node name="FPSLabel" type="Label" parent="."]
+offset_left = -450.0
+offset_top = -167.0
+offset_right = -410.0
+offset_bottom = -144.0
+script = ExtResource("7_ipasa")
+
 [connection signal="child_food_eaten" from="Helper_Food_Spawner" to="Manager_Satiation" method="_on_object_food_spawner_child_food_eaten"]
 [connection signal="mom_drops_food" from="Process_Momma_Bird" to="Helper_Food_Spawner" method="_on_momma_bird_mom_drops_food"]
+[connection signal="toggle_mom_presence" from="Process_Momma_Bird" to="BirdControl" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_predator_presence" from="Process_Predator" to="Process_Momma_Bird" method="_on_process_predator_toggle_predator_presence"]

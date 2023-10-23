@@ -11,13 +11,13 @@ func _physics_process(delta): #Physics process should not have any logic. Logica
 	callMovement(state, delta)
 
 func state0(delta): # Stays in egg
-	print("State 0 does not have an implemented navigation method")
+	pass
 
 func state1(delta): # Remains idle
 	pass
 
 func state2(delta): # Will move towards and look for food
-	print("State 2 does not have an implemented navigation method")
+	pass
 
 func state3(delta): # Follows player
 	var direction = Vector3()
@@ -32,13 +32,13 @@ func state3(delta): # Follows player
 	move_and_slide()
 
 func state4(delta): # Will move to sunspot
-	print("State 4 does not have an implemented navigation method")
+	pass
 	
 func state5(delta): # Will run to edge of nest
-	print("State 5 does not have an implemented navigation method")
+	pass
 	
 func state6(delta): # Will remain entirely immobile. Dead
-	print("State 6 does not have an implemented navigation method")
+	pass
 
 # TODO: Aparrently, you can pass functions as parameters somehow.
 # There should be an extremely easy way to tell the navigation agent to just do 
