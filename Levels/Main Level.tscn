@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfa30ma1dxdgy"]
+[gd_scene load_steps=9 format=3 uid="uid://cfa30ma1dxdgy"]
 
 [ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="2_1iti4"]
 [ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn" id="3_ckkx0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bx0asr7ljxkpl" path="res://Sub Scenes/Process_Predator/Process_Predator.tscn" id="6_63o2m"]
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="7_ipasa"]
 [ext_resource type="PackedScene" uid="uid://dwitdkiendap8" path="res://Sub Scenes/Manager_Birds/Manager_Birds.tscn" id="7_jxroq"]
+[ext_resource type="PackedScene" uid="uid://j6dpmc2nhd23" path="res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn" id="8_khyrq"]
 
 [node name="Game Level" type="Node2D"]
 
@@ -40,6 +41,10 @@ offset_right = -410.0
 offset_bottom = -144.0
 script = ExtResource("7_ipasa")
 
+[node name="Manager_Game_Over" parent="." instance=ExtResource("8_khyrq")]
+position = Vector2(262, -103)
+
+[connection signal="playerStarved" from="Manager_Satiation" to="Manager_Game_Over" method="_on_manager_satiation_player_starved"]
 [connection signal="child_food_eaten" from="Helper_Food_Spawner" to="Manager_Satiation" method="_on_object_food_spawner_child_food_eaten"]
 [connection signal="mom_drops_food" from="Process_Momma_Bird" to="Helper_Food_Spawner" method="_on_momma_bird_mom_drops_food"]
 [connection signal="toggle_mom_presence" from="Process_Momma_Bird" to="BirdControl" method="_on_process_momma_bird_toggle_mom_presence"]

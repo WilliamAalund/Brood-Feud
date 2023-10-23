@@ -14,8 +14,6 @@ res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
 res://Sub Scenes/Game_Over_Manager.tscn
 res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn
 res://Sub Scenes/Dummy Collider/Dummy Collider.tscn
-res://Sub Scenes/Manager_Birds/BirdControl.gd
-res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd
-res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd
-res://Levels/FPSLabel.gd
-res://Sub Scenes/Process_Predator/Predator.gd
+res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.gd
+res://Levels/Demo Levels/Game Over Demo.tscn
+res://Levels/Demo Levels/Hunger Demo.tscn

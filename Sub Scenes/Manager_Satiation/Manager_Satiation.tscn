@@ -8,6 +8,8 @@ script/source = "extends Control # Script for HungerControl Node
 @export var tempRate : float = 0 # Rate that represents rate at which satiation is changing due to hunger.
 @export var foodRestore : float = 10 # Value that represents amount of satiation restored when you eat food.
 
+signal playerStarved
+
 func eat(): # Function called to increase satiation when you eat. Potential mechanic where eating too much could have a drawback?
 	if satiation + foodRestore > 100:
 		satiation = 100
@@ -32,6 +34,8 @@ func _on_timer_timeout(): # Increments satiation value
 	$Debugger_ProgressBar.value = satiation 
 	$ProgressBar_Visual.value = satiation
 	$Debugger_Satiation_Value.text = str(satiation).substr(0,6) # Update label with new satiation value
+	if satiation < 0:
+		emit_signal(\"playerStarved\")
 
 func _on_object_food_food_eaten(): # Function called when object_food transmits food_eaten signal.
 	eat() 
