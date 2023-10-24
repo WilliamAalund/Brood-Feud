@@ -1,4 +1,5 @@
 res://Levels/Main Level.tscn
+<<<<<<< Updated upstream
 res://Sub Scenes/Player_Bird/Player_Bird.gd
 res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn
 res://Sub Scenes/Player_Bird/Player_Bird.tscn
@@ -17,3 +18,5 @@ res://Sub Scenes/Dummy Collider/Dummy Collider.tscn
 res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.gd
 res://Levels/Demo Levels/Game Over Demo.tscn
 res://Levels/Demo Levels/Hunger Demo.tscn
+=======
+>>>>>>> Stashed changes
