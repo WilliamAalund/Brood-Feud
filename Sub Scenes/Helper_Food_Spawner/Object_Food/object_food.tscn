@@ -5,23 +5,21 @@
 [sub_resource type="GDScript" id="GDScript_egfrn"]
 script/source = "extends Node2D
 
-signal food_eaten
+#signal food_eaten
 
 func _ready():
 	print(\"Food     : spawned at: \", self.position)
 	
-		
-func _enter_tree(): #Connecting signal to parent node (which should be Object_Food_Spawner) must be done in this function, rather than _ready()
-	if get_parent().has_method(\"on_food_eaten\"): # Confirms that correct parent node exists, preventing a crash
+#func _enter_tree(): #Connecting signal to parent node (which should be Object_Food_Spawner) must be done in this function, rather than _ready()
+	#if get_parent().has_method(\"on_food_eaten\"): # Confirms that correct parent node exists, preventing a crash
 		#print(\"connected food to object food spawner\")
-		var parent_node = get_parent() # Creates callable object (directly connecting to get_parent() causes a type error)
-		connect(\"food_eaten\", parent_node.on_food_eaten)
+		#var parent_node = get_parent() # Creates callable object (directly connecting to get_parent() causes a type error)
+		#connect(\"food_eaten\", parent_node.on_food_eaten)
 
-func _on_area_2d_area_entered(area): # Initiates signal that food item has been eaten.
+func _on_area_2d_area_entered(area): # Deletes food once it comes into contact with a beak. Code handling satiation is handled in Manager_Birds and in the individual bird that eats the food
 	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
-		#print(\"Food emitting food_eaten\")
-		emit_signal(\"food_eaten\") 
 		queue_free() # Deletes entity.
+		#Previously, would emit \"food_eaten\" signal
 
 "
 
@@ -35,7 +33,7 @@ script = SubResource("GDScript_egfrn")
 scale = Vector2(0.00976562, 0.0107422)
 texture = ExtResource("1_8fngy")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["food"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_77j0b")

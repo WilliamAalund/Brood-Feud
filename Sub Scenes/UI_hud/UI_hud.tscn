@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2q3lmimxr2ox"]
+
+[ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
+[ext_resource type="Texture2D" uid="uid://n3deer2hdrs8" path="res://Visuals/Placeholder Graphics/potion.png" id="2_dft5g"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 611.0
+offset_top = 220.0
+offset_right = -467.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Satiation"
+
+[node name="ProgressBar_Visual" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 768.0
+offset_right = 624.0
+offset_bottom = 788.0
+rotation = -1.72338
+show_percentage = false
+
+[node name="FPSLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 254.0
+offset_right = 501.0
+offset_bottom = 277.0
+script = ExtResource("1_cpjkg")
+
+[node name="Sunlight Symbol" type="Sprite2D" parent="."]
+position = Vector2(491, 608)
+scale = Vector2(0.833334, 0.833335)
+texture = ExtResource("2_dft5g")

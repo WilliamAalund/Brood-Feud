@@ -1,19 +1,26 @@
-res://Levels/Main Level.tscn
-res://Sub Scenes/Player_Bird/Player_Bird.gd
-res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn
-res://Sub Scenes/Player_Bird/Player_Bird.tscn
-res://Sub Scenes/Helper_Food_Spawner/Object_Food/object_food.tscn
-res://Levels/Demo Levels/Food Spawn Demo.tscn
-res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn
-res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn
-res://Sub Scenes/Process_Predator/Process_Predator.tscn
 res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn
-res://Levels/Demo Levels/AI_Bird_Demo.tscn
-res://Sub Scenes/Environment_Nest/Environment_Nest.tscn
+res://Sub Scenes/Player_Bird/Player_Bird.gd
+res://Levels/Main Level.tscn
+res://Sub Scenes/Player_Bird/Player_Bird.tscn
+res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn
 res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
-res://Sub Scenes/Game_Over_Manager.tscn
-res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn
-res://Sub Scenes/Dummy Collider/Dummy Collider.tscn
-res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.gd
-res://Levels/Demo Levels/Game Over Demo.tscn
+res://Sub Scenes/Helper_Food_Spawner/Object_Food/object_food.tscn
+res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn
+res://Levels/Demo Levels/AI_Bird_Demo.tscn
 res://Levels/Demo Levels/Hunger Demo.tscn
+res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn
+res://Sub Scenes/UI_hud/UI_hud.tscn
+res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd
+res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd
+res://Sub Scenes/Manager_Birds/BirdControl.gd
+res://Levels/Main Level.gd
+res://Sub Scenes/Entity_Temperature_Zone/temperature_zone.gd
+res://Sub Scenes/Entity_Temperature_Zone/temperature_zone.tscn
+res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn
+res://Levels/FPSLabel.gd
+res://Sub Scenes/Player_Bird/Player_Head.gd
+res://Sub Scenes/Helper_Sunspots/manager_sunspots.gd
+res://Sub Scenes/Helper_Sunspots/manager_sunspots.tscn
+res://Sub Scenes/Environment_Nest/Entity_Temperature_Zone/temperature_zone.tscn
+res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.tscn
+res://Sub Scenes/Environment_Nest/Environment_Nest.tscn

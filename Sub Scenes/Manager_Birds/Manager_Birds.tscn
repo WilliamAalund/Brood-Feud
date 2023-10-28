@@ -16,6 +16,8 @@ position = Vector2(1, 51)
 wait_time = 0.05
 autostart = true
 
-[connection signal="AI_Bird_Increment_Hunger" from="." to="AI_Bird" method="_on_bird_control_ai_bird_increment_hunger"]
 [connection signal="AI_Bird_Move" from="." to="AI_Bird" method="_on_bird_control_ai_bird_move"]
+[connection signal="Birds_Increment_Hunger" from="." to="Player" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="playerStarved" from="Player" to="." method="_on_player_player_starved"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

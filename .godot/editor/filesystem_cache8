@@ -1,52 +1,64 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1698093429
+::res://::1698520088
 LICENSE.md::TextFile::-1::1695933699::0::1::::<><>::
 README.md::TextFile::-1::1695933699::0::1::::<><>::
 ::res://Assets/::1696908663
-::res://Levels/::1698093256
-FPSLabel.gd::GDScript::-1::1698092281::0::1::::<>Label<>::
-Main Level.tscn::PackedScene::5125530937687886872::1698093256::0::1::::<><>::uid://bshdn3dwrgrbt::::res://Sub Scenes/Environment_Nest/Environment_Nest.tscn<>uid://dmuddbset2mpi::::res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn<>uid://b6f2ildgxylks::::res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn<>uid://cudu6vf7uwwve::::res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn<>uid://bx0asr7ljxkpl::::res://Sub Scenes/Process_Predator/Process_Predator.tscn<>res://Levels/FPSLabel.gd<>uid://dwitdkiendap8::::res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
-::res://Levels/Demo Levels/::1698093257
-AI_Bird_Demo.tscn::PackedScene::552566510149311601::1698093257::0::1::::<><>::uid://bshdn3dwrgrbt::::res://Sub Scenes/Environment_Nest/Environment_Nest.tscn<>uid://dwitdkiendap8::::res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
+::res://Levels/::1698520088
+FPSLabel.gd::GDScript::-1::1698518468::0::1::::<>Label<>::
+Main Level.gd::GDScript::-1::1698518468::0::1::::<>Node2D<>::
+Main Level.tscn::PackedScene::5125530937687886872::1698520087::0::1::::<><>::res://Levels/Main Level.gd<>uid://bshdn3dwrgrbt::::res://Sub Scenes/Environment_Nest/Environment_Nest.tscn<>uid://c5oav4s5u3ohy::::res://Sub Scenes/Entity_Temperature_Zone/temperature_zone.tscn<>uid://b6f2ildgxylks::::res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn<>uid://cudu6vf7uwwve::::res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn<>uid://bx0asr7ljxkpl::::res://Sub Scenes/Process_Predator/Process_Predator.tscn<>uid://dwitdkiendap8::::res://Sub Scenes/Manager_Birds/Manager_Birds.tscn<>uid://j6dpmc2nhd23::::res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn<>uid://c2q3lmimxr2ox::::res://Sub Scenes/UI_hud/UI_hud.tscn<>uid://0fxvg4swlxgr::::res://Sub Scenes/Helper_Sunspots/manager_sunspots.tscn
+::res://Levels/Demo Levels/::1698520092
+AI_Bird_Demo.tscn::PackedScene::552566510149311601::1698520092::0::1::::<><>::uid://bshdn3dwrgrbt::::res://Sub Scenes/Environment_Nest/Environment_Nest.tscn<>uid://dwitdkiendap8::::res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
 Collision Demo.tscn::PackedScene::5237759885442993399::1698084789::0::1::::<><>::uid://buc4ei3c7xex1
-Food Spawn Demo.tscn::PackedScene::5907397413214724888::1698093256::0::1::::<><>::uid://b6f2ildgxylks::::res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn<>uid://buc4ei3c7xex1::::res://Sub Scenes/Player_Bird/Player_Bird.tscn<>uid://dmuddbset2mpi::::res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn
-Hunger Demo.tscn::PackedScene::2101950774488874998::1698068812::0::1::::<><>::uid://di5tsn67yt3vc
+Food Spawn Demo.tscn::PackedScene::5907397413214724888::1698500698::0::1::::<><>::uid://b6f2ildgxylks
+Game Over Demo.tscn::PackedScene::4941459879602116336::1698500698::0::1::::<><>::uid://j6dpmc2nhd23
+Hunger Demo.tscn::PackedScene::2101950774488874998::1698520092::0::1::::<><>::uid://di5tsn67yt3vc::::res://Sub Scenes/Helper_Food_Spawner/Object_Food/object_food.tscn<>uid://dwitdkiendap8::::res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
 Momma Bird Demo.tscn::PackedScene::918693982741662326::1698068096::0::1::::<><>::uid://d14fg5rt0e8f4
 Nest Boundary Demo.tscn::PackedScene::222683424514838992::1698084789::0::1::::<><>::uid://bshdn3dwrgrbt
-::res://Sub Scenes/::1698093257
-Game_Over_Manager.tscn::PackedScene::5695085903521427074::1698093257::0::1::::<><>::
-::res://Sub Scenes/Dummy Collider/::1698093257
-Dummy Collider.tscn::PackedScene::646580696450773402::1698093257::0::1::::<><>::uid://pcpg3edo3nkg::::res://Visuals/Placeholder Graphics/icon.svg
-::res://Sub Scenes/Entity_AI_Bird/::1698093257
-AI_Bird.gd::GDScript::-1::1698092957::0::1::::<>Node2D<>::
-AI_Bird.tscn::PackedScene::5901547118300005280::1698093257::0::1::::<><>::res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd<>res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd<>uid://n3deer2hdrs8::::res://Visuals/Placeholder Graphics/potion.png
-AI_BirdCharacterBody.gd::GDScript::-1::1698091851::0::1::::<>CharacterBody2D<>::
-::res://Sub Scenes/Environment_Nest/::1698093257
-Environment_Nest.tscn::PackedScene::3664477356065935289::1698093257::0::1::::<><>::uid://ndt5ew10f15g::::res://Visuals/Placeholder Graphics/circle.png
-::res://Sub Scenes/Helper_Food_Spawner/::1698093256
-Helper_Food_Spawner.gd::GDScript::-1::1698068619::0::1::::<>Node2D<>::
-Helper_Food_Spawner.tscn::PackedScene::4574250953093907010::1698093256::0::1::::<><>::res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.gd
-::res://Sub Scenes/Helper_Food_Spawner/Object_Food/::1698093256
-object_food.tscn::PackedScene::7783890632137480724::1698093256::0::1::::<><>::uid://baveosqywq5ni::::res://Visuals/Art Assets/Worm_Food.png
-::res://Sub Scenes/Manager_Birds/::1698093257
-BirdControl.gd::GDScript::-1::1698092832::0::1::::<>Node2D<>::
-Manager_Birds.tscn::PackedScene::8721091151183940615::1698093257::0::1::::<><>::res://Sub Scenes/Manager_Birds/BirdControl.gd<>uid://buc4ei3c7xex1::::res://Sub Scenes/Player_Bird/Player_Bird.tscn<>uid://cqc0vbl1gl11m::::res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn
-::res://Sub Scenes/Manager_Game_Over/::1698093257
-Manager_Game_Over.gd::GDScript::-1::1698069094::0::1::::<>Node2D<>::
-Manager_Game_Over.tscn::PackedScene::695904875619236262::1698093257::0::1::::<><>::res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.gd
-::res://Sub Scenes/Manager_Satiation/::1698093256
+Temperature Demo.tscn::PackedScene::7580531734197473402::1698500699::0::1::::<><>::uid://buc4ei3c7xex1
+::res://Sub Scenes/::1698520087
+::res://Sub Scenes/Dummy Collider/::1698500698
+Dummy Collider.tscn::PackedScene::646580696450773402::1698500698::0::1::::<><>::uid://pcpg3edo3nkg
+::res://Sub Scenes/Entity_AI_Bird/::1698520092
+AI_Bird.gd::GDScript::-1::1698519215::0::1::::<>Node2D<>::
+AI_Bird.tscn::PackedScene::5901547118300005280::1698520092::0::1::::<><>::res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd<>res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd<>uid://28v4ug0v4asp::::res://Visuals/Placeholder Graphics/protoBody.png
+AI_BirdCharacterBody.gd::GDScript::-1::1698518468::0::1::::<>CharacterBody2D<>::
+::res://Sub Scenes/Environment_Nest/::1698520087
+Environment_Nest.tscn::PackedScene::3664477356065935289::1698500698::0::1::::<><>::uid://ndt5ew10f15g
+::res://Sub Scenes/Environment_Nest/Entity_Temperature_Zone/::1698520092
+temperature_zone.gd::GDScript::-1::1698518832::0::1::::<>Node2D<>::
+temperature_zone.tscn::PackedScene::5276299605556495523::1698520092::0::1::::<><>::res://Sub Scenes/Environment_Nest/Entity_Temperature_Zone/temperature_zone.gd<>uid://28v4ug0v4asp::::res://Visuals/Placeholder Graphics/protoBody.png
+::res://Sub Scenes/Helper_Food_Spawner/::1698520092
+Helper_Food_Spawner.gd::GDScript::-1::1698505474::0::1::::<>Node2D<>::
+Helper_Food_Spawner.tscn::PackedScene::4574250953093907010::1698520092::0::1::::<><>::res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.gd
+::res://Sub Scenes/Helper_Food_Spawner/Object_Food/::1698520092
+object_food.tscn::PackedScene::7783890632137480724::1698520092::0::1::::<><>::uid://baveosqywq5ni::::res://Visuals/Art Assets/Worm_Food.png
+::res://Sub Scenes/Helper_Sunspots/::1698520092
+manager_sunspots.gd::GDScript::-1::1698519215::0::1::::<>Node2D<>::
+manager_sunspots.tscn::PackedScene::1766477333013865073::1698520092::0::1::::<><>::res://Sub Scenes/Helper_Sunspots/manager_sunspots.gd
+::res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/::0
+temperature_zone.tscn::PackedScene::5276299605556495523::1698520127::0::1::::<><>::res://Sub Scenes/Environment_Nest/Entity_Temperature_Zone/temperature_zone.gd<>uid://28v4ug0v4asp::::res://Visuals/Placeholder Graphics/protoBody.png
+::res://Sub Scenes/Manager_Birds/::1698520092
+BirdControl.gd::GDScript::-1::1698519955::0::1::::<>Node2D<>::
+Manager_Birds.tscn::PackedScene::8721091151183940615::1698520092::0::1::::<><>::res://Sub Scenes/Manager_Birds/BirdControl.gd<>uid://buc4ei3c7xex1::::res://Sub Scenes/Player_Bird/Player_Bird.tscn<>uid://cqc0vbl1gl11m::::res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn
+::res://Sub Scenes/Manager_Game_Over/::1698520092
+Manager_Game_Over.gd::GDScript::-1::1698505578::0::1::::<>Node2D<>::
+Manager_Game_Over.tscn::PackedScene::695904875619236262::1698520092::0::1::::<><>::res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.gd
+::res://Sub Scenes/Manager_Satiation/::1698520092
 Control.gd::GDScript::-1::1697471988::0::1::::<>Control<>::
-Manager_Satiation.tscn::PackedScene::8043003318714938686::1698093256::0::1::::<><>::
-::res://Sub Scenes/Player_Bird/::1698093256
-Player_Bird.gd::GDScript::-1::1698092869::0::1::::<>CharacterBody2D<>::
-Player_Bird.tscn::PackedScene::3796094711503583152::1698093256::0::1::::<><>::res://Sub Scenes/Player_Bird/Player_Bird.gd<>uid://28v4ug0v4asp::::res://Visuals/Placeholder Graphics/protoBody.png<>res://Sub Scenes/Player_Bird/Player_Head.gd<>uid://puopyleeq7w4::::res://Visuals/Placeholder Graphics/ProtoHead.png
-Player_Head.gd::GDScript::-1::1697922117::0::1::::<>CharacterBody2D<>::
-::res://Sub Scenes/Process_Momma_Bird/::1698093256
+Manager_Satiation.tscn::PackedScene::8043003318714938686::1698520092::0::1::::<><>::
+::res://Sub Scenes/Player_Bird/::1698520092
+Player_Bird.gd::GDScript::-1::1698518942::0::1::::<>CharacterBody2D<>::
+Player_Bird.tscn::PackedScene::3796094711503583152::1698520092::0::1::::<><>::res://Sub Scenes/Player_Bird/Player_Bird.gd<>uid://28v4ug0v4asp::::res://Visuals/Placeholder Graphics/protoBody.png<>res://Sub Scenes/Player_Bird/Player_Head.gd<>uid://puopyleeq7w4::::res://Visuals/Placeholder Graphics/ProtoHead.png
+Player_Head.gd::GDScript::-1::1698518468::0::1::::<>CharacterBody2D<>::
+::res://Sub Scenes/Process_Momma_Bird/::1698520092
 Momma_Bird.gd::GDScript::-1::1698085534::0::1::::<>Node2D<>::
-Process_Momma_Bird.tscn::PackedScene::6184082185071336406::1698093256::0::1::::<><>::res://Sub Scenes/Process_Momma_Bird/Momma_Bird.gd<>uid://16qwckh3r6x7::::res://Visuals/Placeholder Graphics/mommabirdplaceholder.png
-::res://Sub Scenes/Process_Predator/::1698093256
+Process_Momma_Bird.tscn::PackedScene::6184082185071336406::1698520092::0::1::::<><>::res://Sub Scenes/Process_Momma_Bird/Momma_Bird.gd<>uid://16qwckh3r6x7::::res://Visuals/Placeholder Graphics/mommabirdplaceholder.png
+::res://Sub Scenes/Process_Predator/::1698500698
 Predator.gd::GDScript::-1::1698093070::0::1::::<>Node2D<>::
-Process_Predator.tscn::PackedScene::4052406618353054937::1698093256::0::1::::<><>::res://Sub Scenes/Process_Predator/Predator.gd<>uid://pcpg3edo3nkg::::res://Visuals/Placeholder Graphics/icon.svg
+Process_Predator.tscn::PackedScene::4052406618353054937::1698500698::0::1::::<><>::res://Sub Scenes/Process_Predator/Predator.gd<>uid://pcpg3edo3nkg
+::res://Sub Scenes/UI_hud/::1698520092
+UI_hud.tscn::PackedScene::6702690552423745495::1698520092::0::1::::<><>::res://Levels/FPSLabel.gd<>uid://n3deer2hdrs8::::res://Visuals/Placeholder Graphics/potion.png
 ::res://Visuals/::1696908563
 ::res://Visuals/Art Assets/::1697984198
 Worm_Food.png::CompressedTexture2D::2430041456871777562::1697984178::1697984198::1::::<><>::

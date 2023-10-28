@@ -40,10 +40,10 @@ texture = ExtResource("2_n24d5")
 script = ExtResource("3_5rfmh")
 angle_padding = 90
 
-[node name="Area2D" type="Area2D" parent="head" groups=["eater"]]
+[node name="beak_area" type="Area2D" parent="head" groups=["eater"]]
 position = Vector2(0, -30)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="head/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="head/beak_area"]
 shape = SubResource("CapsuleShape2D_8hd72")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head" groups=["player"]]
@@ -53,3 +53,12 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="head/CollisionShape2D" groups=["player"]]
 texture = ExtResource("4_vqpuj")
+
+[node name="debugger_satiation" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="head/beak_area" to="." method="_on_beak_area_area_entered"]

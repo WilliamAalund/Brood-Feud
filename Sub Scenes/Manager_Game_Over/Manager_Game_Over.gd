@@ -12,7 +12,10 @@ func _on_hunger_control_player_starved():
 	gameOver = true
 	$Label.visible = true
 
-
-func _on_manager_satiation_player_starved():
+func _on_bird_control_player_starved():
 	gameOver = true
 	$Label.visible = true
+
+#func _on_manager_satiation_player_starved():
+	#gameOver = true
+	#$Label.visible = true

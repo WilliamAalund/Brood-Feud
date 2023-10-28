@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://chf45bqb5qp4n"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.gd" id="1_0mnf6"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="2_qdw30"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdt7u"]
+radius = 39.0
+
+[node name="temperature_zone" type="Node2D"]
+script = ExtResource("1_0mnf6")
+
+[node name="Area2D" type="Area2D" parent="." groups=["sunray"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cdt7u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.992157, 0.992157, 0, 1)
+scale = Vector2(2.49219, 2.46875)
+texture = ExtResource("2_qdw30")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true

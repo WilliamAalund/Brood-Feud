@@ -1,5 +1,5 @@
 extends Node2D
-@export var satiationValue = 100
+@export var satiation = 100
 @export var starvationThreshold = 30
 @export var angryThreshold = 5
 
@@ -9,8 +9,7 @@ const idleVal = 0.04
 # TODO: Implement aggroVal raising, aggroTarger, momHome, isSunspot, noticedPredator, and isStupid
 var aggroVal = 0 # Bird begins with no aggro value
 var aggroTarget
-#var momHome = get_parent().momIsHome # TODO: Find way to alert bird that momma bird is home
-var isSunspot
+#var isSunspot
 var noticedPredator
 var isStupid = false
 
@@ -33,8 +32,8 @@ func _ready(): # Will be removed later on when the bird should actually start in
 # 5 - Focused on hiding from predator
 # 6 - Dead
 
-func updatedState():
-	if satiationValue <= 0: # If the bird is dead its dead, won't do anything.
+func updatedState(): # Returns variable corresponding to state. state then used in pathfinding.
+	if satiation <= 0: # If the bird is dead its dead, won't do anything.
 		return 6 # Dead
 	else: if noticedPredator and not isStupid: # The next thing that will take 
 # over is fight or flight. If the bird is scared or angry it will prioritize that.
@@ -43,11 +42,11 @@ func updatedState():
 	else: if aggroVal >= angryThreshold: # If the bird isn't starving, it will respond to
 # aggression from the player, as well as from other birds.
 		return 3
-	else: if get_parent().momIsHome or satiationValue < starvationThreshold: # If the bird isn't dead,
+	else: if get_parent().momIsHome or satiation < starvationThreshold: # If the bird isn't dead,
 # if there is no predator, if the bird isnt angry, and mom is home or the bird is
 # starving, it will look for food.
 		return 2
-	else: if isSunspot: # If all of the other conditions aren't met, and the bird sees
+	else: if get_parent().isSunspot: # If all of the other conditions aren't met, and the bird sees
 # a sunspot, then it will seek out the sunspot.
 		return 4
 	else: # If the bird isn't dead, there is no predator, it isn't angry, it is not
@@ -64,7 +63,6 @@ func _on_timer_timeout():
 	$Debug_AI_State.text = str($CharacterBody2D.state)
 	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
 
-
-func _on_bird_control_ai_bird_increment_hunger():
-	satiationValue -= idleVal
-	$Debug_Satiation_Label.text = str(satiationValue).substr(0,5)
+func _on_bird_control_birds_increment_hunger():
+	satiation -= get_parent().idleSatiationDrainRate
+	$Debug_Satiation_Label.text = str(satiation).substr(0,5)

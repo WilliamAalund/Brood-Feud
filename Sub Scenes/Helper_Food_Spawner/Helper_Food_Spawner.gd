@@ -12,9 +12,9 @@ func add_food(spawn_inaccuracy: int = spawn_offset): #Spawn inaccuracy can by dy
 	food_instance.position.y += randi_range(-spawn_inaccuracy, spawn_inaccuracy) % spawn_inaccuracy
 	self.add_child(food_instance)
 	
-func on_food_eaten(): # Function called by child food nodes. Connects to hunger control to transmit food signal
-	#print("received on eaten function")
-	emit_signal("child_food_eaten")
+#func on_food_eaten(): # Function called by child food nodes. Connects to hunger control to transmit food signal
+	# Legacy code. Now disconnected from Manager_Satiation
+	#emit_signal("child_food_eaten")
 	
 	
 func _on_button_pressed(): #Used for debugging
