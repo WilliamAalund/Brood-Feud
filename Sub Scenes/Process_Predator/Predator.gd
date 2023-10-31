@@ -42,7 +42,7 @@ func headCheck() -> bool:
 	if momIsHome:
 		print("Predator : cannot head to nest: momma bird is watching")
 		return false
-	return randi_range(1, 100) > 40
+	return randi_range(1, 100) > 40 and !momIsHome
 
 func _on_timer_timeout(): # State machine(?) Every time a second passes, 
 	if !isHome:
@@ -79,45 +79,8 @@ func headToNest():
 	predAggro = 0
 	emit_signal("toggle_predator_presence")
 	
-func _on_momma_bird_toggle_mom_presence():
+func _on_momma_bird_toggle_mom_presence(): # Don't know why this is here, but it doesn't work
 	momIsHome = !momIsHome
 
-#@export var SecondsToReturn = 10
-#@export var FoodToDrop = 3
-#@export var DropInterval = 4 # Time momma bird takes between dropping food
-
-#var goneTimer = 0
-
-
-#signal mom_drops_food
-
-#func set_SecondsToReturn(value): # Handles the progress bar changing when the export value changes
-#	SecondsToReturn = value
-#	$ProgressBar.max_value = SecondsToReturn
-#
-#
-#
-#func _on_timer_timeout():
-#	if (!isHome):
-#		goneTimer += 0.1
-#		$ProgressBar.value = goneTimer
-#	if goneTimer > SecondsToReturn:
-#		print("Momma bird returns")
-#		isHome = true
-#		var momSprite = get_child(0)
-#		momSprite.visible = isHome
-#		momReturns()
-#		goneTimer = 0
-#
-#func momReturns():
-#	await get_tree().create_timer(LandingTime).timeout
-#	var foodDropped = 0
-#	while foodDropped <= FoodToDrop:
-#		emit_signal("mom_drops_food")
-#		foodDropped += 1
-#		await get_tree().create_timer(DropInterval).timeout
-#	isHome = false
-#	var momSprite = get_child(0)
-#	momSprite.visible = isHome
-#	print("Momma bird leaves")
-#
+func _on_process_momma_bird_toggle_mom_presence():
+	momIsHome = !momIsHome

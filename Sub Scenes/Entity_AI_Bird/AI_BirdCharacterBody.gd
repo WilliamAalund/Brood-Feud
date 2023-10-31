@@ -18,14 +18,26 @@ func state1(_delta): # Remains idle
 
 func state2(delta): # Will move towards and look for food
 	#get_global_mouse_position() 2D vector
-	nav.target_position = target
+	if get_parent().noticedFood:
+		nav.target_position = get_parent().targetFood
 	
-	direction = nav.get_next_path_position() - global_position
-	direction = direction.normalized()
+		direction = nav.get_next_path_position() - global_position
+		direction = direction.normalized()
 	
-	velocity = velocity.lerp(direction * speed , accel * delta)
+		velocity = velocity.lerp(direction * speed , accel * delta)
 	
-	move_and_slide()
+		move_and_slide()
+	else:
+		pass # Code to get the bird to crowd around momma bird
+	
+	#nav.target_position = target
+	
+	#direction = nav.get_next_path_position() - global_position
+	#direction = direction.normalized()
+	
+	#velocity = velocity.lerp(direction * speed , accel * delta)
+	
+	#move_and_slide()
 
 func state3(delta): # Follows player
 	#get_global_mouse_position() 2D vector
@@ -38,8 +50,17 @@ func state3(delta): # Follows player
 	
 	move_and_slide()
 
-func state4(_delta): # Will move to sunspot
-	pass
+func state4(delta): # Will move to sunray
+	if !get_parent().inSunray:
+		nav.target_position = get_parent().targetSunray
+		#print(get_parent().targetSunray)
+	
+		direction = nav.get_next_path_position() - global_position
+		direction = direction.normalized()
+	
+		velocity = velocity.lerp(direction * speed , accel * delta)
+	
+		move_and_slide()
 	
 func state5(_delta): # Will run to edge of nest
 	pass

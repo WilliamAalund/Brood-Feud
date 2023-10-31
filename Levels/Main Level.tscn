@@ -49,4 +49,5 @@ position = Vector2(-449, -244)
 [connection signal="playerStarved" from="BirdControl" to="Manager_Game_Over" method="_on_bird_control_player_starved"]
 [connection signal="mom_drops_food" from="Process_Momma_Bird" to="Helper_Food_Spawner" method="_on_momma_bird_mom_drops_food"]
 [connection signal="toggle_mom_presence" from="Process_Momma_Bird" to="BirdControl" method="_on_process_momma_bird_toggle_mom_presence"]
+[connection signal="toggle_mom_presence" from="Process_Momma_Bird" to="Process_Predator" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_predator_presence" from="Process_Predator" to="Process_Momma_Bird" method="_on_process_predator_toggle_predator_presence"]

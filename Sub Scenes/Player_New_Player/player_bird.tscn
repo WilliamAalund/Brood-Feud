@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bft85520xqg1d"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/player_bird.gd" id="1_aa0pe"]
+[ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/bird_body.gd" id="1_k6mr1"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="2_n4n6b"]
+[ext_resource type="Texture2D" uid="uid://puopyleeq7w4" path="res://Visuals/Placeholder Graphics/ProtoHead.png" id="3_e0fji"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dkhmr"]
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7iua6"]
+
+[node name="player_bird" type="Node2D"]
+script = ExtResource("1_aa0pe")
+
+[node name="character_bird" type="CharacterBody2D" parent="."]
+script = ExtResource("1_k6mr1")
+
+[node name="body_physical_collision" type="CollisionShape2D" parent="character_bird"]
+shape = SubResource("CircleShape2D_dkhmr")
+
+[node name="body_sprite" type="Sprite2D" parent="character_bird"]
+texture = ExtResource("2_n4n6b")
+
+[node name="body_area" type="Area2D" parent="character_bird"]
+
+[node name="body_area_collision" type="CollisionShape2D" parent="character_bird/body_area"]
+shape = SubResource("CircleShape2D_dkhmr")
+
+[node name="beak_area" type="Area2D" parent="character_bird" groups=["eater"]]
+
+[node name="beak_sprite" type="Sprite2D" parent="character_bird/beak_area"]
+position = Vector2(0, -27)
+texture = ExtResource("3_e0fji")
+
+[node name="beak_area_collision" type="CollisionShape2D" parent="character_bird/beak_area"]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_7iua6")
+
+[node name="debugger_satiation" type="Label" parent="character_bird"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+
+[connection signal="area_entered" from="character_bird/body_area" to="." method="_on_body_area_area_entered"]
+[connection signal="area_exited" from="character_bird/body_area" to="." method="_on_body_area_area_exited"]
+[connection signal="area_entered" from="character_bird/beak_area" to="." method="_on_beak_area_area_entered"]

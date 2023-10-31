@@ -20,7 +20,7 @@ func _ready():
 
 func state1():
 	var i: float = 0
-	while i < 3000:
+	while i < 2000:
 		self.position.x += sin(i / 25)
 		self.position.y += cos((i / 20) + 5)
 		await $Timer.timeout

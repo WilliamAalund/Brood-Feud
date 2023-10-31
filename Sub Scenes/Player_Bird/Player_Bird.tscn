@@ -40,7 +40,7 @@ texture = ExtResource("2_n24d5")
 script = ExtResource("3_5rfmh")
 angle_padding = 90
 
-[node name="beak_area" type="Area2D" parent="head" groups=["eater"]]
+[node name="beak_area" type="Area2D" parent="head"]
 position = Vector2(0, -30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head/beak_area"]
@@ -55,7 +55,6 @@ disabled = true
 texture = ExtResource("4_vqpuj")
 
 [node name="debugger_satiation" type="Label" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
