@@ -38,6 +38,7 @@ position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_7iua6")
 
 [node name="debugger_satiation" type="Label" parent="character_bird"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "100"
