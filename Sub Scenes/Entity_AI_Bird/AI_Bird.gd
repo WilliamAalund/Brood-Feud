@@ -15,7 +15,7 @@ var noticedFood = false
 var noticedSunray = false
 var noticedPredator
 var isStupid = false
-var inSunray = false
+var inSunlight = false
 
 var Player_Pos # Variable to store the location of the player
 var targetSunray
@@ -80,16 +80,16 @@ func _on_bird_control_birds_increment_hunger():
 func _on_body_zone_area_entered(area):
 	if area.is_in_group("sunray"):
 		await get_tree().create_timer(1.0).timeout
-		inSunray = true
+		inSunlight = true
 	else: if area.is_in_group("food"):
 		eat()
 
 func _on_body_zone_area_exited(area):
 	if area.is_in_group("sunray"):
-		inSunray = false
+		inSunlight = false
 
 func _on_detector_zone_area_entered(area):
-	print("Entering Area Position: ", area.global_position)
+	#print("Entering Area Position: ", area.global_position)
 	if area.is_in_group("sunray"):
 		if !noticedSunray:
 			targetSunray = area.global_position

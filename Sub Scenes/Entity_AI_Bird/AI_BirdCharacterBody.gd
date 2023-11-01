@@ -51,7 +51,7 @@ func state3(delta): # Follows player
 	move_and_slide()
 
 func state4(delta): # Will move to sunray
-	if !get_parent().inSunray:
+	if !get_parent().inSunlight:
 		nav.target_position = get_parent().targetSunray
 		#print(get_parent().targetSunray)
 	

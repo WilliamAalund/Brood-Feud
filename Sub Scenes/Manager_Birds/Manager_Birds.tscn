@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwitdkiendap8"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Manager_Birds/BirdControl.gd" id="1_nqp0i"]
-[ext_resource type="PackedScene" uid="uid://cqc0vbl1gl11m" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn" id="3_aebak"]
+[ext_resource type="PackedScene" uid="uid://cqc0vbl1gl11m" path="res://Sub Scenes/Entity_AI_Bird/entity_ai_bird.tscn" id="3_aebak"]
 [ext_resource type="PackedScene" uid="uid://bft85520xqg1d" path="res://Sub Scenes/Player_New_Player/player_bird.tscn" id="4_2bnt3"]
 
 [node name="BirdControl" type="Node2D"]

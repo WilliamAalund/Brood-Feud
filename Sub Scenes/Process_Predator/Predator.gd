@@ -9,8 +9,6 @@ extends Node2D
 # If you are moving, the bird eats you.
 # If you are near the middle of the nest, the bird eats you.
 # Future features: the chance the predator comes to the nest will increase depending on noise.
-
-
 @export var MaxPredAggro = 750
 @export var PredAggroIncrement = 1
 @export var LandingTime = 0.5
@@ -18,14 +16,15 @@ extends Node2D
 
 var predAggro = 0
 var predApproached = false
-var isHome = false
+var predIsHome = false
 var momIsHome = false
 
 signal toggle_predator_presence # Indicates to other nodes that the predator is at the nest.
+signal player_eaten
 
 func _ready(): # Momma bird starts off invisible
 	var predSprite = get_child(0)
-	predSprite.visible = isHome
+	predSprite.visible = predIsHome
 	$ProgressBar.max_value = MaxPredAggro
 
 func approachCheck() -> bool:
@@ -45,17 +44,17 @@ func headCheck() -> bool:
 	return randi_range(1, 100) > 40 and !momIsHome
 
 func _on_timer_timeout(): # State machine(?) Every time a second passes, 
-	if !isHome:
+	if !predIsHome:
 		predAggro += PredAggroIncrement # Slightly increments predAggro
 		if predAggro > MaxPredAggro:
 			predAggro = MaxPredAggro
 		#print(predAggro, predAggro / MaxPredAggro)
 		$ProgressBar.value = predAggro
-	if predAggro % 10 == 0 and !isHome:
+	if predAggro % 10 == 0 and !predIsHome:
 		if predApproached:
 			if headCheck():
 				print("Predator : heads to nest")
-				isHome = true
+				predIsHome = true
 				# Run evil predator functions
 				headToNest()
 			else: if momIsHome:
@@ -70,17 +69,14 @@ func headToNest():
 	emit_signal("toggle_predator_presence")
 	await get_tree().create_timer(LandingTime).timeout
 	var predSprite = get_child(0)
-	predSprite.visible = isHome
+	predSprite.visible = predIsHome
 	await get_tree().create_timer(StayLength).timeout
 	print("Predator : leaves nest")
-	isHome = false
-	predSprite.visible = isHome
+	predIsHome = false
+	predSprite.visible = predIsHome
 	predApproached = false
 	predAggro = 0
 	emit_signal("toggle_predator_presence")
 	
-func _on_momma_bird_toggle_mom_presence(): # Don't know why this is here, but it doesn't work
-	momIsHome = !momIsHome
-
 func _on_process_momma_bird_toggle_mom_presence():
 	momIsHome = !momIsHome

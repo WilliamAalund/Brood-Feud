@@ -4,8 +4,6 @@ var satiation = 100
 var inSunlight = false
 
 const foodRestore = 10
-const sunRate = -0.02
-const idleSatiationDrainRate = 0.06
 
 signal playerStarved
 
@@ -26,7 +24,7 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 		satiation -= value
 
 func decrementSatiation(): # Decreases the bird's satiation value
-	satiation = satiation - idleSatiationDrainRate - sunRate * int(inSunlight)
+	satiation = satiation - get_parent().idleSatiationDrainRate - get_parent().sunRate * int(inSunlight)
 	$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 	if satiation < 0:
 		emit_signal("playerStarved")

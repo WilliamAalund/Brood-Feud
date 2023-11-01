@@ -1,10 +1,17 @@
-res://Levels/Main Level.tscn
 res://Sub Scenes/Player_Bird/Player_Bird.gd
+res://Levels/Demo Levels/AI Bird Debugger.tscn
+res://Levels/Main Level.tscn
 res://Sub Scenes/Player_Bird/Player_Bird.tscn
-res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
+res://Sub Scenes/Manager_Birds/manager_birds.tscn
 res://Sub Scenes/Player_New_Player/player_bird.tscn
 res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn
-res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn
-res://Sub Scenes/Process_Predator/Process_Predator.tscn
-res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn
-res://Sub Scenes/Player_New_Player/bird_body.gd
+res://Sub Scenes/Process_Momma_Bird/process_momma_bird.tscn
+res://Sub Scenes/Process_Predator/process_predator.tscn
+res://Sub Scenes/Entity_AI_Bird/entity_ai_bird.tscn
+res://Sub Scenes/Environment_Nest/environment_nest.tscn
+res://Sub Scenes/Helper_Sunspots/manager_sunspots.tscn
+res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.tscn
+res://Sub Scenes/Helper_Food_Spawner/helper_food_spawner.tscn
+res://Sub Scenes/UI_Hud/ui_hud.tscn
+res://Sub Scenes/Manager_Game_Over/manager_game_over.tscn
+res://Levels/Demo Levels/AI_Bird_Demo.tscn

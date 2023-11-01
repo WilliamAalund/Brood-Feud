@@ -1,6 +1,6 @@
+Camera2D
 Area2D
 CollisionShape2D
-Camera2D
 Sprite2D
 CharacterBody2D
 PinJoint2D

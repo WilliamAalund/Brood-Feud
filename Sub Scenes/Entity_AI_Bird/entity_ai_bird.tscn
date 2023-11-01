@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cqc0vbl1gl11m"]
 
-[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd" id="1_jt43t"]
-[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd" id="2_5f6wf"]
-[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="3_8k5j2"]
+[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd" id="1_g4xov"]
+[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd" id="2_sf0vd"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="3_bju7e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kx41x"]
 radius = 16.0
@@ -11,17 +11,17 @@ radius = 16.0
 radius = 117.154
 
 [node name="AI_Bird" type="Node2D"]
-script = ExtResource("1_jt43t")
+script = ExtResource("1_g4xov")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-script = ExtResource("2_5f6wf")
+script = ExtResource("2_sf0vd")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
 debug_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 modulate = Color(1, 0.14902, 1, 1)
-texture = ExtResource("3_8k5j2")
+texture = ExtResource("3_bju7e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_kx41x")
