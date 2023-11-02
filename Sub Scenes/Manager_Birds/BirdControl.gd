@@ -1,8 +1,10 @@
 extends Node2D
 
 # Values that each of the birds can refer to in order to make decisions about themselves/what they want to do.
+@export var foodRestore = 12
 @export var idleSatiationDrainRate = 0.06
 @export var sunRate = -0.02
+@export var debug = false
 
 var momIsHome = false # Toggled by toggle_mom_presence signal, sent by momma bird.
 var isSunspot = false # Toggled in the Main Level scene's attached script.
@@ -10,6 +12,10 @@ var isSunspot = false # Toggled in the Main Level scene's attached script.
 signal AI_Bird_Move(target_position)
 signal Birds_Increment_Hunger()
 signal player_starved
+
+func _ready():
+	if debug:
+		$AI_Bird.debug = true
 
 func _physics_process(_delta):
 	emit_signal("AI_Bird_Move", $player_bird.position)

@@ -15,3 +15,10 @@ res://Sub Scenes/Helper_Food_Spawner/helper_food_spawner.tscn
 res://Sub Scenes/UI_Hud/ui_hud.tscn
 res://Sub Scenes/Manager_Game_Over/manager_game_over.tscn
 res://Levels/Demo Levels/AI_Bird_Demo.tscn
+res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd
+res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd
+res://Sub Scenes/Manager_Birds/BirdControl.gd
+res://Sub Scenes/Helper_Sunspots/manager_sunspots.gd
+res://Sub Scenes/Helper_Food_Spawner/Entity_Food/entity_food.tscn
+res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.gd
+res://Sub Scenes/Player_New_Player/player_bird.gd

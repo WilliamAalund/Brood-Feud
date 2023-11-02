@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfa30ma1dxdgy"]
+[gd_scene load_steps=10 format=3 uid="uid://cfa30ma1dxdgy"]
 
 [ext_resource type="Script" path="res://Levels/Main Level.gd" id="1_ai4xj"]
 [ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/environment_nest.tscn" id="2_1iti4"]
-[ext_resource type="PackedScene" uid="uid://chf45bqb5qp4n" path="res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.tscn" id="3_mrf87"]
 [ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Helper_Food_Spawner/helper_food_spawner.tscn" id="5_slw61"]
 [ext_resource type="PackedScene" uid="uid://cudu6vf7uwwve" path="res://Sub Scenes/Process_Momma_Bird/process_momma_bird.tscn" id="5_ucfnu"]
 [ext_resource type="PackedScene" uid="uid://bx0asr7ljxkpl" path="res://Sub Scenes/Process_Predator/process_predator.tscn" id="6_63o2m"]
@@ -15,9 +14,6 @@
 script = ExtResource("1_ai4xj")
 
 [node name="environment_nest" parent="." instance=ExtResource("2_1iti4")]
-
-[node name="temperature_zone" parent="." instance=ExtResource("3_mrf87")]
-position = Vector2(-140, 26)
 
 [node name="manager_birds" parent="." instance=ExtResource("7_jxroq")]
 
@@ -44,10 +40,10 @@ offset_right = -449.0
 offset_bottom = -244.0
 
 [node name="manager_sunspots" parent="." instance=ExtResource("10_k0xh1")]
-position = Vector2(-449, -244)
 
 [connection signal="mom_drops_food" from="process_momma_bird" to="helper_food_spawner" method="_on_momma_bird_mom_drops_food"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_birds" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="process_predator" method="_on_process_momma_bird_toggle_mom_presence"]
+[connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_sunspots" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="player_eaten" from="process_predator" to="manager_game_over" method="_on_process_predator_player_eaten"]
 [connection signal="toggle_predator_presence" from="process_predator" to="process_momma_bird" method="_on_process_predator_toggle_predator_presence"]

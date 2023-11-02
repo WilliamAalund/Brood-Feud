@@ -67,6 +67,9 @@ func state5(_delta): # Will run to edge of nest
 	
 func state6(_delta): # Will remain entirely immobile. Dead
 	pass
+	
+func state7(_delta): # Debugger state
+	pass
 
 # TODO: Aparrently, you can pass functions as parameters somehow.
 # There should be an extremely easy way to tell the navigation agent to just do 
@@ -90,3 +93,5 @@ func callMovement(delta):
 			state5(delta)
 		6:
 			state6(delta)
+		7:
+			state7(delta)

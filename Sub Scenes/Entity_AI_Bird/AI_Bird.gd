@@ -4,10 +4,10 @@ extends Node2D
 @export var angryThreshold = 5
 
 const idleVal = 0.04
-const foodRestore = 10
 
 # State variable is in the child CharacterBody2D Node
 # TODO: Implement aggroVal raising, aggroTarger, momHome, isSunspot, noticedPredator, and isStupid
+var debug = false
 var aggroVal = 0 # Bird begins with no aggro value
 var aggroTarget
 var sunspotTarget
@@ -29,10 +29,10 @@ func _ready(): # Will be removed later on when the bird should actually start in
 # other aspects of each bird as well.
 
 func eat(): # Function called to increase satiation when you eat.
-	if satiation + foodRestore > 100:
+	if satiation + get_parent().foodRestore > 100:
 		satiation = 100
 	else:
-		satiation += foodRestore
+		satiation += get_parent().foodRestore
 
 # -- STATE DESCRIPTIONS --
 # 0 - In egg
@@ -44,6 +44,8 @@ func eat(): # Function called to increase satiation when you eat.
 # 6 - Dead
 
 func updatedState(): # Returns variable corresponding to state. state then used in pathfinding.
+	if debug: # If the bird is in a debugger state, then it will only run the debugging code
+		return 7
 	if satiation <= 0: # If the bird is dead its dead, won't do anything.
 		return 6 # Dead
 	else: if noticedPredator and not isStupid: # The next thing that will take 
