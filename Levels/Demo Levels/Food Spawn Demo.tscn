@@ -13,5 +13,3 @@ position = Vector2(397, 42)
 position = Vector2(311, 168)
 
 [node name="HungerControl" parent="." instance=ExtResource("4_hbtws")]
-
-[connection signal="child_food_eaten" from="Object_Food_Spawner" to="HungerControl" method="_on_object_food_spawner_child_food_eaten"]

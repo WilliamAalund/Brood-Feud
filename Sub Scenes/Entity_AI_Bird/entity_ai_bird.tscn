@@ -14,6 +14,7 @@ radius = 117.154
 script = ExtResource("1_g4xov")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+platform_on_leave = 2
 script = ExtResource("2_sf0vd")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]

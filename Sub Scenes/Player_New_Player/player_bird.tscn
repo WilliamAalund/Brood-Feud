@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bft85520xqg1d"]
+[gd_scene load_steps=8 format=3 uid="uid://bft85520xqg1d"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/player_bird.gd" id="1_aa0pe"]
 [ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/bird_body.gd" id="1_k6mr1"]
@@ -8,12 +8,17 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dkhmr"]
 radius = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_51o00"]
+radius = 16.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7iua6"]
+height = 24.0
 
 [node name="player_bird" type="Node2D"]
 script = ExtResource("1_aa0pe")
 
 [node name="character_bird" type="CharacterBody2D" parent="."]
+collision_mask = 7
 script = ExtResource("1_k6mr1")
 
 [node name="body_physical_collision" type="CollisionShape2D" parent="character_bird"]
@@ -25,7 +30,7 @@ texture = ExtResource("2_n4n6b")
 [node name="body_area" type="Area2D" parent="character_bird"]
 
 [node name="body_area_collision" type="CollisionShape2D" parent="character_bird/body_area"]
-shape = SubResource("CircleShape2D_dkhmr")
+shape = SubResource("CircleShape2D_51o00")
 
 [node name="beak_area" type="Area2D" parent="character_bird" groups=["eater"]]
 
@@ -34,7 +39,7 @@ position = Vector2(0, -27)
 texture = ExtResource("3_e0fji")
 
 [node name="beak_area_collision" type="CollisionShape2D" parent="character_bird/beak_area"]
-position = Vector2(0, -26)
+position = Vector2(0, -29)
 shape = SubResource("CapsuleShape2D_7iua6")
 
 [node name="debugger_satiation" type="Label" parent="character_bird"]
