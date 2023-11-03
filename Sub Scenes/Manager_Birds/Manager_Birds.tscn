@@ -1,21 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwitdkiendap8"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Manager_Birds/BirdControl.gd" id="1_nqp0i"]
-[ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Sub Scenes/Player_Bird/Player_Bird.tscn" id="2_loup2"]
-[ext_resource type="PackedScene" uid="uid://cqc0vbl1gl11m" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn" id="3_aebak"]
+[ext_resource type="PackedScene" uid="uid://cqc0vbl1gl11m" path="res://Sub Scenes/Entity_AI_Bird/entity_ai_bird.tscn" id="3_aebak"]
+[ext_resource type="PackedScene" uid="uid://bft85520xqg1d" path="res://Sub Scenes/Player_New_Player/player_bird.tscn" id="4_2bnt3"]
 
 [node name="BirdControl" type="Node2D"]
 script = ExtResource("1_nqp0i")
 
-[node name="Player" parent="." instance=ExtResource("2_loup2")]
+[node name="player_bird" parent="." instance=ExtResource("4_2bnt3")]
 
 [node name="AI_Bird" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(1, 51)
+position = Vector2(75, -2)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
 
-[connection signal="AI_Bird_Increment_Hunger" from="." to="AI_Bird" method="_on_bird_control_ai_bird_increment_hunger"]
+[node name="AI_Bird2" parent="." instance=ExtResource("3_aebak")]
+position = Vector2(-101, 22)
+
 [connection signal="AI_Bird_Move" from="." to="AI_Bird" method="_on_bird_control_ai_bird_move"]
+[connection signal="Birds_Increment_Hunger" from="." to="player_bird" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="playerStarved" from="player_bird" to="." method="_on_player_bird_player_starved"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

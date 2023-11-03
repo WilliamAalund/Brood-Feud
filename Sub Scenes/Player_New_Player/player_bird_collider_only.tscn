@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7il0wq261xri"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/player_bird.gd" id="1_gcxrj"]
+[ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/bird_body.gd" id="2_xqydv"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="3_cfkun"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dkhmr"]
+radius = 16.0
+
+[node name="player_bird" type="Node2D"]
+script = ExtResource("1_gcxrj")
+
+[node name="character_bird" type="CharacterBody2D" parent="."]
+collision_mask = 7
+script = ExtResource("2_xqydv")
+
+[node name="body_physical_collision" type="CollisionShape2D" parent="character_bird"]
+shape = SubResource("CircleShape2D_dkhmr")
+
+[node name="body_sprite" type="Sprite2D" parent="character_bird"]
+texture = ExtResource("3_cfkun")
+
+[node name="debugger_satiation" type="Label" parent="character_bird"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"

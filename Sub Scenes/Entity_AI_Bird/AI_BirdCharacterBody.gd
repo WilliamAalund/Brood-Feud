@@ -1,26 +1,45 @@
 extends CharacterBody2D
 
-var speed = 30
-var accel = 30
+var speed = 40
+var accel = speed
 var state = 0 # Variable used for pathfinding logic. Value is managed in parent node
 var target = Vector2(0,0)
-
+var direction = Vector3()
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 
 func _physics_process(delta): #Physics process should not have any logic. Logical problems should be handled outside the function
-	callMovement(state, delta)
+	callMovement(delta)
 
-func state0(delta): # Stays in egg
+func state0(_delta): # Stays in egg
 	pass
 
-func state1(delta): # Remains idle
+func state1(_delta): # Remains idle
 	pass
 
 func state2(delta): # Will move towards and look for food
-	pass
+	#get_global_mouse_position() 2D vector
+	if get_parent().noticedFood:
+		nav.target_position = get_parent().targetFood
+	
+		direction = nav.get_next_path_position() - global_position
+		direction = direction.normalized()
+	
+		velocity = velocity.lerp(direction * speed , accel * delta)
+	
+		move_and_slide()
+	else:
+		pass # Code to get the bird to crowd around momma bird
+	
+	#nav.target_position = target
+	
+	#direction = nav.get_next_path_position() - global_position
+	#direction = direction.normalized()
+	
+	#velocity = velocity.lerp(direction * speed , accel * delta)
+	
+	#move_and_slide()
 
 func state3(delta): # Follows player
-	var direction = Vector3()
 	#get_global_mouse_position() 2D vector
 	nav.target_position = target
 	
@@ -31,13 +50,25 @@ func state3(delta): # Follows player
 	
 	move_and_slide()
 
-func state4(delta): # Will move to sunspot
+func state4(delta): # Will move to sunray
+	if !get_parent().inSunlight:
+		nav.target_position = get_parent().targetSunray
+		#print(get_parent().targetSunray)
+	
+		direction = nav.get_next_path_position() - global_position
+		direction = direction.normalized()
+	
+		velocity = velocity.lerp(direction * speed , accel * delta)
+	
+		move_and_slide()
+	
+func state5(_delta): # Will run to edge of nest
 	pass
 	
-func state5(delta): # Will run to edge of nest
+func state6(_delta): # Will remain entirely immobile. Dead
 	pass
 	
-func state6(delta): # Will remain entirely immobile. Dead
+func state7(_delta): # Debugger state
 	pass
 
 # TODO: Aparrently, you can pass functions as parameters somehow.
@@ -48,7 +79,7 @@ func state6(delta): # Will remain entirely immobile. Dead
 # (For example, state 1 will just make the body call the state 1 pathfinding option,
 # instead of using a case or if statement to call the state 1 function.)
 
-func callMovement(state, delta):
+func callMovement(delta):
 	match state:
 		1:
 			state1(delta)
@@ -62,3 +93,5 @@ func callMovement(state, delta):
 			state5(delta)
 		6:
 			state6(delta)
+		7:
+			state7(delta)

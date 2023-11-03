@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqc0vbl1gl11m"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd" id="1_g4xov"]
+[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd" id="2_sf0vd"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="3_bju7e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kx41x"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cyhn5"]
+radius = 117.154
+
+[node name="AI_Bird" type="Node2D"]
+script = ExtResource("1_g4xov")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+platform_on_leave = 2
+script = ExtResource("2_sf0vd")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+debug_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+modulate = Color(1, 0.14902, 1, 1)
+texture = ExtResource("3_bju7e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_kx41x")
+
+[node name="eater_zone" type="Area2D" parent="CharacterBody2D" groups=["eater"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/eater_zone"]
+shape = SubResource("CircleShape2D_kx41x")
+
+[node name="body_zone" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/body_zone"]
+shape = SubResource("CircleShape2D_kx41x")
+
+[node name="detector_zone" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/detector_zone"]
+shape = SubResource("CircleShape2D_cyhn5")
+
+[node name="Debug_Satiation_Label" type="Label" parent="CharacterBody2D"]
+offset_left = -50.0
+offset_top = -35.0
+offset_right = -12.0
+offset_bottom = -12.0
+
+[node name="Debug_AI_State" type="Label" parent="CharacterBody2D"]
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -12.0
+
+[node name="StateTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_entered"]
+[connection signal="area_exited" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_exited"]
+[connection signal="area_entered" from="CharacterBody2D/detector_zone" to="." method="_on_detector_zone_area_entered"]
+[connection signal="area_exited" from="CharacterBody2D/detector_zone" to="." method="_on_detector_zone_area_exited"]
+[connection signal="timeout" from="StateTimer" to="." method="_on_timer_timeout"]

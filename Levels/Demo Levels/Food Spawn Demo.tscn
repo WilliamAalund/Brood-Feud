@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqft8b83kvehs"]
 
-[ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn" id="1_y8h70"]
+[ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Helper_Food_Spawner/helper_food_spawner.tscn" id="1_y8h70"]
 [ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Sub Scenes/Player_Bird/Player_Bird.tscn" id="2_8mvq0"]
 [ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn" id="4_hbtws"]
 
@@ -13,5 +13,3 @@ position = Vector2(397, 42)
 position = Vector2(311, 168)
 
 [node name="HungerControl" parent="." instance=ExtResource("4_hbtws")]
-
-[connection signal="child_food_eaten" from="Object_Food_Spawner" to="HungerControl" method="_on_object_food_spawner_child_food_eaten"]

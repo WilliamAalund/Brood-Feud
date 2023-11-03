@@ -51,9 +51,9 @@ func momReturns(): # Hand
 	emit_signal("toggle_mom_presence")
 	print("Momma bird leaves")
 	
-func _on_predator_toggle_predator_presence():
-	predatorIsHome = !predatorIsHome
-
 
 func _on_process_predator_toggle_predator_presence():
-	pass # Replace with function body.
+	predatorIsHome = !predatorIsHome
+
+#func _on_predator_toggle_predator_presence():
+	#predatorIsHome = !predatorIsHome

@@ -1,7 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://dmuddbset2mpi"]
 
 [sub_resource type="GDScript" id="GDScript_lbhpg"]
-script/source = "extends Control # Script for HungerControl Node
+script/source = "# ----- THIS CODE IS NOT USED ANYMORE. In order to use it, you will need to reconnect its signals to the proper nodes. -----
+# Nodes that need to be reconnected/modified for this to work again: Game over manager, food object, helper food spawner
+
+extends Control # Script for HungerControl Node
 
 @export var satiation : float = 100 # Value for hunger. 100 represents being full, and 0 represents starving
 @export var idleRate : float = 0.04 # Rate that represents amount satiation decreases for existing in world.
@@ -74,7 +77,6 @@ show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
-autostart = true
 
 [node name="Button" type="Button" parent="."]
 visible = false

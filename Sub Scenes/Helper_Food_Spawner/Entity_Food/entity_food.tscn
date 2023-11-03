@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://di5tsn67yt3vc"]
+
+[ext_resource type="Texture2D" uid="uid://baveosqywq5ni" path="res://Visuals/Art Assets/Worm_Food.png" id="1_8fngy"]
+
+[sub_resource type="GDScript" id="GDScript_egfrn"]
+script/source = "extends Node2D
+
+#signal food_eaten
+
+func _ready():
+	print(\"Food     : spawned at: \", self.position)
+	
+#func _enter_tree(): #Connecting signal to parent node (which should be Object_Food_Spawner) must be done in this function, rather than _ready()
+	#if get_parent().has_method(\"on_food_eaten\"): # Confirms that correct parent node exists, preventing a crash
+		#print(\"connected food to object food spawner\")
+		#var parent_node = get_parent() # Creates callable object (directly connecting to get_parent() causes a type error)
+		#connect(\"food_eaten\", parent_node.on_food_eaten)
+
+func _on_area_2d_area_entered(area): # Deletes food once it comes into contact with a beak. Code handling satiation is handled in Manager_Birds and in the individual bird that eats the food
+	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
+		queue_free() # Deletes entity.
+		#Previously, would emit \"food_eaten\" signal
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfqyj"]
+size = Vector2(14, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77j0b"]
+size = Vector2(16, 18)
+
+[node name="object_food" type="Node2D"]
+script = SubResource("GDScript_egfrn")
+
+[node name="food_physics_body" type="RigidBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+inertia = 2.2
+gravity_scale = 0.0
+lock_rotation = true
+angular_damp = 8.061
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="food_physics_body"]
+shape = SubResource("RectangleShape2D_nfqyj")
+
+[node name="Sprite2D" type="Sprite2D" parent="food_physics_body"]
+scale = Vector2(0.00976562, 0.0107422)
+texture = ExtResource("1_8fngy")
+
+[node name="food_eat_detector" type="Area2D" parent="food_physics_body" groups=["food"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="food_physics_body/food_eat_detector"]
+shape = SubResource("RectangleShape2D_77j0b")
+
+[connection signal="area_entered" from="food_physics_body/food_eat_detector" to="." method="_on_area_2d_area_entered"]

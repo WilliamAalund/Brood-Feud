@@ -1,15 +1,21 @@
 res://Levels/Main Level.tscn
 <<<<<<< Updated upstream
 res://Sub Scenes/Player_Bird/Player_Bird.gd
-res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn
 res://Sub Scenes/Player_Bird/Player_Bird.tscn
-res://Sub Scenes/Helper_Food_Spawner/Object_Food/object_food.tscn
-res://Levels/Demo Levels/Food Spawn Demo.tscn
+res://Sub Scenes/Manager_Birds/manager_birds.tscn
+res://Sub Scenes/Player_New_Player/player_bird.tscn
 res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn
-res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn
-res://Sub Scenes/Process_Predator/Process_Predator.tscn
-res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn
+res://Sub Scenes/Process_Momma_Bird/process_momma_bird.tscn
+res://Sub Scenes/Process_Predator/process_predator.tscn
+res://Sub Scenes/Entity_AI_Bird/entity_ai_bird.tscn
+res://Sub Scenes/Environment_Nest/environment_nest.tscn
+res://Sub Scenes/Helper_Sunspots/manager_sunspots.tscn
+res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.tscn
+res://Sub Scenes/Helper_Food_Spawner/helper_food_spawner.tscn
+res://Sub Scenes/UI_Hud/ui_hud.tscn
+res://Sub Scenes/Manager_Game_Over/manager_game_over.tscn
 res://Levels/Demo Levels/AI_Bird_Demo.tscn
+<<<<<<< HEAD
 res://Sub Scenes/Environment_Nest/Environment_Nest.tscn
 res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
 res://Sub Scenes/Game_Over_Manager.tscn
@@ -20,3 +26,17 @@ res://Levels/Demo Levels/Game Over Demo.tscn
 res://Levels/Demo Levels/Hunger Demo.tscn
 =======
 >>>>>>> Stashed changes
+=======
+res://Levels/Demo Levels/AI Bird Debugger.tscn
+res://Sub Scenes/Helper_Food_Spawner/Entity_Food/entity_food.tscn
+res://Sub Scenes/Rig_Momma_Bird/rig_momma_bird.tscn
+res://Levels/Demo Levels/Food Collision Demo.tscn
+res://Levels/Demo Levels/Food Spawn Demo.tscn
+res://Sub Scenes/Player_New_Player/player_bird_collider_only.tscn
+res://Levels/Demo Levels/Collision Demo.tscn
+res://Sub Scenes/Player_New_Player/dummy_player_bird.tscn
+res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd
+res://Sub Scenes/Process_Predator/rig_predator.tscn
+res://Sub Scenes/Process_Predator/rig_predator.gd
+res://Sub Scenes/Process_Predator/Predator.gd
+>>>>>>> main
