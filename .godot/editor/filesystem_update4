@@ -22,7 +22,4 @@ res://Levels/Demo Levels/Food Spawn Demo.tscn
 res://Sub Scenes/Player_New_Player/player_bird_collider_only.tscn
 res://Levels/Demo Levels/Collision Demo.tscn
 res://Sub Scenes/Player_New_Player/dummy_player_bird.tscn
-res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd
 res://Sub Scenes/Process_Predator/rig_predator.tscn
-res://Sub Scenes/Process_Predator/rig_predator.gd
-res://Sub Scenes/Process_Predator/Predator.gd

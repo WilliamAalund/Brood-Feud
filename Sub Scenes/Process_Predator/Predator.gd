@@ -13,8 +13,8 @@ extends Node2D
 
 
 # All of these values are in seconds
-const BASE_TIME_AWAY_FROM_NEST = 7
-const TIME_AWAY_VARIANCE = 6
+const BASE_TIME_AWAY_FROM_NEST = 75
+const TIME_AWAY_VARIANCE = 5
 const TIME_APPROACHED_MIN = 2
 const TIME_APPROACHED_MAX = 4
 
