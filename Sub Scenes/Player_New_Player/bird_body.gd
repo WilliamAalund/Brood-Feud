@@ -2,9 +2,11 @@ extends CharacterBody2D
 
 var move_speed = 100
 var rotate_speed = 0.05  # Adjust this value to control the rotation speed
-var push_force = 400.0
+var push_force = 80.0
 
 func _physics_process(_delta):
+	
+	
 	var move_dir = Vector2(0, 0)
 	if Input.is_action_pressed("up"):
 		move_dir = Vector2(0, - Input.get_action_strength("up")).rotated(rotation)

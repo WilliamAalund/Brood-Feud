@@ -76,7 +76,7 @@ func _on_timer_timeout():
 	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
 
 func _on_bird_control_birds_increment_hunger():
-	satiation -= get_parent().idleSatiationDrainRate
+	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight)
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
 
 func _on_body_zone_area_entered(area):

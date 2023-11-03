@@ -22,6 +22,12 @@ func _physics_process(_delta):
 	)
 	velocity = input_direction * move_speed
 	move_and_slide()
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			print(-c.get_normal() * push_force)
+			#-c.get_normal() * push_force
+			c.get_collider().apply_force(c.get_normal() * -push_force)
 	
 # --- SATIATION FUNCTIONS ---
 func eat(): # Function called to increase satiation when you eat.
