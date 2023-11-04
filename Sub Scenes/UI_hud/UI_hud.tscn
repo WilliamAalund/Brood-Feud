@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2q3lmimxr2ox"]
 
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
-[ext_resource type="Texture2D" uid="uid://n3deer2hdrs8" path="res://Visuals/Placeholder Graphics/potion.png" id="2_dft5g"]
+[ext_resource type="Texture2D" uid="uid://xdq1tqik3lpa" path="res://Visuals/Art Assets/UIInSunlight.png" id="2_6da3i"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -43,6 +43,8 @@ offset_bottom = 277.0
 script = ExtResource("1_cpjkg")
 
 [node name="Sunlight Symbol" type="Sprite2D" parent="."]
-position = Vector2(491, 608)
-scale = Vector2(0.833334, 0.833335)
-texture = ExtResource("2_dft5g")
+self_modulate = Color(1, 1, 1, 0.862745)
+position = Vector2(493, 607)
+rotation = -0.127409
+scale = Vector2(0.0447667, 0.0400529)
+texture = ExtResource("2_6da3i")
