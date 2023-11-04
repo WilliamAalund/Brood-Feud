@@ -3,7 +3,7 @@ extends Node2D
 # Values that each of the birds can refer to in order to make decisions about themselves/what they want to do.
 @export var foodRestore = 12
 @export var idleSatiationDrainRate = 0.06
-@export var sunRate = -0.02
+@export var sunRate = -0.03
 @export var debug = false
 
 var momIsHome = false # Toggled by toggle_mom_presence signal, sent by momma bird.

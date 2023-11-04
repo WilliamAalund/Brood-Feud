@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/player_bird.gd" id="1_aa0pe"]
 [ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/bird_body.gd" id="1_k6mr1"]
 [ext_resource type="Texture2D" uid="uid://c3frapks115w2" path="res://Visuals/Art Assets/draft_player_bird.png" id="3_2a3i1"]
-[ext_resource type="Texture2D" uid="uid://puopyleeq7w4" path="res://Visuals/Placeholder Graphics/ProtoHead.png" id="3_e0fji"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="4_6ke6v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3tcvq"]
 radius = 16.0
@@ -12,7 +12,8 @@ radius = 16.0
 radius = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7iua6"]
-height = 24.0
+radius = 11.0
+height = 26.0
 
 [node name="player_bird" type="Node2D"]
 script = ExtResource("1_aa0pe")
@@ -34,12 +35,15 @@ texture = ExtResource("3_2a3i1")
 [node name="body_area_collision" type="CollisionShape2D" parent="character_bird/body_area"]
 shape = SubResource("CircleShape2D_51o00")
 
-[node name="beak_area" type="Area2D" parent="character_bird" groups=["eater"]]
+[node name="beak_area" type="Area2D" parent="character_bird" groups=["attacker", "eater"]]
+monitoring = false
+monitorable = false
 
 [node name="beak_sprite" type="Sprite2D" parent="character_bird/beak_area"]
 visible = false
-position = Vector2(0, -27)
-texture = ExtResource("3_e0fji")
+position = Vector2(0, -29)
+scale = Vector2(0.6875, 0.8125)
+texture = ExtResource("4_6ke6v")
 
 [node name="beak_area_collision" type="CollisionShape2D" parent="character_bird/beak_area"]
 position = Vector2(0, -29)
@@ -51,6 +55,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "100"
 
+[connection signal="player_attacks" from="character_bird" to="." method="_on_character_bird_player_attacks"]
 [connection signal="area_entered" from="character_bird/body_area" to="." method="_on_body_area_area_entered"]
 [connection signal="area_exited" from="character_bird/body_area" to="." method="_on_body_area_area_exited"]
 [connection signal="area_entered" from="character_bird/beak_area" to="." method="_on_beak_area_area_entered"]
