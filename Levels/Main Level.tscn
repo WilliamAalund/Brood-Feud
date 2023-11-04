@@ -24,7 +24,7 @@ texture = ExtResource("2_14buk")
 [node name="manager_birds" parent="." instance=ExtResource("7_jxroq")]
 
 [node name="process_momma_bird" parent="." instance=ExtResource("5_ucfnu")]
-position = Vector2(-299, -156)
+position = Vector2(292, -73)
 
 [node name="helper_food_spawner" parent="." instance=ExtResource("5_slw61")]
 position = Vector2(0, 70)
@@ -45,10 +45,12 @@ offset_bottom = -244.0
 [node name="manager_sunspots" parent="." instance=ExtResource("10_k0xh1")]
 
 [node name="process_predator" parent="." instance=ExtResource("6_63o2m")]
+position = Vector2(301, 150)
 
 [connection signal="mom_drops_food" from="process_momma_bird" to="helper_food_spawner" method="_on_momma_bird_mom_drops_food"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_birds" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_sunspots" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="process_predator" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="player_eaten" from="process_predator" to="manager_game_over" method="_on_process_predator_player_eaten"]
+[connection signal="toggle_predator_approach" from="process_predator" to="manager_birds" method="_on_process_predator_toggle_predator_approach"]
 [connection signal="toggle_predator_presence" from="process_predator" to="process_momma_bird" method="_on_process_predator_toggle_predator_presence"]

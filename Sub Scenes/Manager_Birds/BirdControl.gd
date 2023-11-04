@@ -12,6 +12,7 @@ var isSunspot = false # Toggled in the Main Level scene's attached script.
 signal AI_Bird_Move(target_position)
 signal Birds_Increment_Hunger()
 signal player_starved
+signal birds_notice_predator
 
 func _ready():
 	if debug:
@@ -30,7 +31,8 @@ func _on_player_bird_player_starved():
 	emit_signal("player_starved")
 	
 
-
+func _on_process_predator_toggle_predator_approach():
+	emit_signal("birds_notice_predator")
 
 
 

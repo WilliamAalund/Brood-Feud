@@ -6,7 +6,7 @@ extends Node2D
 
 func shadowFlyOver():
 	$predator_shadow.visible = true
-	$predator_shadow.position = Vector2(100,100)
+	$predator_shadow.global_position = Vector2(100,100)
 	var i = 0
 	while i < 50:
 		$predator_shadow.position.x -= 5
