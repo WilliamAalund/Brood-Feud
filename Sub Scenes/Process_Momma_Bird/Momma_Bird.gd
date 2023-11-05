@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var SecondsToReturn = 10
-@export var FoodToDrop = 3
+@export var FoodToDrop = 4
 @export var DropInterval = 4 # Time momma bird takes between dropping food
 @export var LandingTime = 1.5
 

@@ -6,7 +6,6 @@
 [node name="Momma_Bird" type="Node2D"]
 script = ExtResource("1_44ueo")
 SecondsToReturn = 25
-FoodToDrop = 10
 DropInterval = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
