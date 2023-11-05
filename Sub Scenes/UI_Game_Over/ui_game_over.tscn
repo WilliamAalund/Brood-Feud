@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwui7idexgcb2"]
+
+[ext_resource type="Script" path="res://Sub Scenes/UI_Game_Over/ui_game_over.gd" id="1_8l0d2"]
+[ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://Visuals/Placeholder Graphics/circle.png" id="1_q638a"]
+
+[node name="ui_game_over" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8l0d2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 338)
+scale = Vector2(2.91, 2.25333)
+texture = ExtResource("1_q638a")
+
+[node name="game_over" type="Label" parent="."]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 238.0
+offset_right = 508.0
+offset_bottom = 264.0
+text = "Game Over
+"
+
+[node name="death_reason" type="Label" parent="."]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 263.0
+offset_right = 462.0
+offset_bottom = 286.0

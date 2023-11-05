@@ -6,3 +6,7 @@ func _process(_delta):
 	$Camera2D.position = $manager_birds/player_bird/character_bird.global_position / Camera2DScale
 	$CanvasLayer/ui_hud/ProgressBar_Visual.value = $manager_birds/player_bird.satiation 
 	$CanvasLayer/ui_hud/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
+
+
+func _on_manager_game_over_game_over_ocurred():
+	$CanvasLayer/ui_game_over.visible = true

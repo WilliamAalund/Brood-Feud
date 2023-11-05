@@ -89,6 +89,7 @@ func predatorDecision(): # Signal output / functions handling actually eating th
 		print("Predator wants to eat the dumb bird")
 	else: if foundPlayerBird:
 		print("Predator wants to eat the player")
+		emit_signal("player_eaten")
 	else: if foundBird:
 		print("Predator wants to eat the ai bird")
 	else:
