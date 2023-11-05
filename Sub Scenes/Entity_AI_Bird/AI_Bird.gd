@@ -23,6 +23,8 @@ var targetFood
 
 func _ready(): # Will be removed later on when the bird should actually start in the nest
 	$CharacterBody2D.state = updatedState()
+	if isStupid:
+		$CharacterBody2D/body_zone.add_to_group("dumb")
 
 # updatedState: returns an integer value that represents the current state that the bird is in.
 # This function is used to control the bird's navigation logic, and it will be used to control

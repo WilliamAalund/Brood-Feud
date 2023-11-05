@@ -26,6 +26,9 @@ var timeUntilHeadToNest
 var aggressionDecreaseValue = 0
 var predIsHome = false
 var momIsHome = false
+var foundDumbBird = false
+var foundPlayerBird = false
+var foundBird = false
 
 signal toggle_predator_approach
 signal toggle_predator_presence # Indicates to other nodes that the predator is at the nest.
@@ -33,6 +36,7 @@ signal player_eaten
 
 func _ready():
 	predatorLoop()
+	#detectionAnimation()
 
 func predatorLoop():
 	while 1 == 1:
@@ -60,10 +64,47 @@ func predatorLoop():
 		while (predIsHome):
 			await $Timer.timeout
 		print("Predator: Leaves nest")
+
+
+func detectionAnimation():
+	$bird_detector/Sprite2D.visible = true
+	$bird_detector/Sprite2D.modulate.a = 1
+	var i = 20
+	while i > 0:
+		$bird_detector/Sprite2D.modulate.a -= .05
+		await get_tree().create_timer(0.04).timeout
+		i -= 1
+	$bird_detector/Sprite2D.visible = false
+
+func evaluateObject(object):
+	if object.is_in_group("dumb"):
+		foundDumbBird = true
+	else: if object.is_in_group("player") and !foundDumbBird:
+		foundPlayerBird = true
+	else: if object.is_in_group("bird") and !foundDumbBird and !foundPlayerBird:
+		foundBird = true
+		
+func predatorDecision(): # Signal output / functions handling actually eating the birds will go here
+	if foundDumbBird:
+		print("Predator wants to eat the dumb bird")
+	else: if foundPlayerBird:
+		print("Predator wants to eat the player")
+	else: if foundBird:
+		print("Predator wants to eat the ai bird")
+	else:
+		print("Predator doesn't notice any birds")
+
 func headToNest():
 	predIsHome = true
-	emit_signal("toggle_predator_presence")
+	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
 	await get_tree().create_timer(LandingTime).timeout
+	detectionAnimation() # Indicates to player what area isn't safe
+	foundBird = false
+	foundPlayerBird = false
+	foundDumbBird = false
+	for object in $bird_detector.get_overlapping_areas():
+		evaluateObject(object)
+	predatorDecision() # Given previous booleans, figure out which bird to eat, if any
 	await get_tree().create_timer(StayLength).timeout
 	emit_signal("toggle_predator_presence")
 	predIsHome = false

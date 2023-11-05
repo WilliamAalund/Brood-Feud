@@ -45,7 +45,6 @@ offset_bottom = -244.0
 [node name="manager_sunspots" parent="." instance=ExtResource("10_k0xh1")]
 
 [node name="process_predator" parent="." instance=ExtResource("6_63o2m")]
-position = Vector2(301, 150)
 
 [connection signal="mom_drops_food" from="process_momma_bird" to="helper_food_spawner" method="_on_momma_bird_mom_drops_food"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_birds" method="_on_process_momma_bird_toggle_mom_presence"]
