@@ -20,10 +20,9 @@ func _ready():
 		3:
 			state1()
 
-func modulateOverLifespan(lifespan):
+func modulateOverLifespan(_lifespan):
 	var x = 0
 	var function = -1* (x-1)^2 + 1
-	self.modulate.a
 	pass
 
 func state1():

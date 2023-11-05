@@ -36,7 +36,6 @@ func _physics_process(_delta):
 
 func _input(event):
 	if event.is_action_pressed("interact") && !isInteracting:
-		print("interact pressed")
 		emit_signal("player_attacks")
 		isInteracting = true
 		await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
@@ -44,7 +43,7 @@ func _input(event):
 		$beak_area.monitorable = true
 		$beak_area.monitoring = true
 		$beak_area/beak_sprite.visible = true
-		Input.start_joy_vibration(0, 0, 0.1, 0.2)
+		Input.start_joy_vibration(0, 0, 1, 0.2)
 		await get_tree().create_timer(INTERACT_LENGTH).timeout
 		$beak_area.monitorable = false
 		$beak_area.monitoring = false

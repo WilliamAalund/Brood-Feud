@@ -41,7 +41,7 @@ func momReturns(): # Hand
 	momSprite.visible = isHome
 	await get_tree().create_timer(LandingTime).timeout
 	var foodDropped = 0
-	while foodDropped <= FoodToDrop:
+	while foodDropped < FoodToDrop:
 		emit_signal("mom_drops_food")
 		foodDropped += 1
 		await get_tree().create_timer(DropInterval).timeout

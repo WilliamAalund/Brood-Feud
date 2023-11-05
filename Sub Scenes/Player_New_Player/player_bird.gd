@@ -15,7 +15,7 @@ func eat(): # Function called to increase satiation when you eat.
 			satiation = 100
 		else:
 			satiation += get_parent().foodRestore
-		Input.start_joy_vibration(0, 0.7, 0.7, 0.15)
+		Input.start_joy_vibration(0, 1, 0, 0.15)
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:

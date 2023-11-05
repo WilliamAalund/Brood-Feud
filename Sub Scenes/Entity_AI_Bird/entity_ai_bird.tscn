@@ -33,7 +33,7 @@ shape = SubResource("CircleShape2D_kx41x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/eater_zone"]
 shape = SubResource("CircleShape2D_kx41x")
 
-[node name="body_zone" type="Area2D" parent="CharacterBody2D"]
+[node name="body_zone" type="Area2D" parent="CharacterBody2D" groups=["bird"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/body_zone"]
 shape = SubResource("CircleShape2D_kx41x")
