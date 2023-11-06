@@ -1,5 +1,6 @@
 res://Levels/Main Level.tscn
 res://Sub Scenes/Player_Bird/Player_Bird.gd
+res://Sub Scenes/Player_New_Player/player_bird.gd
 res://Sub Scenes/Player_Bird/Player_Bird.tscn
 res://Sub Scenes/Manager_Birds/Manager_Birds.tscn
 res://Sub Scenes/Player_New_Player/player_bird.tscn
@@ -7,4 +8,5 @@ res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn
 res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn
 res://Sub Scenes/Process_Predator/Process_Predator.tscn
 res://Sub Scenes/Entity_AI_Bird/AI_Bird.tscn
-res://Sub Scenes/Player_New_Player/bird_body.gd
+res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn
+res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd

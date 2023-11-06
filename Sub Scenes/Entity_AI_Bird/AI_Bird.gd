@@ -83,6 +83,7 @@ func _on_body_zone_area_entered(area):
 		inSunray = true
 	else: if area.is_in_group("food"):
 		eat()
+		
 
 func _on_body_zone_area_exited(area):
 	if area.is_in_group("sunray"):
