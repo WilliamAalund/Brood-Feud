@@ -48,3 +48,10 @@ position = Vector2(493, 607)
 rotation = -0.127409
 scale = Vector2(0.0447667, 0.0400529)
 texture = ExtResource("2_6da3i")
+
+[node name="level_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 737.0
+offset_right = 538.0
+offset_bottom = 760.0

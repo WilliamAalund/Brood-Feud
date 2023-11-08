@@ -7,7 +7,7 @@ const INTERACT_COOLDOWN = 0.2 # In seconds
 var isInteracting = false
 var move_speed = 100 # Adjust this value to control movement speed
 var rotate_speed = 0.05  # Adjust this value to control the rotation speed
-var push_force = 80.0 # For some advanced physics, currently unused
+var push_force = 2400.0 # Value used when calculating impulse to apply
 
 signal player_attacks
 
@@ -30,7 +30,6 @@ func _physics_process(_delta):
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
 			print(-c.get_normal() * push_force)
-			#-c.get_normal() * push_force
 			c.get_collider().apply_force(c.get_normal() * -push_force)
 		
 

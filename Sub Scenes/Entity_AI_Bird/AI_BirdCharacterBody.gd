@@ -10,6 +10,7 @@ const AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER = 45 # Distance bird will keep itself
 
 var speed = 40
 var accel = speed
+var push_force = 80.0
 var state = 0 # Variable used for pathfinding logic. Value is managed in parent node
 var target = Vector2(0,0)
 var direction = Vector3()

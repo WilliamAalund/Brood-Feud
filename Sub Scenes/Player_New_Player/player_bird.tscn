@@ -20,6 +20,7 @@ script = ExtResource("1_aa0pe")
 
 [node name="character_bird" type="CharacterBody2D" parent="."]
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_k6mr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character_bird"]
