@@ -1,116 +1,141 @@
 extends CharacterBody2D
 
+const AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER = 45 # Distance bird will keep itself from the player when attacking
+
+@onready var nav: NavigationAgent2D = $NavigationAgent2D
 #how fast this dude can spin
 @export var rotspeed = 0.05
 #how inaccurate this dude's pathfinding can be
 @export var rot_dead_zone = 1.0
-
 
 var speed = 40
 var accel = speed
 var state = 0 # Variable used for pathfinding logic. Value is managed in parent node
 var target = Vector2(0,0)
 var direction = Vector3()
-@onready var nav: NavigationAgent2D = $NavigationAgent2D
+var foodTargetsArray = []
+var sunrayTargetsArray = []
+var sunrayTarget
+var foodTarget
+var playerTarget = Vector2(0,0)
 
-func moveToTarget(delta, myTarget):
-	nav.target_position = myTarget
+func _physics_process(delta): # Main pathfinding loop
+		updateTargetArrays()
+		Callable(self, "state" + str(state)).call(delta) # Calls the associated lambda function
+		#callMovementLambda(delta, state)
+#func callMovementLambda(delta, state): # Calls the associated lambda function
+#	Callable(self, "state" + str(state)).call(delta)
+func moveToTarget(_delta, myTarget):
+	nav.target_position = myTarget # Sets target position
 	
 	var move_dir = Vector2(0, 0)
-	move_dir = Vector2(0, - 1).rotated(rotation)
+	move_dir = Vector2(0, - 1).rotated(rotation) # Angles movement vector to direction
 	
-
-	velocity = move_dir * speed
+	velocity = move_dir * speed # Vector time scalar is vector quantity
 	move_and_slide()
 	
-	move_dir.normalized()
+	move_dir.normalized() # Do we need to do this? move_dir is already a unit vector - William 
 	
-	
-
 	direction = nav.get_next_path_position() - global_position
 	direction = direction.normalized()
-
-	#velocity = velocity.lerp(direction * speed , accel * delta)
 	
 	var move_rad = move_dir.angle()
 	var dir_rad = direction.angle()
 	var rad_diff = dir_rad - move_rad
 	if (rad_diff > PI): #this means that the angles are closer than math would indicate. modulus stuff
 		rad_diff = dir_rad - ((2*PI)-move_rad)
-	
- #right turn
-	if rad_to_deg(rad_diff) < (0-rot_dead_zone):
+	if rad_to_deg(rad_diff) < (0-rot_dead_zone): #right turn
 		rotation -= rotspeed
 	elif rad_to_deg(rad_diff) > (0+rot_dead_zone): #left turn
 		rotation += rotspeed
-
-func _physics_process(delta): #Physics process should not have any logic. Logical problems should be handled outside the function
-	callMovement(delta)
-
-func state0(_delta): # Stays in egg
-	pass
+#	elif rad_to_deg(rad_diff) < rot_dead_zone:
+#		rotation = move_dir.angle_to(myTarget)
+#	elif rad_to_deg((2*PI) - rad_diff) < rot_dead_zone:
+#		rotation = (2*PI) - move_dir.angle_to(myTarget)
+func updateTargetArrays():
+	foodTargetsArray = []
+	sunrayTargetsArray = []
+	for area in $detector_zone.get_overlapping_areas():
+		if area.is_in_group("food"):
+			foodTargetsArray.append(area.global_position)
+		else: if area.is_in_group("sunray"):
+			sunrayTargetsArray.append(area.global_position)
+		else: if area.is_in_group("player"):
+			playerTarget = area.global_position
+func findClosestTarget(array):
+	if array.size() == 0:
+		print("Error: array contains no values")
+		return self.position
+	var index = 0
+	var closestPosition = array[0]
+	for item in array:
+		if (self.position).length() - item.length() < closestPosition.length():
+			#index = item.index
+			closestPosition = item
+	return closestPosition
+func createIdlePosition():
+	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
 
 func state1(_delta): # Remains idle
 	pass
-
 func state2(delta): # Will move towards and look for food
-	#get_global_mouse_position() 2D vector
 	if get_parent().noticedFood:
-		moveToTarget(delta, get_parent().targetFood)
-
+		foodTarget = findClosestTarget(foodTargetsArray)
+		moveToTarget(delta, foodTarget)
 	else:
 		pass # Code to get the bird to crowd around momma bird
-	
-	#nav.target_position = target
-	
-	#direction = nav.get_next_path_position() - global_position
-	#direction = direction.normalized()
-	
-	#velocity = velocity.lerp(direction * speed , accel * delta)
-	
-	#move_and_slide()
-
 func state3(delta): # Follows player
-	#get_global_mouse_position() 2D vector
-	moveToTarget(delta, target)
-
+	if (self.position - playerTarget).length() > AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER:
+		moveToTarget(delta, playerTarget)
 func state4(delta): # Will move to sunray
 	if !get_parent().inSunlight:
-		moveToTarget(delta, get_parent().targetSunray)
-	
+		sunrayTarget = findClosestTarget(sunrayTargetsArray)
+		moveToTarget(delta, sunrayTarget)
 func state5(_delta): # Will run to edge of nest
 	pass
-	
 func state6(_delta): # Will remain entirely immobile. Dead
 	pass
-	
 func state7(_delta): # Debugger state
 	pass
+func state8(_delta): # Unallocated state
+	pass
 
-# TODO: Aparrently, you can pass functions as parameters somehow. -YUP! python 
-# and therefore gd script are "functional" languages, which feature this.
-# c++ is an object-oriented language. -Liam
+#func callMovement(delta):
+#	match state:
+#		1:
+#			state1.call(delta)
+#		2:
+#			state2.call(delta)
+#		3:
+#			state3.call(delta)
+#		4:
+#			state4.call(delta)
+#		5:
+#			state5.call(delta)
+#		6:
+#			state6.call(delta)
+#		7:
+#			state7.call(delta)
 
-# There should be an extremely easy way to tell the navigation agent to just do 
-# x navigation behavior, where x is just the state value.
-# The NavigationAgent2D currently uses a switch case system (called match in Godot)
-# to choose the correct path. Ideally, it shouldn't have to "choose" at all.
-# (For example, state 1 will just make the body call the state 1 pathfinding option,
-# instead of using a case or if statement to call the state 1 function.)
-
-func callMovement(delta):
-	match state:
-		1:
-			state1(delta)
-		2:
-			state2(delta)
-		3:
-			state3(delta)
-		4:
-			state4(delta)
-		5:
-			state5(delta)
-		6:
-			state6(delta)
-		7:
-			state7(delta)
+#var state_1 = func (delta): # Remains idle
+#	pass
+#var state_2 = func (delta): # Will move towards and look for food
+#	if get_parent().noticedFood:
+#		moveToTarget(delta, get_parent().targetFood)
+#	else:
+#		pass # Code to get the bird to crowd around momma bird
+#var state_3 = func (delta): # Follows player
+#	#get_global_mouse_position() 2D vector
+#	moveToTarget(delta, target)
+#var state_4 = func (delta): # Will move to sunray
+#	if !get_parent().inSunlight:
+#		moveToTarget(delta, get_parent().targetSunray)
+#var state_5 = func (delta): # Will run to edge of nest
+#	pass
+#var state_6 = func (delta): # Will remain entirely immobile. Dead
+#	pass
+#var state_7 = func (delta): # Debugger state
+#	pass
+#var state_8 = func (delta): # Unallocated state
+#	pass
+#var movementLambdasArray = [state1, state2, state3, state4, state5, state6, state7] # Array of lambda functions. Each function corresponds to a state, and contains instructions for pathfinding

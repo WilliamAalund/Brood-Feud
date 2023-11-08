@@ -22,7 +22,7 @@ func _ready():
 
 func modulateOverLifespan(_lifespan):
 	var x = 0
-	var function = -1* (x-1)^2 + 1
+	var _function = -1* (x-1)^2 + 1
 	pass
 
 func state1():

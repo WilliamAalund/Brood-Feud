@@ -12,7 +12,7 @@ var isSunspot = false # Toggled in the Main Level scene's attached script.
 signal AI_Bird_Move(target_position)
 signal Birds_Increment_Hunger()
 signal player_starved
-signal birds_notice_predator
+signal birds_toggle_predator_notice
 
 func _ready():
 	if debug:
@@ -30,19 +30,5 @@ func _on_timer_timeout():
 func _on_player_bird_player_starved():
 	emit_signal("player_starved")
 	
-
 func _on_process_predator_toggle_predator_approach():
-	emit_signal("birds_notice_predator")
-
-
-
-
-
-#func _ready():
-	#var aiBirdInstance = food_scene.instantiate()
-	#food_instance.position.x += randi_range(-spawn_inaccuracy, spawn_inaccuracy) % spawn_inaccuracy # Randomly varies spawn position around Object_Food_Spawner
-	#food_instance.position.y += randi_range(-spawn_inaccuracy, spawn_inaccuracy) % spawn_inaccuracy
-	#self.add_child(food_instance)
-
-#func _on_player_player_starved(): # Communicated with the Manager_Game_Over node.
-	#emit_signal("playerStarved()")
+	emit_signal("birds_toggle_predator_notice")
