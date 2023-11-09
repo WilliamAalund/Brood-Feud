@@ -1,5 +1,7 @@
 extends Node2D
 
+const TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME = 6
+
 @export var SecondsToReturn = 10
 @export var FoodToDrop = 4
 @export var DropInterval = 4 # Time momma bird takes between dropping food
@@ -8,9 +10,11 @@ extends Node2D
 var goneTimer = 0
 var isHome = true # Momma bird starts off at the nest
 var predatorIsHome = false # Used to make sure momma bird doesn't come to roost while predator is attacking
+var timesLandedAtNest = 0
 
 signal mom_drops_food
 signal toggle_mom_presence
+signal momma_win_condition
 
 func set_SecondsToReturn(value): # Handles the progress bar changing when the export value changes
 	SecondsToReturn = value
@@ -50,6 +54,9 @@ func momReturns(): # Hand
 	goneTimer = 0
 	emit_signal("toggle_mom_presence")
 	print("Momma bird leaves")
+	timesLandedAtNest += 1
+	if timesLandedAtNest > TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME:
+		emit_signal("momma_win_condition")
 	
 
 func _on_process_predator_toggle_predator_presence():

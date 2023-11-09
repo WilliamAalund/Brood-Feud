@@ -1,7 +1,7 @@
 extends Node2D
 
 # Values that each of the birds can refer to in order to make decisions about themselves/what they want to do.
-@export var foodRestore = 12
+@export var foodRestore = 15
 @export var idleSatiationDrainRate = 0.06
 @export var sunRate = -0.03
 @export var debug = false
@@ -31,4 +31,7 @@ func _on_player_bird_player_starved():
 	emit_signal("player_starved")
 	
 func _on_process_predator_toggle_predator_approach():
+	emit_signal("birds_toggle_predator_notice")
+
+func _on_process_predator_predator_leaves_nest():
 	emit_signal("birds_toggle_predator_notice")

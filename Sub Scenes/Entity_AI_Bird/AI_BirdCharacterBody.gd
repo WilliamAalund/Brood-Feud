@@ -24,8 +24,6 @@ func _physics_process(delta): # Main pathfinding loop
 		updateTargetArrays()
 		Callable(self, "state" + str(state)).call(delta) # Calls the associated lambda function
 		#callMovementLambda(delta, state)
-#func callMovementLambda(delta, state): # Calls the associated lambda function
-#	Callable(self, "state" + str(state)).call(delta)
 func moveToTarget(_delta, myTarget):
 	nav.target_position = myTarget # Sets target position
 	
@@ -77,6 +75,7 @@ func findClosestTarget(array):
 func createIdlePosition():
 	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
 
+# --- STATE FUNCTIONS ---
 func state1(_delta): # Remains idle
 	pass
 func state2(delta): # Will move towards and look for food
@@ -100,23 +99,6 @@ func state7(_delta): # Debugger state
 	pass
 func state8(_delta): # Unallocated state
 	pass
-
-#func callMovement(delta):
-#	match state:
-#		1:
-#			state1.call(delta)
-#		2:
-#			state2.call(delta)
-#		3:
-#			state3.call(delta)
-#		4:
-#			state4.call(delta)
-#		5:
-#			state5.call(delta)
-#		6:
-#			state6.call(delta)
-#		7:
-#			state7.call(delta)
 
 #var state_1 = func (delta): # Remains idle
 #	pass

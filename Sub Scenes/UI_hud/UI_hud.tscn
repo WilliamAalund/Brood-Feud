@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2q3lmimxr2ox"]
+[gd_scene load_steps=4 format=3 uid="uid://c2q3lmimxr2ox"]
 
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
 [ext_resource type="Texture2D" uid="uid://xdq1tqik3lpa" path="res://Visuals/Art Assets/UIInSunlight.png" id="2_6da3i"]
+[ext_resource type="Texture2D" uid="uid://brn66pryq76xx" path="res://Visuals/Art Assets/draft_hud_stomach.png" id="4_vsnun"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -55,3 +56,16 @@ offset_left = 498.0
 offset_top = 737.0
 offset_right = 538.0
 offset_bottom = 760.0
+
+[node name="hud" type="Node2D" parent="."]
+rotation = -0.149906
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 1
+texture_under = ExtResource("4_vsnun")
+texture_progress = ExtResource("4_vsnun")
+tint_under = Color(0.666667, 0.666667, 0.666667, 1)

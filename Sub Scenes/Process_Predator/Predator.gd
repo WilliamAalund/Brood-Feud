@@ -1,29 +1,19 @@
 extends Node2D
 
-# --- NONE OF THIS IS CORRECT ANYMORE ---
-# Rate incrementing to 100 in the background
-# there is a ratevalue% chance that predator will head to the nest.
-# If the predator heads to the nest, there is a 10% chance they will go to the nest every check
-# And a 10% chance to leave the nest the next time a role occurs
-# If the predator comes to the nest, momma bird cannot return. 
-# If you are moving, the bird eats you.
-# If you are near the middle of the nest, the bird eats you.
-# Future features: the chance the predator comes to the nest will increase depending on noise.
-# --- NONE OF THIS IS CORRECT ANYMORE ---
-
-
 # All of these values are in seconds
-const BASE_TIME_AWAY_FROM_NEST = 65
-const TIME_AWAY_VARIANCE = 5
-const TIME_APPROACHED_MIN = 2
-const TIME_APPROACHED_MAX = 4
+const BASE_TIME_AWAY_FROM_NEST = 60 # The base time that the predator will wait intil approaching the nest
+const TIME_AWAY_STALL = 4 # The time that the predator will wait after attempting to approach, but being blocked by momma bird
+const TIME_AWAY_VARIANCE = 5 # The maximum amount of variance in the time that the predator will wait to approach the nest
+const TIME_APPROACHED_MIN = 3 # The minimum amount of time the predator will stay approached before heading to the nest
+const TIME_APPROACHED_MAX = 5 # The maximum amount of time the predator will stay approached before heading to the nest
+const TIME_APPROACHED_STALL = 4 # The time that the predator will wait after attempting to head to the nest, but was blocked by momma bird
 
 @export var LandingTime = 0.5
-@export var StayLength = 5
+@export var StayLength = 3
 
 var timeAwayFromNest
 var timeUntilHeadToNest
-var aggressionDecreaseValue = 0
+var aggressionTimeDecrease = 0
 var predIsHome = false
 var momIsHome = false
 var foundDumbBird = false
@@ -32,39 +22,55 @@ var foundBird = false
 
 signal toggle_predator_approach
 signal toggle_predator_presence # Indicates to other nodes that the predator is at the nest.
+signal predator_leaves_nest
 signal player_eaten
 
 func _ready():
 	predatorLoop()
 	#detectionAnimation()
 
+# --- PREDATOR LOOP ---
+# Always running in the background
+# Predator initially waits the base time to be away from the nest (minus a potential variance value)
+# Time is measures in seconds.
+# Once this time is up, the predator will attempt to "approach" the nest. If momma bird is home, the predator will not approach
+# The predator will then spend between 2 to 5 seconds "approached" before actually heading to the nest. The predator will not approach if they were blocked by momma bird
+# Then the predator will head to the nest, and run the script handing that event.
+# After the predator leaves the nest, the time until the next predator approach (excluding variance) will be decreased
+# TOTAL TIME FOR A SINGLE LOOP: timeAwayFromNest + timeUntilHeadToNest + LandingTime + StayLength
+# Future feature: Predator could respond to noise
+
+
 func predatorLoop():
 	while 1 == 1:
-		timeAwayFromNest = BASE_TIME_AWAY_FROM_NEST - aggressionDecreaseValue - randi_range(0, TIME_AWAY_VARIANCE)
+		timeAwayFromNest = BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease - randi_range(0, TIME_AWAY_VARIANCE)
 		$ProgressBar.max_value = timeAwayFromNest
-		while timeAwayFromNest >= 0:
+		while timeAwayFromNest >= 0 or momIsHome:
 			await $Timer.timeout
 			#print(timeAwayFromNest)
 			timeAwayFromNest -= 1
 			$ProgressBar.value = $ProgressBar.max_value - timeAwayFromNest
+			if timeAwayFromNest == 0 and momIsHome:
+				print("Predator: momma bird preventing approach to nest")
+				timeAwayFromNest = TIME_AWAY_STALL
 		# Predator approaches the nest
 		emit_signal("toggle_predator_approach")
 		print("Predator: Approaches nest")
-		timeUntilHeadToNest = randi_range(2, 5)
+		timeUntilHeadToNest = randi_range(TIME_APPROACHED_MIN, TIME_APPROACHED_MAX)
 		while timeUntilHeadToNest >= 0 or momIsHome:
 			await $Timer.timeout
-			#print(timeUntilHeadToNest)
 			if momIsHome:
-				print("Predator: cannot approach nest")
-				timeUntilHeadToNest = 4
+				print("Predator: momma bird preventing head to nest")
+				timeUntilHeadToNest = TIME_APPROACHED_STALL
 			else:
 				timeUntilHeadToNest -= 1
 		print("Predator: Heads to nest")
 		headToNest()
 		while (predIsHome):
 			await $Timer.timeout
+		emit_signal("predator_leaves_nest")
+		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 10 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
-
 
 func detectionAnimation():
 	$bird_detector/Sprite2D.visible = true
@@ -84,7 +90,7 @@ func evaluateObject(object):
 	else: if object.is_in_group("bird") and !foundDumbBird and !foundPlayerBird:
 		foundBird = true
 		
-func predatorDecision(): # Signal output / functions handling actually eating the birds will go here
+func predatorEatDecision(): # Signal output / functions handling actually eating the birds will go here
 	if foundDumbBird:
 		print("Predator wants to eat the dumb bird")
 	else: if foundPlayerBird:
@@ -96,61 +102,20 @@ func predatorDecision(): # Signal output / functions handling actually eating th
 		print("Predator doesn't notice any birds")
 
 func headToNest():
-	predIsHome = true
+	predIsHome = true # Prevents predator loop from continuing
 	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
 	await get_tree().create_timer(LandingTime).timeout
 	detectionAnimation() # Indicates to player what area isn't safe
+	# Booleans that are used in predatorEatDecision()
 	foundBird = false
 	foundPlayerBird = false
 	foundDumbBird = false
-	for object in $bird_detector.get_overlapping_areas():
+	for object in $bird_detector.get_overlapping_areas(): # Grabs all birds in detection range, evaluates them
 		evaluateObject(object)
-	predatorDecision() # Given previous booleans, figure out which bird to eat, if any
 	await get_tree().create_timer(StayLength).timeout
+	predatorEatDecision() # Given previous booleans, figure out which bird to eat, if any
 	emit_signal("toggle_predator_presence")
 	predIsHome = false
 	
 func _on_process_momma_bird_toggle_mom_presence():
 	momIsHome = !momIsHome
-
-#@export var MaxPredAggro = 750
-#@export var PredAggroIncrement = 1
-#var predAggro = 0
-#var predApproached = false
-
-#func approachCheck() -> bool:
-#	var check = randi_range(predAggro, MaxPredAggro)
-#	$Debug_Roll.text = str(check)
-#	#print("Predator : Approach check: ", check)
-#	if check == MaxPredAggro:
-#		return true
-#	else:
-#		#print("false")
-#		return false
-#
-#func headCheck() -> bool:
-#	if momIsHome:
-#		print("Predator : cannot head to nest: momma bird is watching")
-#		return false
-#	return randi_range(1, 100) > 40 and !momIsHome
-
-#func _on_timer_timeout(): # State machine(?) Every time a second passes, 
-#	if !predIsHome:
-#		predAggro += PredAggroIncrement # Slightly increments predAggro
-#		if predAggro > MaxPredAggro:
-#			predAggro = MaxPredAggro
-#		#print(predAggro, predAggro / MaxPredAggro)
-#		$ProgressBar.value = predAggro
-#	if predAggro % 10 == 0 and !predIsHome:
-#		if predApproached:
-#			if headCheck():
-#				print("Predator : heads to nest")
-#				predIsHome = true
-#				# Run evil predator functions
-#				headToNest()
-#			else: if momIsHome:
-#				pass # Preserves aggression level. Bird will not completely reset: just wait for another chance
-#		else: if approachCheck():
-#			print("Predator : approaches nest")
-#			emit_signal("toggle_predator_approach")
-#			predApproached = true
