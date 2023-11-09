@@ -5,8 +5,6 @@
 
 [node name="Momma_Bird" type="Node2D"]
 script = ExtResource("1_44ueo")
-SecondsToReturn = 25
-DropInterval = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.41)
