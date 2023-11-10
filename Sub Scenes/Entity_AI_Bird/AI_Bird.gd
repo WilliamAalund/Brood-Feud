@@ -26,6 +26,7 @@ func _ready(): # Will be removed later on when the bird should actually start in
 	$CharacterBody2D.state = updatedState()
 	if isStupid:
 		$CharacterBody2D/body_zone.add_to_group("dumb")
+	
 
 func eat(): # Function called to increase satiation when you eat.
 	if satiation + get_parent().foodRestore > 100:
@@ -74,6 +75,9 @@ func _on_timer_timeout():
 func _on_bird_control_birds_increment_hunger():
 	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight)
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
+	if satiation <= 0: # Prevent dead bodies from eating food
+		$CharacterBody2D/eater_zone.remove_from_group("eater")
+		$CharacterBody2D/Sprite2D.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
 
 func _on_body_zone_area_entered(area):
 	if area.is_in_group("sunray"):

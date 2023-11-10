@@ -8,19 +8,20 @@
 script = ExtResource("1_nqp0i")
 
 [node name="player_bird" parent="." instance=ExtResource("4_2bnt3")]
+position = Vector2(27, 111)
 
 [node name="AI_Bird" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(67, 27)
+position = Vector2(73, 69)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
 
 [node name="AI_Bird2" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(-73, 29)
+position = Vector2(-73, 73)
 
 [node name="AI_Bird3" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(44, -33)
+position = Vector2(-29, 119)
 
 [connection signal="AI_Bird_Move" from="." to="AI_Bird" method="_on_bird_control_ai_bird_move"]
 [connection signal="Birds_Increment_Hunger" from="." to="player_bird" method="_on_bird_control_birds_increment_hunger"]

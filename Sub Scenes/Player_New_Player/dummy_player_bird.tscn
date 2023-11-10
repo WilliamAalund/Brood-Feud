@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://drjktniigej38"]
+[gd_scene load_steps=4 format=3 uid="uid://cm88tdwstgkgu"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/CharacterBody2D.gd" id="1_q70mf"]
 [ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="2_me1mp"]

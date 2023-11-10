@@ -3,7 +3,7 @@ extends Node2D
 const TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME = 6
 
 @export var SecondsToReturn = 25
-@export var FoodToDrop = 6
+@export var FoodToDrop = 5
 @export var DropInterval = 2 # Time momma bird takes between dropping food
 @export var LandingTime = 1.5
 
@@ -21,8 +21,8 @@ func set_SecondsToReturn(value): # Handles the progress bar changing when the ex
 	$ProgressBar.max_value = SecondsToReturn
 
 func _ready(): # Momma bird starts off at the nest
-	var momSprite = get_child(0)
-	momSprite.visible = isHome
+	#var momSprite = get_child(0)
+	#momSprite.visible = isHome
 	$ProgressBar.max_value = SecondsToReturn
 	momReturns()
 
@@ -41,8 +41,8 @@ func _on_timer_timeout(): # Function runs every 0.1 seconds
 
 func momReturns(): # Hand
 	emit_signal("toggle_mom_presence")
-	var momSprite = get_child(0)
-	momSprite.visible = isHome
+	#var momSprite = get_child(0)
+	#momSprite.visible = isHome
 	await get_tree().create_timer(LandingTime).timeout
 	var foodDropped = 0
 	while foodDropped < FoodToDrop:
@@ -50,7 +50,7 @@ func momReturns(): # Hand
 		foodDropped += 1
 		await get_tree().create_timer(DropInterval).timeout
 	isHome = false
-	momSprite.visible = isHome
+	#momSprite.visible = isHome
 	goneTimer = 0
 	emit_signal("toggle_mom_presence")
 	print("Momma bird leaves")

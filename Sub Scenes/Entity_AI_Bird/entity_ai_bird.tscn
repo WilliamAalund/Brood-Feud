@@ -22,7 +22,6 @@ platform_on_leave = 2
 script = ExtResource("2_sf0vd")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
-debug_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(-0.499999, -12.5)
@@ -49,12 +48,14 @@ shape = SubResource("CircleShape2D_kx41x")
 shape = SubResource("CircleShape2D_cyhn5")
 
 [node name="Debug_Satiation_Label" type="Label" parent="CharacterBody2D"]
+visible = false
 offset_left = -50.0
 offset_top = -35.0
 offset_right = -12.0
 offset_bottom = -12.0
 
 [node name="Debug_AI_State" type="Label" parent="CharacterBody2D"]
+visible = false
 offset_top = -34.0
 offset_right = 40.0
 offset_bottom = -11.0

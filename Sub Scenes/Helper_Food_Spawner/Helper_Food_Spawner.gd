@@ -16,7 +16,7 @@ func calculateFoodSpawnPosition():
 	var birdPositions = [] # Stores Global Position of all birds.
 	var i = 0
 	for area in $bird_position_grabber.get_overlapping_areas():
-		if area.is_in_group("bird"):
+		if area.is_in_group("bird") or area.is_in_group("eater"):
 			birdPositions.append(area.global_position)
 	while (!validSpawn and i < 500):
 		$dummy_spawn.position = Vector2(randi_range(-spawn_offset, spawn_offset), randi_range(-spawn_offset, spawn_offset))

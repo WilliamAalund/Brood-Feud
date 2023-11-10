@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cudu6vf7uwwve"]
+[gd_scene load_steps=4 format=3 uid="uid://cudu6vf7uwwve"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Process_Momma_Bird/Momma_Bird.gd" id="1_44ueo"]
 [ext_resource type="Texture2D" uid="uid://16qwckh3r6x7" path="res://Visuals/Placeholder Graphics/mommabirdplaceholder.png" id="2_gvgd0"]
+[ext_resource type="PackedScene" uid="uid://cwtxxxhlmsx4m" path="res://Sub Scenes/Rig_Momma_Bird/rig_momma_bird.tscn" id="3_8cupb"]
 
 [node name="Momma_Bird" type="Node2D"]
 script = ExtResource("1_44ueo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(202, -33)
 scale = Vector2(0.4, 0.41)
 texture = ExtResource("2_gvgd0")
 
@@ -30,4 +33,7 @@ offset_right = -16.0
 offset_bottom = -79.0
 text = "Mama"
 
+[node name="rig_momma_bird" parent="." instance=ExtResource("3_8cupb")]
+
+[connection signal="toggle_mom_presence" from="." to="rig_momma_bird" method="_on_momma_bird_toggle_mom_presence"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

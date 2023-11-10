@@ -25,7 +25,6 @@ texture = ExtResource("2_14buk")
 [node name="manager_birds" parent="." instance=ExtResource("7_jxroq")]
 
 [node name="process_momma_bird" parent="." instance=ExtResource("5_ucfnu")]
-position = Vector2(292, -73)
 
 [node name="helper_food_spawner" parent="." instance=ExtResource("5_slw61")]
 position = Vector2(0, 70)
