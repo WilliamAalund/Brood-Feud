@@ -5,22 +5,23 @@
 [sub_resource type="GDScript" id="GDScript_egfrn"]
 script/source = "extends Node2D
 
-#signal food_eaten
+const TIME_UNTIL_FOOD_READY_TO_BE_EATEN = 0.2
 
 func _ready():
-	print(\"Food     : spawned at: \", self.position)
+	print(\"Food spawned at: \", self.position)
+	#await get_tree().create_timer(TIME_UNTIL_FOOD_READY_TO_BE_EATEN).timeout
+	#$food_physics_body/food_eat_detector.add_to_group(\"food\")
 	
+
+func _on_area_2d_area_entered(area): # Deletes food once it comes into contact with a beak. Code handling satiation is handled in Manager_Birds and in the individual bird that eats the food
+	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
+		queue_free() # Deletes entity.
+
 #func _enter_tree(): #Connecting signal to parent node (which should be Object_Food_Spawner) must be done in this function, rather than _ready()
 	#if get_parent().has_method(\"on_food_eaten\"): # Confirms that correct parent node exists, preventing a crash
 		#print(\"connected food to object food spawner\")
 		#var parent_node = get_parent() # Creates callable object (directly connecting to get_parent() causes a type error)
 		#connect(\"food_eaten\", parent_node.on_food_eaten)
-
-func _on_area_2d_area_entered(area): # Deletes food once it comes into contact with a beak. Code handling satiation is handled in Manager_Birds and in the individual bird that eats the food
-	if area.is_in_group(\"eater\"): # Function will only emit signal if it collides with an Area2D object in the \"eater\" group.
-		queue_free() # Deletes entity.
-		#Previously, would emit \"food_eaten\" signal
-
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfqyj"]

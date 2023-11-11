@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="4_qhvhc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k6d5c"]
-radius = 210.0
+radius = 173.003
 
 [node name="Predator" type="Node2D"]
 script = ExtResource("1_tnf4g")
@@ -49,16 +49,16 @@ offset_bottom = -69.0
 
 [node name="bird_detector" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bird_detector"]
-shape = SubResource("CircleShape2D_k6d5c")
-
 [node name="Sprite2D" type="Sprite2D" parent="bird_detector"]
 visible = false
 modulate = Color(0.831373, 0, 0.117647, 1)
 self_modulate = Color(1, 1, 1, 0.454902)
-position = Vector2(-0.49999, -3.8147e-06)
-scale = Vector2(0.349167, 0.348333)
+position = Vector2(-5.72205e-06, -0.500025)
+scale = Vector2(0.286667, 0.285833)
 texture = ExtResource("4_qhvhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bird_detector"]
+shape = SubResource("CircleShape2D_k6d5c")
 
 [connection signal="toggle_predator_approach" from="." to="rig_predator" method="_on_predator_toggle_predator_approach"]
 [connection signal="toggle_predator_presence" from="." to="rig_predator" method="_on_predator_toggle_predator_presence"]

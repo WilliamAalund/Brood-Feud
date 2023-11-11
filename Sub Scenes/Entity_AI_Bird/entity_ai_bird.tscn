@@ -11,7 +11,7 @@ radius = 17.0
 height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cyhn5"]
-radius = 117.154
+radius = 169.027
 
 [node name="AI_Bird" type="Node2D"]
 script = ExtResource("1_g4xov")
@@ -22,6 +22,7 @@ platform_on_leave = 2
 script = ExtResource("2_sf0vd")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+debug_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(-0.499999, -12.5)
@@ -48,22 +49,30 @@ shape = SubResource("CircleShape2D_kx41x")
 shape = SubResource("CircleShape2D_cyhn5")
 
 [node name="Debug_Satiation_Label" type="Label" parent="CharacterBody2D"]
-visible = false
-offset_left = -50.0
-offset_top = -35.0
-offset_right = -12.0
-offset_bottom = -12.0
+modulate = Color(0.945098, 0.121569, 0.156863, 1)
+offset_left = -19.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 21.0
+
+[node name="boolean_tag" type="Label" parent="CharacterBody2D"]
+modulate = Color(0.8, 0, 0.105882, 1)
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
 
 [node name="Debug_AI_State" type="Label" parent="CharacterBody2D"]
-visible = false
-offset_top = -34.0
-offset_right = 40.0
-offset_bottom = -11.0
+modulate = Color(0.619608, 0, 0.141176, 1)
+offset_left = -19.0
+offset_top = -46.0
+offset_right = 21.0
+offset_bottom = -23.0
 
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
+[connection signal="area_entered" from="CharacterBody2D/eater_zone" to="." method="_on_eater_zone_area_entered"]
 [connection signal="area_entered" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_entered"]
 [connection signal="area_exited" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_exited"]
 [connection signal="area_entered" from="CharacterBody2D/detector_zone" to="." method="_on_detector_zone_area_entered"]

@@ -1,5 +1,13 @@
 extends Node2D
 
+const STARTING_LEVEL = 0
+const EXP_TO_LEVEL_UP = 4
+const LEVEL_UP_PUSH_FORCE_INCREASE = 400
+const LEVEL_UP_SCALE_INCREASE = 0.1
+const LEVEL_UP_MOVE_SPEED_INCREASE = 10
+
+var level = 1
+var exp = 0
 var satiation = 100
 var inSunlight = false
 var numSunlightSpotsInside = 0
@@ -16,6 +24,24 @@ func eat(): # Function called to increase satiation when you eat.
 		else:
 			satiation += get_parent().foodRestore
 		Input.start_joy_vibration(0, 1, 0, 0.15)
+	exp += 1
+	if exp == EXP_TO_LEVEL_UP:
+		levelUp()
+		
+func levelUp():
+	level += 1
+	exp = 0
+	#self.scale += Vector2(LEVEL_UP_SCALE_INCREASE,LEVEL_UP_SCALE_INCREASE)
+	$character_bird.push_force += LEVEL_UP_PUSH_FORCE_INCREASE
+	$character_bird.move_speed += LEVEL_UP_MOVE_SPEED_INCREASE
+	$character_bird.modulate = Color(.5,1,.5,1)
+	var i = 0.0
+	while i < 5:
+		$character_bird.modulate = Color(.5 + (i / 10),1,.5 + (i / 10),1)
+		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 5,LEVEL_UP_SCALE_INCREASE / 5)
+		await get_tree().create_timer(0.1).timeout
+		i += 1
+	$character_bird.modulate = Color(1,1,1,1)
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:

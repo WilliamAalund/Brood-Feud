@@ -5,7 +5,7 @@ const INTERACT_LENGTH = 0.2 # In seconds
 const INTERACT_COOLDOWN = 0.2 # In seconds
 
 var isInteracting = false
-var move_speed = 100 # Adjust this value to control movement speed
+var move_speed = 80 # Adjust this value to control movement speed
 var rotate_speed = 0.05  # Adjust this value to control the rotation speed
 var push_force = 2400.0 # Value used when calculating impulse to apply
 

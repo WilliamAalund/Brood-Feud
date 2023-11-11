@@ -72,7 +72,7 @@ func predatorLoop():
 		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 10 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
 
-func detectionAnimation():
+func birdDetectorCircleAnimation():
 	$bird_detector/Sprite2D.visible = true
 	$bird_detector/Sprite2D.modulate.a = 1
 	var i = 20
@@ -105,7 +105,7 @@ func headToNest():
 	predIsHome = true # Prevents predator loop from continuing
 	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
 	await get_tree().create_timer(LandingTime).timeout
-	detectionAnimation() # Indicates to player what area isn't safe
+	birdDetectorCircleAnimation() # Indicates to player what area isn't safe
 	# Booleans that are used in predatorEatDecision()
 	foundBird = false
 	foundPlayerBird = false

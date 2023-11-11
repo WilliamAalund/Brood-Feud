@@ -76,14 +76,18 @@ func createIdlePosition():
 	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
 
 # --- STATE FUNCTIONS ---
-func state1(_delta): # Remains idle
+func state1(delta): # Remains idle
 	pass
+	# moveToTarget(delta, self.position)
+	# If idle target equals a sentinel value
+	# run a check to see if you should generate a new idle target
+	# if you generate a new one, moveToTarget(delta, idleTarget)
 func state2(delta): # Will move towards and look for food
 	if get_parent().noticedFood:
 		foodTarget = findClosestTarget(foodTargetsArray)
 		moveToTarget(delta, foodTarget)
 	else:
-		pass # Code to get the bird to crowd around momma bird
+		moveToTarget(delta, Vector2(0.0,50.0)) # Code to get the bird to crowd around momma bird
 func state3(delta): # Follows player
 	if (self.position - playerTarget).length() > AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER:
 		moveToTarget(delta, playerTarget)
