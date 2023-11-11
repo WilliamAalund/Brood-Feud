@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2q3lmimxr2ox"]
+[gd_scene load_steps=7 format=3 uid="uid://c2q3lmimxr2ox"]
 
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
 [ext_resource type="Texture2D" uid="uid://xdq1tqik3lpa" path="res://Visuals/Art Assets/UIInSunlight.png" id="2_6da3i"]
+[ext_resource type="Texture2D" uid="uid://ckl07yb68ifox" path="res://Visuals/Art Assets/draft_hud_bird.png" id="3_k7rva"]
+[ext_resource type="Script" path="res://Sub Scenes/UI_hud/stomach_bar.gd" id="4_6pag5"]
 [ext_resource type="Texture2D" uid="uid://brn66pryq76xx" path="res://Visuals/Art Assets/draft_hud_stomach.png" id="4_vsnun"]
+[ext_resource type="Texture2D" uid="uid://baveosqywq5ni" path="res://Visuals/Art Assets/Worm_Food.png" id="5_ortuu"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,7 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="satiation_word" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -27,6 +31,7 @@ grow_vertical = 0
 text = "Satiation"
 
 [node name="ProgressBar_Visual" type="ProgressBar" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 477.0
 offset_top = 768.0
@@ -45,7 +50,7 @@ script = ExtResource("1_cpjkg")
 
 [node name="Sunlight Symbol" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.862745)
-position = Vector2(493, 607)
+position = Vector2(1296, 555)
 rotation = -0.127409
 scale = Vector2(0.0447667, 0.0400529)
 texture = ExtResource("2_6da3i")
@@ -60,12 +65,34 @@ offset_bottom = 760.0
 [node name="hud" type="Node2D" parent="."]
 rotation = -0.149906
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="hud_bird" type="Sprite2D" parent="."]
+position = Vector2(1304, 693)
+rotation = 0.879766
+scale = Vector2(0.137369, 0.120407)
+texture = ExtResource("3_k7rva")
+
+[node name="stomach_bar" type="TextureProgressBar" parent="hud_bird"]
+offset_left = -1185.0
+offset_top = -828.0
+offset_right = 2371.0
+offset_bottom = 1506.0
+step = 0.1
 fill_mode = 1
 texture_under = ExtResource("4_vsnun")
 texture_progress = ExtResource("4_vsnun")
-tint_under = Color(0.666667, 0.666667, 0.666667, 1)
+tint_under = Color(0.435294, 0.435294, 0.435294, 1)
+tint_progress = Color(1, 0.815686, 1, 1)
+script = ExtResource("4_6pag5")
+
+[node name="food_eaten_progress_bar" type="TextureProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1213.0
+offset_top = 585.0
+offset_right = 1258.0
+offset_bottom = 625.0
+rotation = -0.00470942
+step = 100.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_ortuu")

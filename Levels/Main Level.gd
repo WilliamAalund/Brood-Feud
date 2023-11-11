@@ -4,7 +4,7 @@ extends Node2D
 
 func _process(_delta):
 	$Camera2D.position = $manager_birds/player_bird/character_bird.global_position / Camera2DScale
-	$CanvasLayer/ui_hud/ProgressBar_Visual.value = $manager_birds/player_bird.satiation 
+	$CanvasLayer/ui_hud/hud_bird/stomach_bar.actualValue = $manager_birds/player_bird.satiation 
 	$CanvasLayer/ui_hud/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
 
 
