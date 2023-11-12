@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://0plqp2caagms"]
+[gd_scene load_steps=8 format=3 uid="uid://0plqp2caagms"]
 
+[ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="1_xmlk6"]
 [ext_resource type="Texture2D" uid="uid://pcpg3edo3nkg" path="res://Visuals/Placeholder Graphics/icon.svg" id="2_qrdpa"]
+[ext_resource type="PackedScene" uid="uid://di5tsn67yt3vc" path="res://Sub Scenes/Helper_Food_Spawner/Entity_Food/entity_food.tscn" id="4_gin1k"]
 [ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/CharacterBody2D.gd" id="5_w5m70"]
 [ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="6_tigg1"]
 
@@ -11,6 +13,9 @@ size = Vector2(42, 42)
 radius = 16.0
 
 [node name="Food Collision Demo" type="Node2D"]
+
+[node name="object_nest" parent="." instance=ExtResource("1_xmlk6")]
+position = Vector2(-1, -26)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 2)
@@ -35,7 +40,8 @@ one_way_collision_margin = 0.0
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-collision_mask = 6
+collision_mask = 7
+motion_mode = 1
 script = ExtResource("5_w5m70")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -43,3 +49,6 @@ shape = SubResource("CircleShape2D_wpbiy")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture = ExtResource("6_tigg1")
+
+[node name="object_food" parent="." instance=ExtResource("4_gin1k")]
+position = Vector2(56, -30)

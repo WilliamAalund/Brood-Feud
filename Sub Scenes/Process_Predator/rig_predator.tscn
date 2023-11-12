@@ -9,15 +9,15 @@ script = ExtResource("1_wh23j")
 
 [node name="predator_shadow" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(0.419608, 0.0901961, 0.172549, 1)
-self_modulate = Color(1, 1, 1, 0.278431)
+modulate = Color(0.972549, 0.647059, 0.686275, 1)
+self_modulate = Color(1, 1, 1, 0.811765)
 position = Vector2(136, 124)
 texture = ExtResource("2_7rhti")
 
 [node name="predator_body" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0.45098, 0.027451, 0.0980392, 1)
-position = Vector2(0, -276)
+position = Vector2(288, -76)
 scale = Vector2(0.598413, 0.624)
 texture = ExtResource("3_whuwo")
 

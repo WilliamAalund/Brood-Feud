@@ -53,7 +53,7 @@ func decrementSatiation(): # Decreases the bird's satiation value
 
 # --- DETECTING EATING, INCREMENTING HUNGER ---
 func _on_beak_area_area_entered(area):
-	if area.is_in_group("food"):
+	if area.is_in_group("food") or area.is_in_group("playerfood"):
 		eat()
 
 func _on_bird_control_birds_increment_hunger():

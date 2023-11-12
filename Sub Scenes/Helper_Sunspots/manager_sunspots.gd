@@ -1,9 +1,9 @@
 extends Node2D
 
 const SPAWN_OFFSET = 100
-const SUNRAYS_TO_SPAWN = 4
-const MIN_INTERVAL_BETWEEN_SUNRAY_SPAWN = 4
-const MAX_INTERVAL_BETWEEN_SUNRAY_SPAWN = 10
+const SUNRAYS_TO_SPAWN = 6
+const MIN_INTERVAL_BETWEEN_SUNRAY_SPAWN = 3
+const MAX_INTERVAL_BETWEEN_SUNRAY_SPAWN = 8
 
 var sunray_scene = load("res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.tscn")
 var momIsHome = false

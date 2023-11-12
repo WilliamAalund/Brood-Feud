@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://k81bpylosxqt"]
+
+[ext_resource type="Script" path="res://Levels/Demo Levels/Controller Vibration Demo.gd" id="1_0fwo2"]
+
+[node name="Controller Vibration Demo" type="Node2D"]
+script = ExtResource("1_0fwo2")
+weak_magnitude = 0.6
+strong_magnitude = 0.3

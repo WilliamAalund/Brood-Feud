@@ -1,7 +1,7 @@
 extends Node2D
 
-const LIFESPAN_MIN = 4
-const LIFESPAN_MAX = 10
+const LIFESPAN_MIN = 3
+const LIFESPAN_MAX = 7
 
 var lifespan = 5 # Parameter should be in terms of seconds.
 var randomState = randi_range(1,3)
@@ -20,10 +20,9 @@ func _ready():
 		3:
 			state1()
 
-func modulateOverLifespan(lifespan):
+func modulateOverLifespan(_lifespan):
 	var x = 0
-	var function = -1* (x-1)^2 + 1
-	self.modulate.a
+	var _function = -1* (x-1)^2 + 1
 	pass
 
 func state1():

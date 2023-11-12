@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6f2ildgxylks"]
+[gd_scene load_steps=5 format=3 uid="uid://b6f2ildgxylks"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.gd" id="1_ru5mi"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="2_10uoy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fkl3"]
+radius = 202.022
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_inyoy"]
+radius = 21.0238
 
 [node name="Object_Food_Spawner" type="Node2D"]
 script = ExtResource("1_ru5mi")
@@ -13,5 +20,23 @@ offset_right = 289.0
 offset_bottom = 171.0
 text = "Press to add food
 "
+
+[node name="bird_position_grabber" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bird_position_grabber"]
+shape = SubResource("CircleShape2D_0fkl3")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="dummy_spawn" type="Area2D" parent="."]
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="dummy_spawn"]
+visible = false
+position = Vector2(-4.76837e-07, -7.15256e-07)
+scale = Vector2(1.3125, 1.3125)
+texture = ExtResource("2_10uoy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dummy_spawn"]
+shape = SubResource("CircleShape2D_inyoy")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
