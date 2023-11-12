@@ -11,7 +11,7 @@ const INTERACT_COOLDOWN = 1.3 # In seconds
 #how inaccurate this dude's pathfinding can be
 @export var rot_dead_zone = 1.0
 
-var speed = 45
+var speed = 55
 var accel = speed
 var push_force = 80.0
 var state = 0 # Variable used for pathfinding logic. Value is managed in parent node

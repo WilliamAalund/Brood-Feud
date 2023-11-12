@@ -117,9 +117,9 @@ func _on_bird_control_ai_bird_move(target_position):
 
 func _on_timer_timeout():
 	$CharacterBody2D.state = updatedState()
-	$CharacterBody2D/Debug_AI_State.text = str($CharacterBody2D.state) + " " + str(numSunlightSpotsInside)
+	$CharacterBody2D/Debug_AI_State.text = str($CharacterBody2D.state) + " #:" + str(numSunlightSpotsInside)
 
-	$CharacterBody2D/boolean_tag.text = str(numSunlightSpotsNoticed) + " " + str(noticedSunray)
+	$CharacterBody2D/boolean_tag.text = str(numSunlightSpotsNoticed) + " n:" + str(noticedSunray) + " i:" + str(inSunlight)
 	if aggroVal > 0:
 		aggroVal -= 1
 	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
@@ -138,7 +138,8 @@ func _on_body_zone_area_entered(area):
 	if area.is_in_group("sunray"):
 		numSunlightSpotsInside += 1
 		await get_tree().create_timer(1.0).timeout # I don't know why I put this here, but I don't want to remove it just in case it is important
-		inSunlight = true
+		if numSunlightSpotsInside > 0:
+			inSunlight = true
 	else: if area.is_in_group("attacker"):
 		print("attacked")
 		aggroVal += 100
@@ -147,7 +148,7 @@ func _on_body_zone_area_entered(area):
 func _on_body_zone_area_exited(area):
 	if area.is_in_group("sunray"):
 		numSunlightSpotsInside -= 1
-		if numSunlightSpotsInside <= 1:
+		if numSunlightSpotsInside <= 0:
 			inSunlight = false
 
 func _on_detector_zone_area_entered(area):
@@ -182,7 +183,8 @@ func _on_eater_zone_area_entered(area): # When the bird is interacting, and its 
 		eat()
 
 func _on_eater_detector_zone_area_entered(area): # When the bird detects that its beak could hit something
-	if area.is_in_group("food"):
-		$CharacterBody2D.beakInteract()
-	elif area.is_in_group("player") and aggroVal > lowerAngryThreshold:
-		$CharacterBody2D.beakInteract()
+	if satiation > 0:
+		if area.is_in_group("food"):
+			$CharacterBody2D.beakInteract()
+		elif area.is_in_group("player") and aggroVal > lowerAngryThreshold:
+			$CharacterBody2D.beakInteract()

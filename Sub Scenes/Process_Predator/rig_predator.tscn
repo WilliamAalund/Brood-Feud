@@ -9,7 +9,7 @@ script = ExtResource("1_wh23j")
 
 [node name="predator_shadow" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(0.419608, 0.0901961, 0.172549, 1)
+modulate = Color(0.972549, 0.647059, 0.686275, 1)
 self_modulate = Color(1, 1, 1, 0.811765)
 position = Vector2(136, 124)
 texture = ExtResource("2_7rhti")

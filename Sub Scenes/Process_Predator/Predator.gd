@@ -1,7 +1,7 @@
 extends Node2D
 
 # All of these values are in seconds
-const BASE_TIME_AWAY_FROM_NEST = 60 # The base time that the predator will wait intil approaching the nest
+const BASE_TIME_AWAY_FROM_NEST = 55 # The base time that the predator will wait intil approaching the nest
 const TIME_AWAY_STALL = 4 # The time that the predator will wait after attempting to approach, but being blocked by momma bird
 const TIME_AWAY_VARIANCE = 5 # The maximum amount of variance in the time that the predator will wait to approach the nest
 const TIME_APPROACHED_MIN = 3 # The minimum amount of time the predator will stay approached before heading to the nest
@@ -46,7 +46,6 @@ func predatorLoop():
 		$ProgressBar.max_value = timeAwayFromNest
 		while timeAwayFromNest >= 0 or momIsHome:
 			await $Timer.timeout
-			#print(timeAwayFromNest)
 			timeAwayFromNest -= 1
 			$ProgressBar.value = $ProgressBar.max_value - timeAwayFromNest
 			if timeAwayFromNest == 0 and momIsHome:
