@@ -1,7 +1,7 @@
 extends Node2D
 
-const LIFESPAN_MIN = 4
-const LIFESPAN_MAX = 10
+const LIFESPAN_MIN = 3
+const LIFESPAN_MAX = 7
 
 var lifespan = 5 # Parameter should be in terms of seconds.
 var randomState = randi_range(1,3)

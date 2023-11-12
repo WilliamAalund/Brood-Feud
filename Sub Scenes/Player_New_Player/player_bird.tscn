@@ -17,6 +17,7 @@ height = 26.0
 
 [node name="player_bird" type="Node2D"]
 script = ExtResource("1_aa0pe")
+hasInfiniteFood = false
 
 [node name="character_bird" type="CharacterBody2D" parent="."]
 collision_mask = 7

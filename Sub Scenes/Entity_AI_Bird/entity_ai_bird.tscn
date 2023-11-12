@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqc0vbl1gl11m"]
+[gd_scene load_steps=9 format=3 uid="uid://cqc0vbl1gl11m"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd" id="1_g4xov"]
 [ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd" id="2_sf0vd"]
 [ext_resource type="Texture2D" uid="uid://p4bk5tdue3ta" path="res://Visuals/Art Assets/draft_sibling_bird.png" id="3_ddn7a"]
+[ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="4_uem5o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kx41x"]
 radius = 17.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82nrl"]
+height = 26.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_be47h"]
 height = 24.0
@@ -32,11 +36,25 @@ texture = ExtResource("3_ddn7a")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_kx41x")
 
-[node name="eater_zone" type="Area2D" parent="CharacterBody2D" groups=["eater"]]
+[node name="eater_detector_zone" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/eater_detector_zone"]
+position = Vector2(0, -31)
+shape = SubResource("CapsuleShape2D_82nrl")
+
+[node name="eater_zone" type="Area2D" parent="CharacterBody2D" groups=["ai_attacker", "eater"]]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/eater_zone"]
 position = Vector2(0, -31)
 shape = SubResource("CapsuleShape2D_be47h")
+
+[node name="hitbox_sprite" type="Sprite2D" parent="CharacterBody2D/eater_zone"]
+visible = false
+position = Vector2(-8.34465e-07, -31)
+scale = Vector2(0.625, 0.75)
+texture = ExtResource("4_uem5o")
 
 [node name="body_zone" type="Area2D" parent="CharacterBody2D" groups=["bird"]]
 
@@ -72,6 +90,7 @@ offset_bottom = -23.0
 wait_time = 0.1
 autostart = true
 
+[connection signal="area_entered" from="CharacterBody2D/eater_detector_zone" to="." method="_on_eater_detector_zone_area_entered"]
 [connection signal="area_entered" from="CharacterBody2D/eater_zone" to="." method="_on_eater_zone_area_entered"]
 [connection signal="area_entered" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_entered"]
 [connection signal="area_exited" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_exited"]

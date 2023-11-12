@@ -3,8 +3,8 @@ extends Node2D
 const TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME = 6
 
 @export var SecondsToReturn = 25
-@export var FoodToDrop = 6
-@export var DropInterval = 2 # Time momma bird takes between dropping food
+@export var FoodToDrop = 8
+@export var DropInterval = 0.8 # Time momma bird takes between dropping food
 @export var LandingTime = 1.5
 
 var goneTimer = 0

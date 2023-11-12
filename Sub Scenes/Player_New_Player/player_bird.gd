@@ -5,12 +5,16 @@ const EXP_TO_LEVEL_UP = 4
 const LEVEL_UP_PUSH_FORCE_INCREASE = 400
 const LEVEL_UP_SCALE_INCREASE = 0.1
 const LEVEL_UP_MOVE_SPEED_INCREASE = 10
+const BLEED_RATE = 0.04
+
+@export var hasInfiniteFood = true
 
 var level = 1
 var exp = 0
 var satiation = 100
-var inSunlight = false
+var damage = 0
 var numSunlightSpotsInside = 0
+var inSunlight = false
 
 signal playerStarved
 
@@ -50,12 +54,22 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 	else:
 		satiation -= value
 
+func bleed(value):
+	damage += value
+	var totalDamageIncurred = damage * BLEED_RATE
+	Input.start_joy_vibration(.5, 1, 0, totalDamageIncurred / 4)
+	print("Queued damage: ", totalDamageIncurred)
+
 func decrementSatiation(): # Decreases the bird's satiation value
-	satiation = satiation - get_parent().idleSatiationDrainRate - get_parent().sunRate * int(inSunlight)
-	$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
-	if satiation < 0:
-		emit_signal("playerStarved")
-		
+	if hasInfiniteFood:
+		satiation = 100
+	else:
+		satiation = satiation - get_parent().idleSatiationDrainRate - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
+		$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
+		if satiation < 0:
+			emit_signal("playerStarved")
+		if damage > 0:
+			damage -= 1
 # --- DETECTING EATING, DECREMENTING HUNGER ---
 func _on_beak_area_area_entered(area):
 	if area.is_in_group("food"):
@@ -67,13 +81,14 @@ func _on_bird_control_birds_increment_hunger():
 # --- ENTERING, EXITING SUNLIGHT ---
 func _on_body_area_area_entered(area):
 	if area.is_in_group("sunray"):
-		#print("I am in the sunlight")
 		numSunlightSpotsInside += 1
 		inSunlight = bool(numSunlightSpotsInside)
+	elif area.is_in_group("ai_attacker"):
+		print("Player attacked")
+		bleed(45)
 
 func _on_body_area_area_exited(area):
 	if area.is_in_group("sunray"):
-		#print("I am in the sunlight")
 		numSunlightSpotsInside -= 1
 		inSunlight = bool(numSunlightSpotsInside)
 

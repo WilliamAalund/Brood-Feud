@@ -38,7 +38,12 @@ theme_override_font_sizes/normal_font_size = 102
 text = "MOMMA BIRD PLACEHOLDER
 I AM MOMMA BIRD HELLO"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="character_momma" groups=["bird"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character_momma"]
+shape = SubResource("CapsuleShape2D_okuqj")
+
+[node name="bird_detector_area" type="Area2D" parent="character_momma" groups=["momma"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character_momma/bird_detector_area"]
 shape = SubResource("CapsuleShape2D_okuqj")
 
 [connection signal="toggle_fly" from="." to="character_momma" method="_on_rig_momma_bird_toggle_fly"]

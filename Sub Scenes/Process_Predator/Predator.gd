@@ -40,7 +40,6 @@ func _ready():
 # TOTAL TIME FOR A SINGLE LOOP: timeAwayFromNest + timeUntilHeadToNest + LandingTime + StayLength
 # Future feature: Predator could respond to noise
 
-
 func predatorLoop():
 	while 1 == 1:
 		timeAwayFromNest = BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease - randi_range(0, TIME_AWAY_VARIANCE)
@@ -69,7 +68,7 @@ func predatorLoop():
 		while (predIsHome):
 			await $Timer.timeout
 		emit_signal("predator_leaves_nest")
-		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 10 # This will shorten the time until the next predator approach
+		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
 
 func birdDetectorCircleAnimation():

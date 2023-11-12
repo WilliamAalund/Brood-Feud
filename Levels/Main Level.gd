@@ -5,7 +5,9 @@ extends Node2D
 func _process(_delta):
 	$Camera2D.position = $manager_birds/player_bird/character_bird.global_position / Camera2DScale
 	$CanvasLayer/ui_hud/hud_bird/stomach_bar.actualValue = $manager_birds/player_bird.satiation 
-	$CanvasLayer/ui_hud/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
+	$CanvasLayer/ui_hud/hud_bird/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
+	$CanvasLayer/ui_hud/hud_bird/bleeding_symbol.modulate.a = .5 * int(bool($manager_birds/player_bird.damage))
+	#$CanvasLayer/ui_hud/bleeding_symbol.scale = Vector2(max(1,$manager_birds/player_bird.damage / 100),max(1,$manager_birds/player_bird.damage / 100))
 
 
 func _on_manager_game_over_game_over_ocurred(reason):

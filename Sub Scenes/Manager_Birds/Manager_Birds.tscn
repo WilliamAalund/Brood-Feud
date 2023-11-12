@@ -14,20 +14,29 @@ position = Vector2(27, 111)
 wait_time = 0.05
 autostart = true
 
+[node name="AI_Bird4" parent="." instance=ExtResource("3_aebak")]
+position = Vector2(-20, 157)
+
 [node name="AI_Bird2" parent="." instance=ExtResource("3_aebak")]
 position = Vector2(99, 110)
 
 [node name="AI_Bird" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(-9, 112)
+position = Vector2(-60, 103)
 
 [node name="AI_Bird3" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(69, 160)
+position = Vector2(62, 163)
 
 [connection signal="Birds_Increment_Hunger" from="." to="player_bird" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="Birds_Increment_Hunger" from="." to="AI_Bird2" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="Birds_Increment_Hunger" from="." to="AI_Bird" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird3" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird4" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_momma_bird_notice"]
+[connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird3" method="_on_bird_control_birds_toggle_momma_bird_notice"]
+[connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird4" method="_on_bird_control_birds_toggle_momma_bird_notice"]
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_predator_notice"]
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird" method="_on_bird_control_birds_toggle_predator_notice"]
+[connection signal="birds_toggle_predator_notice" from="." to="AI_Bird3" method="_on_bird_control_birds_toggle_predator_notice"]
+[connection signal="birds_toggle_predator_notice" from="." to="AI_Bird4" method="_on_bird_control_birds_toggle_predator_notice"]
 [connection signal="playerStarved" from="player_bird" to="." method="_on_player_bird_player_starved"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

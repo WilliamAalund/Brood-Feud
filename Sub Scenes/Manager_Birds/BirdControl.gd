@@ -1,7 +1,7 @@
 extends Node2D
 
 # Values that each of the birds can refer to in order to make decisions about themselves/what they want to do.
-@export var foodRestore = 10
+@export var foodRestore = 8
 @export var idleSatiationDrainRate = 0.06
 @export var sunRate = -0.03
 @export var debug = false

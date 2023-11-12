@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 const AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER = 45 # Distance bird will keep itself from the player when attacking
+const INTERACT_INPUT_DELAY = 0.2 # In seconds
+const INTERACT_LENGTH = 0.2 # In seconds
+const INTERACT_COOLDOWN = 1.3 # In seconds
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 #how fast this dude can spin
@@ -8,7 +11,7 @@ const AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER = 45 # Distance bird will keep itself
 #how inaccurate this dude's pathfinding can be
 @export var rot_dead_zone = 1.0
 
-var speed = 40
+var speed = 45
 var accel = speed
 var push_force = 80.0
 var state = 0 # Variable used for pathfinding logic. Value is managed in parent node
@@ -19,11 +22,11 @@ var sunrayTargetsArray = []
 var sunrayTarget
 var foodTarget
 var playerTarget = Vector2(0,0)
+var isInteracting = false
 
 func _physics_process(delta): # Main pathfinding loop
 		updateTargetArrays()
 		Callable(self, "state" + str(state)).call(delta) # Calls the associated lambda function
-		#callMovementLambda(delta, state)
 func moveToTarget(_delta, myTarget):
 	nav.target_position = myTarget # Sets target position
 	
@@ -51,6 +54,9 @@ func moveToTarget(_delta, myTarget):
 #		rotation = move_dir.angle_to(myTarget)
 #	elif rad_to_deg((2*PI) - rad_diff) < rot_dead_zone:
 #		rotation = (2*PI) - move_dir.angle_to(myTarget)
+func ensureClipping(_delta): # Ran when the bird is not doing anything, but still needs to make sure that it collides properly
+	velocity = Vector2(0,0)
+	move_and_slide()
 func updateTargetArrays():
 	foodTargetsArray = []
 	sunrayTargetsArray = []
@@ -74,10 +80,27 @@ func findClosestTarget(array):
 	return closestPosition
 func createIdlePosition():
 	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
-
+func beakInteract():
+	emit_signal("ai_bird_attacks")
+	isInteracting = true
+	await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
+	# Attack
+	$eater_zone.monitorable = true
+	$eater_zone.monitoring = true
+	$eater_zone/hitbox_sprite.visible = true
+	await get_tree().create_timer(INTERACT_LENGTH).timeout
+	$eater_zone.monitorable = false
+	$eater_zone.monitoring = false
+	$eater_zone/hitbox_sprite.visible = false
+	# Wait a bit after attack
+	await get_tree().create_timer(INTERACT_COOLDOWN).timeout
+	isInteracting = false
+	$eater_detector_zone.monitoring = false
+	$eater_detector_zone.monitoring = true
+	
 # --- STATE FUNCTIONS ---
 func state1(delta): # Remains idle
-	pass
+	ensureClipping(delta)
 	# moveToTarget(delta, self.position)
 	# If idle target equals a sentinel value
 	# run a check to see if you should generate a new idle target
@@ -97,32 +120,9 @@ func state4(delta): # Will move to sunray
 		moveToTarget(delta, sunrayTarget)
 func state5(_delta): # Will run to edge of nest
 	pass
-func state6(_delta): # Will remain entirely immobile. Dead
-	pass
+func state6(delta): # Will remain entirely immobile. Dead
+	ensureClipping(delta)
 func state7(_delta): # Debugger state
 	pass
 func state8(_delta): # Unallocated state
 	pass
-
-#var state_1 = func (delta): # Remains idle
-#	pass
-#var state_2 = func (delta): # Will move towards and look for food
-#	if get_parent().noticedFood:
-#		moveToTarget(delta, get_parent().targetFood)
-#	else:
-#		pass # Code to get the bird to crowd around momma bird
-#var state_3 = func (delta): # Follows player
-#	#get_global_mouse_position() 2D vector
-#	moveToTarget(delta, target)
-#var state_4 = func (delta): # Will move to sunray
-#	if !get_parent().inSunlight:
-#		moveToTarget(delta, get_parent().targetSunray)
-#var state_5 = func (delta): # Will run to edge of nest
-#	pass
-#var state_6 = func (delta): # Will remain entirely immobile. Dead
-#	pass
-#var state_7 = func (delta): # Debugger state
-#	pass
-#var state_8 = func (delta): # Unallocated state
-#	pass
-#var movementLambdasArray = [state1, state2, state3, state4, state5, state6, state7] # Array of lambda functions. Each function corresponds to a state, and contains instructions for pathfinding

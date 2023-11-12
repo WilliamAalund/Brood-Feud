@@ -29,12 +29,11 @@ func _physics_process(_delta):
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
-			print(-c.get_normal() * push_force)
 			c.get_collider().apply_force(c.get_normal() * -push_force)
 		
 
 func _input(event):
-	if event.is_action_pressed("interact") && !isInteracting:
+	if event.is_action_pressed("interact") && !isInteracting: # Makes sure script can't run while the player is already interacting
 		emit_signal("player_attacks")
 		isInteracting = true
 		await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
