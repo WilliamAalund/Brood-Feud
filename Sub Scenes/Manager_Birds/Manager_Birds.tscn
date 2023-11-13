@@ -7,9 +7,6 @@
 [node name="BirdControl" type="Node2D"]
 script = ExtResource("1_nqp0i")
 
-[node name="player_bird" parent="." instance=ExtResource("4_2bnt3")]
-position = Vector2(27, 111)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
@@ -26,6 +23,9 @@ position = Vector2(-60, 103)
 [node name="AI_Bird3" parent="." instance=ExtResource("3_aebak")]
 position = Vector2(62, 163)
 
+[node name="player_bird" parent="." instance=ExtResource("4_2bnt3")]
+position = Vector2(27, 111)
+
 [connection signal="Birds_Increment_Hunger" from="." to="player_bird" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="Birds_Increment_Hunger" from="." to="AI_Bird4" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="Birds_Increment_Hunger" from="." to="AI_Bird2" method="_on_bird_control_birds_increment_hunger"]
@@ -38,5 +38,6 @@ position = Vector2(62, 163)
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_predator_notice"]
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird" method="_on_bird_control_birds_toggle_predator_notice"]
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird3" method="_on_bird_control_birds_toggle_predator_notice"]
-[connection signal="playerStarved" from="player_bird" to="." method="_on_player_bird_player_starved"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="playerStarved" from="player_bird" to="." method="_on_player_bird_player_starved"]
+[connection signal="player_grew_up" from="player_bird" to="." method="_on_player_bird_player_grew_up"]
