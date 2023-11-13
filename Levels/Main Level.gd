@@ -19,3 +19,9 @@ func _on_process_momma_bird_momma_win_condition():
 	if !$CanvasLayer/ui_game_over.visible:
 		$CanvasLayer/ui_game_over.visible = true
 		$CanvasLayer/ui_game_over/death_reason.text = "You win"
+
+
+func _on_manager_birds_player_grew_up():
+	if !$CanvasLayer/ui_game_over.visible:
+		$CanvasLayer/ui_game_over.visible = true
+		$CanvasLayer/ui_game_over/death_reason.text = "You made a good brood parasite!"

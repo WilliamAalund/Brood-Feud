@@ -16,3 +16,7 @@ func _on_manager_birds_player_starved():
 	gameOver = true
 	$Label.visible = true
 	emit_signal("game_over_ocurred", "You starved to death")
+
+
+func _on_manager_birds_player_grew_up():
+	pass # Replace with function body.

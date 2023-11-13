@@ -4,7 +4,7 @@ const TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME = 6
 
 @export var SecondsToReturn = 25
 @export var FoodToDrop = 8
-@export var DropInterval = 0.8 # Time momma bird takes between dropping food
+@export var DropInterval = 1 # Time momma bird takes between dropping food
 @export var LandingTime = 1.5
 
 var goneTimer = 0
@@ -55,8 +55,8 @@ func momReturns(): # Hand
 	emit_signal("toggle_mom_presence")
 	print("Momma bird leaves")
 	timesLandedAtNest += 1
-	if timesLandedAtNest > TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME:
-		emit_signal("momma_win_condition")
+#	if timesLandedAtNest > TIMES_LANDED_AT_NEST_NEEDED_TO_WIN_GAME:
+#		emit_signal("momma_win_condition")
 	
 
 func _on_process_predator_toggle_predator_presence():
