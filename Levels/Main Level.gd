@@ -26,3 +26,7 @@ func _on_manager_birds_player_grew_up():
 	if !$CanvasLayer/ui_game_over.visible:
 		$CanvasLayer/ui_game_over.visible = true
 		$CanvasLayer/ui_game_over/death_reason.text = "You made a good brood parasite!"
+
+
+func _on_manager_birds_player_attacked():
+	$CanvasLayer/ui_hud.damageOverlayAnimation()

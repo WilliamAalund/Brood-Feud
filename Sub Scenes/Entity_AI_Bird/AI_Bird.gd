@@ -52,18 +52,17 @@ func _ready(): # Will be removed later on when the bird should actually start in
 	if isStupid:
 		$CharacterBody2D/body_zone.add_to_group("dumb")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	updateTargetArraysAndClosestPositions()
 	updateDecisionBooleans()
 	if sizeExperience > 0:
 		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 20,LEVEL_UP_SCALE_INCREASE / 20)
-		$CharacterBody2D.modulate = Color(.5 + (sizeExperience / 20),1,.5 + (sizeExperience / 20),1)
+		$CharacterBody2D.modulate = Color(.5 + (sizeExperience / 20.0),1,.5 + (sizeExperience / 20.0),1)
 		sizeExperience -= 1
 		if sizeExperience <= 0:
 			$CharacterBody2D.modulate = Color(1,1,1,1)
 	if stunVal > 0:
 		stunVal -= 1
-		print(stunVal)
 	
 
 func eat(): # Function called to increase satiation when you eat.
@@ -74,7 +73,6 @@ func eat(): # Function called to increase satiation when you eat.
 		satiation += get_parent().foodRestore
 	experience += 1
 	if experience >= EXPERIENCE_TO_LEVEL_UP:
-		print("AI BIRD AGED UP")
 		ageUp()
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
@@ -97,7 +95,7 @@ func ageUp():
 
 func bleed(value):
 	damage += value
-	var totalDamageIncurred = damage * BLEED_RATE
+	#var totalDamageIncurred = damage * BLEED_RATE
 	Input.start_joy_vibration(.5, 1, 0, 0.2)
 	stunVal += 15
 	#print("Queued damage: ", totalDamageIncurred)
@@ -152,7 +150,6 @@ func findClosestTarget(array):
 	if array.size() == 0:
 		print("Error: array contains no values")
 		return self.position
-	var index = 0
 	var closestPosition = array[0]
 	for item in array:
 		if (self.position).length() - item.length() < closestPosition.length():
@@ -199,7 +196,6 @@ func _on_body_zone_area_entered(area):
 		if numSunlightSpotsInside > 0:
 			inSunlight = true
 	else: if area.is_in_group("attacker"):
-		print("attacked")
 		aggroVal += 100
 		bleed(45)
 
@@ -208,29 +204,6 @@ func _on_body_zone_area_exited(area):
 		numSunlightSpotsInside -= 1
 		if numSunlightSpotsInside <= 0:
 			inSunlight = false
-
-func _on_detector_zone_area_entered(area):
-#	if area.is_in_group("sunray"):
-#		numSunlightSpotsNoticed += 1
-#		noticedSunray = true
-#	else: if area.is_in_group("food"):
-#		numFoodsNoticed += 1
-#		noticedFood = true
-	pass
-
-func _on_detector_zone_area_exited(area):
-#	if area.is_in_group("sunray"):
-#		numSunlightSpotsNoticed -= 1
-#		if numSunlightSpotsNoticed <= 0:
-#			numSunlightSpotsNoticed = 0
-#			noticedSunray = false
-#			print("No more sunrays to notice")
-#	else: if area.is_in_group("food"):
-#		numFoodsNoticed -= 1
-#		if numFoodsNoticed <= 0:
-#			numFoodsNoticed = 0
-#			noticedFood = false
-	pass
 
 func _on_bird_control_birds_toggle_predator_notice():
 	noticedPredator = !noticedPredator

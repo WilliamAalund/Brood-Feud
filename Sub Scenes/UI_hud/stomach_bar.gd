@@ -9,7 +9,7 @@ var actualValue = 100
 func _ready():
 	updateValue()
 	
-func _process(delta):
+func _process(_delta):
 	updateValue()
 
 func updateValue():

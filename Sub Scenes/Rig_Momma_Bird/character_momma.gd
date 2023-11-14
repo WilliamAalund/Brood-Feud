@@ -16,7 +16,7 @@ var flyingIn = false
 #	await get_tree().create_timer(5).timeout
 #	flyOut()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var fly_direction
 	if flyingIn: # If momma bird is flying into the nest
 		fly_direction = roost_target_position - self.global_position # roost_target_position + self.global_position

@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2q3lmimxr2ox"]
+[gd_scene load_steps=10 format=3 uid="uid://c2q3lmimxr2ox"]
 
+[ext_resource type="Script" path="res://Sub Scenes/UI_hud/ui_hud.gd" id="1_2o14y"]
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
 [ext_resource type="Texture2D" uid="uid://xdq1tqik3lpa" path="res://Visuals/Art Assets/UIInSunlight.png" id="2_6da3i"]
 [ext_resource type="Texture2D" uid="uid://culirrjo660tq" path="res://Visuals/Art Assets/Bleeding_Icon.png" id="2_hdwa6"]
@@ -7,6 +8,7 @@
 [ext_resource type="Script" path="res://Sub Scenes/UI_hud/stomach_bar.gd" id="4_6pag5"]
 [ext_resource type="Texture2D" uid="uid://brn66pryq76xx" path="res://Visuals/Art Assets/draft_hud_stomach.png" id="4_vsnun"]
 [ext_resource type="Texture2D" uid="uid://baveosqywq5ni" path="res://Visuals/Art Assets/Worm_Food.png" id="5_ortuu"]
+[ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="9_8vvss"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2o14y")
 
 [node name="satiation_word" type="Label" parent="."]
 visible = false
@@ -106,3 +109,9 @@ step = 100.0
 value = 100.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_ortuu")
+
+[node name="damage_overlay" type="Sprite2D" parent="."]
+modulate = Color(0.752941, 0.027451, 0.388235, 1)
+position = Vector2(864, 432)
+scale = Vector2(2.64965, 1.98432)
+texture = ExtResource("9_8vvss")

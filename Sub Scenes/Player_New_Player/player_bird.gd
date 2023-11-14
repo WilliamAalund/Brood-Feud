@@ -21,14 +21,15 @@ var inSunlight = false
 
 signal playerStarved
 signal player_grew_up
+signal player_attacked
 
 func _ready():
 	$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if sizeExperience > 0:
 		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 20,LEVEL_UP_SCALE_INCREASE / 20)
-		$character_bird.modulate = Color(.5 + (sizeExperience / 20),1,.5 + (sizeExperience / 20),1)
+		$character_bird.modulate = Color(.5 + (sizeExperience / 20.0),1,.5 + (sizeExperience / 20.0),1)
 		sizeExperience -= 1
 		if sizeExperience <= 0:
 			$character_bird.modulate = Color(1,1,1,1)
@@ -71,6 +72,7 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 		satiation -= value
 
 func bleed(value):
+	emit_signal("player_attacked")
 	damage += value
 	var totalDamageIncurred = damage * BLEED_RATE
 	Input.start_joy_vibration(.5, 1, 0, 0.3)
@@ -80,7 +82,7 @@ func decrementSatiation(): # Decreases the bird's satiation value
 	if hasInfiniteFood:
 		satiation = 100
 	else:
-		satiation = satiation - get_parent().idleSatiationDrainRate - (level / 100) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
+		satiation = satiation - get_parent().idleSatiationDrainRate - (level / 100.0) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
 		$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 		if satiation < 0:
 			emit_signal("playerStarved")

@@ -97,6 +97,4 @@ autostart = true
 [connection signal="area_entered" from="CharacterBody2D/eater_zone" to="." method="_on_eater_zone_area_entered"]
 [connection signal="area_entered" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_entered"]
 [connection signal="area_exited" from="CharacterBody2D/body_zone" to="." method="_on_body_zone_area_exited"]
-[connection signal="area_entered" from="CharacterBody2D/detector_zone" to="." method="_on_detector_zone_area_entered"]
-[connection signal="area_exited" from="CharacterBody2D/detector_zone" to="." method="_on_detector_zone_area_exited"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_timer_timeout"]

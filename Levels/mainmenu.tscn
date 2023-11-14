@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://6xw0x2tk3xdg"]
+[gd_scene load_steps=4 format=3 uid="uid://yk3102jxt6mv"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_55gce"]
 [ext_resource type="Texture2D" uid="uid://di4okmy4rn2dn" path="res://Visuals/Placeholder Graphics/Brood_Feud-removebg-preview.png" id="2_es7fj"]

@@ -4,8 +4,8 @@ extends Node2D
 const BASE_TIME_AWAY_FROM_NEST = 55 # The base time that the predator will wait intil approaching the nest
 const TIME_AWAY_STALL = 4 # The time that the predator will wait after attempting to approach, but being blocked by momma bird
 const TIME_AWAY_VARIANCE = 5 # The maximum amount of variance in the time that the predator will wait to approach the nest
-const TIME_APPROACHED_MIN = 3 # The minimum amount of time the predator will stay approached before heading to the nest
-const TIME_APPROACHED_MAX = 5 # The maximum amount of time the predator will stay approached before heading to the nest
+const TIME_APPROACHED_MIN = 2 # The minimum amount of time the predator will stay approached before heading to the nest
+const TIME_APPROACHED_MAX = 4 # The maximum amount of time the predator will stay approached before heading to the nest
 const TIME_APPROACHED_STALL = 4 # The time that the predator will wait after attempting to head to the nest, but was blocked by momma bird
 
 @export var LandingTime = 0.5
@@ -67,7 +67,7 @@ func predatorLoop():
 		while (predIsHome):
 			await $Timer.timeout
 		emit_signal("predator_leaves_nest")
-		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9 # This will shorten the time until the next predator approach
+		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
 
 func birdDetectorCircleAnimation():

@@ -59,7 +59,7 @@ func ensureClipping(_delta): # Ran when the bird is not doing anything, but stil
 func createIdlePosition():
 	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
 func beakInteract():
-	emit_signal("ai_bird_attacks")
+	#emit_signal("ai_bird_attacks")
 	isInteracting = true
 	await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
 	# Attack
@@ -102,5 +102,5 @@ func state6(delta): # Will remain entirely immobile. Dead
 	ensureClipping(delta)
 func state7(_delta): # Debugger state
 	pass
-func state8(_delta): # Unallocated state
-	pass
+func state8(delta): # Stunned state
+	ensureClipping(delta)
