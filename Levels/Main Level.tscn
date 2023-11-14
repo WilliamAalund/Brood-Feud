@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dwitdkiendap8" path="res://Sub Scenes/Manager_Birds/Manager_Birds.tscn" id="7_jxroq"]
 [ext_resource type="PackedScene" uid="uid://j6dpmc2nhd23" path="res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn" id="8_khyrq"]
 [ext_resource type="PackedScene" uid="uid://cwui7idexgcb2" path="res://Sub Scenes/UI_Game_Over/ui_game_over.tscn" id="9_g8uvl"]
-[ext_resource type="PackedScene" uid="uid://c2q3lmimxr2ox" path="res://Sub Scenes/UI_hud/ui_hud.tscn" id="9_hbv22"]
+[ext_resource type="PackedScene" uid="uid://c2q3lmimxr2ox" path="res://Sub Scenes/UI_hud/UI_hud.tscn" id="9_hbv22"]
 [ext_resource type="PackedScene" uid="uid://0fxvg4swlxgr" path="res://Sub Scenes/Helper_Sunspots/manager_sunspots.tscn" id="10_k0xh1"]
 
 [node name="Game Level" type="Node2D"]
