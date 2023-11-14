@@ -12,10 +12,10 @@ height = 268.0
 script = ExtResource("1_ebopd")
 
 [node name="roost_target" type="Node2D" parent="."]
-position = Vector2(0, -125)
+position = Vector2(0, -250)
 
 [node name="fly_off_target" type="Node2D" parent="."]
-position = Vector2(0, 447)
+position = Vector2(0, 700)
 
 [node name="character_momma" type="CharacterBody2D" parent="."]
 position = Vector2(0, -500)

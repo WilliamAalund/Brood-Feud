@@ -75,12 +75,14 @@ offset_right = 19.0
 offset_bottom = 21.0
 
 [node name="boolean_tag" type="Label" parent="CharacterBody2D"]
+visible = false
 modulate = Color(0.8, 0, 0.105882, 1)
 offset_left = -20.0
 offset_top = -23.0
 offset_right = 20.0
 
 [node name="Debug_AI_State" type="Label" parent="CharacterBody2D"]
+visible = false
 modulate = Color(0.619608, 0, 0.141176, 1)
 offset_left = -19.0
 offset_top = -46.0

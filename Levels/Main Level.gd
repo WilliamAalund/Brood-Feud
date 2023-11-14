@@ -1,9 +1,10 @@
 extends Node2D
 
-@export var Camera2DScale = 4
+@export var Camera2DScale = 3
 
 func _process(_delta):
-	$Camera2D.position = $manager_birds/player_bird/character_bird.global_position / Camera2DScale
+	$Camera2D.position.x = $manager_birds/player_bird/character_bird.global_position.x / Camera2DScale
+	$Camera2D.position.y = $manager_birds/player_bird/character_bird.global_position.y / Camera2DScale
 	$CanvasLayer/ui_hud/hud_bird/stomach_bar.actualValue = $manager_birds/player_bird.satiation 
 	$CanvasLayer/ui_hud/hud_bird/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
 	$CanvasLayer/ui_hud/hud_bird/bleeding_symbol.modulate.a = .5 * int(bool($manager_birds/player_bird.damage))

@@ -23,16 +23,18 @@ texture = ExtResource("2_14buk")
 [node name="environment_nest" parent="." instance=ExtResource("2_1iti4")]
 
 [node name="manager_birds" parent="." instance=ExtResource("7_jxroq")]
+position = Vector2(0, -100)
 
 [node name="process_momma_bird" parent="." instance=ExtResource("5_ucfnu")]
 
 [node name="helper_food_spawner" parent="." instance=ExtResource("5_slw61")]
-position = Vector2(0, 70)
+position = Vector2(0, -70)
 
 [node name="manager_game_over" parent="." instance=ExtResource("8_khyrq")]
 position = Vector2(261, -145)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.3, 1.3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

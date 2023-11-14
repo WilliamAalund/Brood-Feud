@@ -3,7 +3,7 @@ extends Node2D
 const STARTING_LEVEL = 0
 const EXP_TO_LEVEL_UP = 4
 const LEVEL_UP_PUSH_FORCE_INCREASE = 400
-const LEVEL_UP_SCALE_INCREASE = 0.3
+const LEVEL_UP_SCALE_INCREASE = 0.2
 const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const LEVEL_NEEDED_TO_CHANGE_SPRITE = 6
 const LEVEL_NEEDED_TO_WIN_THE_GAME = 8
@@ -12,7 +12,8 @@ const BLEED_RATE = 0.04
 @export var hasInfiniteFood = false
 
 var level = 1
-var exp = 0
+var experience = 0
+var sizeExperience = 0
 var satiation = 100
 var damage = 0
 var numSunlightSpotsInside = 0
@@ -24,6 +25,14 @@ signal player_grew_up
 func _ready():
 	$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 
+func _physics_process(delta):
+	if sizeExperience > 0:
+		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 20,LEVEL_UP_SCALE_INCREASE / 20)
+		$character_bird.modulate = Color(.5 + (sizeExperience / 20),1,.5 + (sizeExperience / 20),1)
+		sizeExperience -= 1
+		if sizeExperience <= 0:
+			$character_bird.modulate = Color(1,1,1,1)
+
 func eat(): # Function called to increase satiation when you eat.
 	if "foodRestore" in get_parent():
 		if satiation + get_parent().foodRestore > 100:
@@ -31,24 +40,23 @@ func eat(): # Function called to increase satiation when you eat.
 		else:
 			satiation += get_parent().foodRestore
 		Input.start_joy_vibration(0, 1, 0, 0.15)
-	exp += 1
-	if exp == EXP_TO_LEVEL_UP:
+	experience += 1
+	if experience >= EXP_TO_LEVEL_UP:
 		levelUp()
 		
 func levelUp():
-	level += 1
-	exp = 0
-	#self.scale += Vector2(LEVEL_UP_SCALE_INCREASE,LEVEL_UP_SCALE_INCREASE)
-	$character_bird.push_force += LEVEL_UP_PUSH_FORCE_INCREASE
+	level += 1 # Level up
+	experience = 0 # Reset experience
+	$character_bird.push_force += LEVEL_UP_PUSH_FORCE_INCREASE # Increase stats
 	$character_bird.move_speed += LEVEL_UP_MOVE_SPEED_INCREASE
 	$character_bird.modulate = Color(.5,1,.5,1)
-	var i = 0.0
-	while i < 5:
-		$character_bird.modulate = Color(.5 + (i / 10),1,.5 + (i / 10),1)
-		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 5,LEVEL_UP_SCALE_INCREASE / 5)
-		await get_tree().create_timer(0.1).timeout
-		i += 1
-	$character_bird.modulate = Color(1,1,1,1)
+	#var i = 0.0
+	sizeExperience += 20 # Variable that indicates the player needs to grow a certain amount. The reason this is not done inside of this function is because timers become inaccurate at low timeout values, wheras _physics_process does not
+#	while i < 5:
+#		$character_bird.modulate = Color(.5 + (i / 10),1,.5 + (i / 10),1)
+#		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 5,LEVEL_UP_SCALE_INCREASE / 5)
+#		await get_tree().create_timer(0.1).timeout
+#		i += 1
 	if level >= LEVEL_NEEDED_TO_CHANGE_SPRITE:
 		var newBird = preload("res://Visuals/Art Assets/draft_player_older_bird.png")
 		$character_bird/body_sprite.texture = newBird

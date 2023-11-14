@@ -87,7 +87,7 @@ func state2(delta): # Will move towards and look for food
 	if get_parent().noticedFood:
 		moveToTarget(delta, foodTarget)
 	else:
-		moveToTarget(delta, Vector2(0.0,50.0)) # Code to get the bird to crowd around momma bird
+		moveToTarget(delta, Vector2(0.0,-70)) # Code to get the bird to crowd around momma bird
 		ensureClipping(delta)
 func state3(delta): # Follows player
 	moveToTarget(delta, playerTarget)

@@ -16,6 +16,7 @@ const MAXIMUM_FOOD_IN_TUMMY_ALLOWED = 2
 var age = 1
 var experience = 0
 var damage = 0
+var sizeExperience = 0
 
 # State variable is in the child CharacterBody2D Node
 # TODO: Implement momHome, and isStupid
@@ -54,9 +55,16 @@ func _ready(): # Will be removed later on when the bird should actually start in
 func _physics_process(delta):
 	updateTargetArraysAndClosestPositions()
 	updateDecisionBooleans()
+	if sizeExperience > 0:
+		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 20,LEVEL_UP_SCALE_INCREASE / 20)
+		$CharacterBody2D.modulate = Color(.5 + (sizeExperience / 20),1,.5 + (sizeExperience / 20),1)
+		sizeExperience -= 1
+		if sizeExperience <= 0:
+			$CharacterBody2D.modulate = Color(1,1,1,1)
 	if stunVal > 0:
 		stunVal -= 1
 		print(stunVal)
+	
 
 func eat(): # Function called to increase satiation when you eat.
 	foodInTummy += 1
@@ -85,13 +93,7 @@ func ageUp():
 	$CharacterBody2D.push_force += LEVEL_UP_PUSH_FORCE_INCREASE
 	$CharacterBody2D.speed += LEVEL_UP_MOVE_SPEED_INCREASE
 	$CharacterBody2D.modulate = Color(.5,1,.5,1)
-	var i = 0.0
-	while i < 5:
-		$CharacterBody2D.modulate = Color(.5 + (i / 10),1,.5 + (i / 10),1)
-		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 5,LEVEL_UP_SCALE_INCREASE / 5)
-		await get_tree().create_timer(0.1).timeout
-		i += 1
-	$CharacterBody2D.modulate = Color(1,1,1,1)
+	sizeExperience += 20
 
 func bleed(value):
 	damage += value
