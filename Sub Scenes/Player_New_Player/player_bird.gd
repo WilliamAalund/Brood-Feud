@@ -5,7 +5,7 @@ const EXP_TO_LEVEL_UP = 4
 const LEVEL_UP_PUSH_FORCE_INCREASE = 400
 const LEVEL_UP_SCALE_INCREASE = 0.3
 const LEVEL_UP_MOVE_SPEED_INCREASE = 10
-const LEVEL_NEEDED_TO_CHANGE_SPRITE = 5
+const LEVEL_NEEDED_TO_CHANGE_SPRITE = 6
 const LEVEL_NEEDED_TO_WIN_THE_GAME = 8
 const BLEED_RATE = 0.04
 
@@ -65,14 +65,14 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 func bleed(value):
 	damage += value
 	var totalDamageIncurred = damage * BLEED_RATE
-	Input.start_joy_vibration(.5, 1, 0, totalDamageIncurred / 4)
+	Input.start_joy_vibration(.5, 1, 0, 0.3)
 	print("Queued damage: ", totalDamageIncurred)
 
 func decrementSatiation(): # Decreases the bird's satiation value
 	if hasInfiniteFood:
 		satiation = 100
 	else:
-		satiation = satiation - get_parent().idleSatiationDrainRate - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
+		satiation = satiation - get_parent().idleSatiationDrainRate - (level / 100) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
 		$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 		if satiation < 0:
 			emit_signal("playerStarved")

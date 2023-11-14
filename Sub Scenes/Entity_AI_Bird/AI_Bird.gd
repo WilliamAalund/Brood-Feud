@@ -1,23 +1,28 @@
 extends Node2D
 
 const STARTING_LEVEL = 0
-const EXP_TO_LEVEL_UP = 3
+const EXPERIENCE_TO_LEVEL_UP = 3
 const LEVEL_UP_PUSH_FORCE_INCREASE = 400
 const LEVEL_UP_SCALE_INCREASE = 0.1
 const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const BLEED_RATE = 0.04
+const MAXIMUM_FOOD_IN_TUMMY_ALLOWED = 2
 
 @export var satiation = 100
 @export var starvationThreshold = 30 # Currently unused, doesn't have a good place in the state logic right now
 @export var lowerAngryThreshold = 50
 @export var upperAngryThreshold = 150
 
-var level = 1
-var exp = 0
+var age = 1
+var experience = 0
 var damage = 0
 
 # State variable is in the child CharacterBody2D Node
 # TODO: Implement momHome, and isStupid
+# --- ARRAYS USED IN STATE CALCULATIONS
+var foodTargetsArray = []
+var sunrayTargetsArray = []
+
 
 # --- VALUES USED IN STATE CALCULATIONS
 var aggroVal = 0 # Bird begins with no aggro value
@@ -26,6 +31,8 @@ var sunspotTarget
 var numSunlightSpotsInside = 0
 var numSunlightSpotsNoticed = 0
 var numFoodsNoticed = 0
+var foodInTummy = 0 # Prevents overeating
+var stunVal = 0
 
 # --- BOOLEANS USED IN STATE CALCULATIONS
 var debug = false
@@ -38,21 +45,29 @@ var inSunlight = false
 var isDead = false
 
 func _ready(): # Will be removed later on when the bird should actually start in the nest
+	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
 	#$CharacterBody2D/Debug_Satiation_Label.text = "DG"
 	if isStupid:
 		$CharacterBody2D/body_zone.add_to_group("dumb")
-	
+
+func _physics_process(delta):
+	updateTargetArraysAndClosestPositions()
+	updateDecisionBooleans()
+	if stunVal > 0:
+		stunVal -= 1
+		print(stunVal)
 
 func eat(): # Function called to increase satiation when you eat.
+	foodInTummy += 1
 	if satiation + get_parent().foodRestore > 100:
 		satiation = 100
 	else:
 		satiation += get_parent().foodRestore
-	exp += 1
-	if exp >= EXP_TO_LEVEL_UP:
-		print("AI BIRD LEVELED UP")
-		levelUp()
+	experience += 1
+	if experience >= EXPERIENCE_TO_LEVEL_UP:
+		print("AI BIRD AGED UP")
+		ageUp()
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:
@@ -63,9 +78,9 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 	else:
 		satiation -= value
 
-func levelUp():
-	level += 1
-	exp = 0
+func ageUp():
+	age += 1
+	experience = 0
 	#self.scale += Vector2(LEVEL_UP_SCALE_INCREASE,LEVEL_UP_SCALE_INCREASE)
 	$CharacterBody2D.push_force += LEVEL_UP_PUSH_FORCE_INCREASE
 	$CharacterBody2D.speed += LEVEL_UP_MOVE_SPEED_INCREASE
@@ -81,8 +96,9 @@ func levelUp():
 func bleed(value):
 	damage += value
 	var totalDamageIncurred = damage * BLEED_RATE
-	Input.start_joy_vibration(.5, 1, 0, totalDamageIncurred / 4)
-	print("Queued damage: ", totalDamageIncurred)
+	Input.start_joy_vibration(.5, 1, 0, 0.2)
+	stunVal += 15
+	#print("Queued damage: ", totalDamageIncurred)
 
 # -- STATE DESCRIPTIONS --
 # 1 - Idle
@@ -92,13 +108,15 @@ func bleed(value):
 # 5 - Focused on hiding from predator
 # 6 - Dead
 # 7 - Debug
-# 8 - Unallocated
+# 8 - Stunned
 
 func updatedState(): # Returns variable corresponding to state. state then used in pathfinding.
 	if debug: # If the bird is in a debugger state, then it will only run the debugging code
 		return 7
 	else: if isDead: # If the bird is dead its dead, won't do anything.
 		return 6 # Dead
+	else: if stunVal > 0 and aggroVal <= upperAngryThreshold:
+		return 8
 	else: if aggroVal >= upperAngryThreshold: # If you are consistently attacking a bird, it will prioritize attacking you
 		return 3
 	else: if noticedPredator and not isStupid: # The next thing that will take over is fight or flight. If the bird is scared or angry it will prioritize that. Unless it is a stupid bird.
@@ -112,6 +130,44 @@ func updatedState(): # Returns variable corresponding to state. state then used 
 	else: # If the bird isn't dead, there is no predator, it isn't angry, it is not starving, mom isn't home, and there is no sunspot to seek out, then the bird will remain idle.
 		return 1 # Idle
 
+func updateTargetArraysAndClosestPositions():
+	foodTargetsArray = []
+	sunrayTargetsArray = []
+	for area in $CharacterBody2D/detector_zone.get_overlapping_areas():
+		if area.is_in_group("food"):
+			foodTargetsArray.append(area.global_position)
+		else: if area.is_in_group("sunray"):
+			sunrayTargetsArray.append(area.global_position)
+		else: if area.is_in_group("player"):
+			$CharacterBody2D.playerTarget = area.global_position
+			#playerTarget = area.global_position
+	if foodTargetsArray.size() > 0:
+		$CharacterBody2D.foodTarget = findClosestTarget(foodTargetsArray)
+	if sunrayTargetsArray.size() > 0:
+		$CharacterBody2D.sunrayTarget = findClosestTarget(sunrayTargetsArray)
+
+func findClosestTarget(array):
+	if array.size() == 0:
+		print("Error: array contains no values")
+		return self.position
+	var index = 0
+	var closestPosition = array[0]
+	for item in array:
+		if (self.position).length() - item.length() < closestPosition.length():
+			#index = item.index
+			closestPosition = item
+	return closestPosition
+
+func updateDecisionBooleans():
+	if foodTargetsArray.size() > 0 and foodInTummy < MAXIMUM_FOOD_IN_TUMMY_ALLOWED:
+		noticedFood = true
+	else:
+		noticedFood = false
+	if sunrayTargetsArray.size() > 0:
+		noticedSunray = true
+	else:
+		noticedSunray = false
+
 func _on_bird_control_ai_bird_move(target_position):
 	$CharacterBody2D.target = target_position # Replace with function body.
 
@@ -119,7 +175,7 @@ func _on_timer_timeout():
 	$CharacterBody2D.state = updatedState()
 	$CharacterBody2D/Debug_AI_State.text = str($CharacterBody2D.state) + " #:" + str(numSunlightSpotsInside)
 
-	$CharacterBody2D/boolean_tag.text = str(numSunlightSpotsNoticed) + " n:" + str(noticedSunray) + " i:" + str(inSunlight)
+	$CharacterBody2D/boolean_tag.text = str(foodInTummy)
 	if aggroVal > 0:
 		aggroVal -= 1
 	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
@@ -152,34 +208,37 @@ func _on_body_zone_area_exited(area):
 			inSunlight = false
 
 func _on_detector_zone_area_entered(area):
-	if area.is_in_group("sunray"):
-		numSunlightSpotsNoticed += 1
-		noticedSunray = true
-	else: if area.is_in_group("food"):
-		numFoodsNoticed += 1
-		noticedFood = true
+#	if area.is_in_group("sunray"):
+#		numSunlightSpotsNoticed += 1
+#		noticedSunray = true
+#	else: if area.is_in_group("food"):
+#		numFoodsNoticed += 1
+#		noticedFood = true
+	pass
 
 func _on_detector_zone_area_exited(area):
-	if area.is_in_group("sunray"):
-		numSunlightSpotsNoticed -= 1
-		if numSunlightSpotsNoticed <= 0:
-			numSunlightSpotsNoticed = 0
-			noticedSunray = false
-			print("No more sunrays to notice")
-	else: if area.is_in_group("food"):
-		numFoodsNoticed -= 1
-		if numFoodsNoticed <= 0:
-			numFoodsNoticed = 0
-			noticedFood = false
+#	if area.is_in_group("sunray"):
+#		numSunlightSpotsNoticed -= 1
+#		if numSunlightSpotsNoticed <= 0:
+#			numSunlightSpotsNoticed = 0
+#			noticedSunray = false
+#			print("No more sunrays to notice")
+#	else: if area.is_in_group("food"):
+#		numFoodsNoticed -= 1
+#		if numFoodsNoticed <= 0:
+#			numFoodsNoticed = 0
+#			noticedFood = false
+	pass
 
 func _on_bird_control_birds_toggle_predator_notice():
 	noticedPredator = !noticedPredator
 
 func _on_bird_control_birds_toggle_momma_bird_notice():
 	noticedMom = !noticedMom
+	foodInTummy = 0
 
 func _on_eater_zone_area_entered(area): # When the bird is interacting, and its beak collides with an area
-	if area.is_in_group("food"):
+	if area.is_in_group("food") and foodInTummy < MAXIMUM_FOOD_IN_TUMMY_ALLOWED:
 		eat()
 
 func _on_eater_detector_zone_area_entered(area): # When the bird detects that its beak could hit something

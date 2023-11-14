@@ -14,18 +14,17 @@ const INTERACT_COOLDOWN = 1.3 # In seconds
 var speed = 55
 var accel = speed
 var push_force = 80.0
-var state = 0 # Variable used for pathfinding logic. Value is managed in parent node
-var target = Vector2(0,0)
+var state = 1 # Variable used for pathfinding logic. Value is managed in parent node)
 var direction = Vector3()
 var foodTargetsArray = []
 var sunrayTargetsArray = []
 var sunrayTarget
 var foodTarget
-var playerTarget = Vector2(0,0)
+var idleTarget
+var playerTarget
 var isInteracting = false
 
 func _physics_process(delta): # Main pathfinding loop
-		updateTargetArrays()
 		Callable(self, "state" + str(state)).call(delta) # Calls the associated lambda function
 func moveToTarget(_delta, myTarget):
 	nav.target_position = myTarget # Sets target position
@@ -57,27 +56,6 @@ func moveToTarget(_delta, myTarget):
 func ensureClipping(_delta): # Ran when the bird is not doing anything, but still needs to make sure that it collides properly
 	velocity = Vector2(0,0)
 	move_and_slide()
-func updateTargetArrays():
-	foodTargetsArray = []
-	sunrayTargetsArray = []
-	for area in $detector_zone.get_overlapping_areas():
-		if area.is_in_group("food"):
-			foodTargetsArray.append(area.global_position)
-		else: if area.is_in_group("sunray"):
-			sunrayTargetsArray.append(area.global_position)
-		else: if area.is_in_group("player"):
-			playerTarget = area.global_position
-func findClosestTarget(array):
-	if array.size() == 0:
-		print("Error: array contains no values")
-		return self.position
-	var index = 0
-	var closestPosition = array[0]
-	for item in array:
-		if (self.position).length() - item.length() < closestPosition.length():
-			#index = item.index
-			closestPosition = item
-	return closestPosition
 func createIdlePosition():
 	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
 func beakInteract():
@@ -97,7 +75,7 @@ func beakInteract():
 	isInteracting = false
 	$eater_detector_zone.monitoring = false
 	$eater_detector_zone.monitoring = true
-	
+
 # --- STATE FUNCTIONS ---
 func state1(delta): # Remains idle
 	ensureClipping(delta)
@@ -107,19 +85,19 @@ func state1(delta): # Remains idle
 	# if you generate a new one, moveToTarget(delta, idleTarget)
 func state2(delta): # Will move towards and look for food
 	if get_parent().noticedFood:
-		foodTarget = findClosestTarget(foodTargetsArray)
 		moveToTarget(delta, foodTarget)
 	else:
 		moveToTarget(delta, Vector2(0.0,50.0)) # Code to get the bird to crowd around momma bird
+		ensureClipping(delta)
 func state3(delta): # Follows player
-	if (self.position - playerTarget).length() > AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER:
-		moveToTarget(delta, playerTarget)
+	moveToTarget(delta, playerTarget)
+#	if (self.position - playerTarget).length() > AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER:
+#		moveToTarget(delta, playerTarget)
 func state4(delta): # Will move to sunray
 	if !get_parent().inSunlight:
-		sunrayTarget = findClosestTarget(sunrayTargetsArray)
 		moveToTarget(delta, sunrayTarget)
-func state5(_delta): # Will run to edge of nest
-	pass
+func state5(delta): # Will run to edge of nest
+	ensureClipping(delta)
 func state6(delta): # Will remain entirely immobile. Dead
 	ensureClipping(delta)
 func state7(_delta): # Debugger state
