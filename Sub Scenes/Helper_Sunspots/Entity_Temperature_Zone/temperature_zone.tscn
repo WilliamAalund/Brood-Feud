@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://chf45bqb5qp4n"]
+[gd_scene load_steps=5 format=3 uid="uid://chf45bqb5qp4n"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Helper_Sunspots/Entity_Temperature_Zone/temperature_zone.gd" id="1_0mnf6"]
 [ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="2_ev6pf"]
+[ext_resource type="Texture2D" uid="uid://b11jak81wq7l8" path="res://Visuals/Art Assets/Sunspots.png" id="2_q5soj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdt7u"]
 radius = 39.0
@@ -14,7 +15,13 @@ script = ExtResource("1_0mnf6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cdt7u")
 
+[node name="sunspot_sprite" type="Sprite2D" parent="."]
+position = Vector2(-0.500001, -0.500001)
+scale = Vector2(0.0415039, 0.0405273)
+texture = ExtResource("2_q5soj")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1.43051e-06, -0.500001)
 scale = Vector2(0.065, 0.0641667)
 texture = ExtResource("2_ev6pf")

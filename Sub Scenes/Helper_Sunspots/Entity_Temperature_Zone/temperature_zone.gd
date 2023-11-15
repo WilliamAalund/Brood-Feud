@@ -9,7 +9,7 @@ var randomState = randi_range(1,3)
 func _ready():
 	lifespan = randi_range(LIFESPAN_MIN, LIFESPAN_MAX)
 	self.modulate.a = 0
-	while (self.modulate.a < .4):
+	while (self.modulate.a < .5):
 		self.modulate.a += 0.01
 		await $Timer.timeout
 	match randomState:
