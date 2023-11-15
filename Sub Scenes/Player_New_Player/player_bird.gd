@@ -70,6 +70,7 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 		emit_signal("playerStarved")
 	else:
 		satiation -= value
+	$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 
 func bleed(value):
 	emit_signal("player_attacked")
@@ -82,7 +83,7 @@ func decrementSatiation(): # Decreases the bird's satiation value
 	if hasInfiniteFood:
 		satiation = 100
 	else:
-		satiation = satiation - get_parent().idleSatiationDrainRate - (level / 100.0) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
+		satiation = satiation - (get_parent().idleSatiationDrainRate - 0.01) - (level / 100.0) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
 		$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 		if satiation < 0:
 			emit_signal("playerStarved")

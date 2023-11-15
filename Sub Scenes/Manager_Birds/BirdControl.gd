@@ -22,6 +22,8 @@ signal pred_spot
 func _ready():
 	if debug:
 		$AI_Bird.debug = true
+	var dumbBird = get_child(4)
+	dumbBird.makeBirdStupid()
 
 func _on_process_momma_bird_toggle_mom_presence(): # When mom comes to/leaves nest
 	emit_signal("birds_toggle_momma_bird_notice")

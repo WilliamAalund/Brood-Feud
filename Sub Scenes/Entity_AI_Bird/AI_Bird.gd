@@ -48,16 +48,18 @@ var isDead = false
 var predator_spot = Vector2(0,0) #(0,0) is null, and means birds don't know where pred is. sets when
 #predator shows itself
 
-
-
-
 func _ready(): # Will be removed later on when the bird should actually start in the nest
 	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
 	#$CharacterBody2D/Debug_Satiation_Label.text = "DG"
 	if isStupid:
-		$CharacterBody2D/body_zone.add_to_group("dumb")
+		makeBirdStupid()
 
+func makeBirdStupid(): # Called by bird manager to make one bird stupid
+	isStupid = true
+	$CharacterBody2D/body_zone.add_to_group("dumb")
+	print("An AI bird is now stupid.")
+	
 func _physics_process(_delta):
 	updateTargetArraysAndClosestPositions()
 	updateDecisionBooleans()
@@ -111,8 +113,10 @@ func killBird():
 	$CharacterBody2D/Sprite2D.visible = false
 	$CharacterBody2D/dead_bird_sprite.visible = true # Indicate to the player that the bird is dead
 	$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1)
+	$CharacterBody2D/body_zone.remove_from_group("dumb")
 	$CharacterBody2D/CollisionShape2D.queue_free()
 	self.z_index = 0
+
 # -- STATE DESCRIPTIONS --
 # 1 - Idle
 # 2 - Focused on food

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfs66kv10p18q"]
+
+[ext_resource type="Script" path="res://Levels/directions.gd" id="1_5p8t1"]
+[ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="1_ihvtn"]
+[ext_resource type="PackedScene" uid="uid://bft85520xqg1d" path="res://Sub Scenes/Player_New_Player/player_bird.tscn" id="2_i0hqb"]
+
+[node name="directions" type="Node2D"]
+script = ExtResource("1_5p8t1")
+
+[node name="player_bird" parent="." instance=ExtResource("2_i0hqb")]
+position = Vector2(650, 323)
+
+[node name="object_nest" parent="." instance=ExtResource("1_ihvtn")]
+position = Vector2(674, 306)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 95.0
+offset_top = 94.0
+offset_right = 332.0
+offset_bottom = 198.0
+text = "How to play:
+W,S/Left joystick: Move forward, backwards
+A,D/Right joystick: Turn while moving
+Space/Left Trigger/A button/X button: Eat/Attack"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 323)
+zoom = Vector2(0.9, 0.9)
+
+[node name="backButton" type="Button" parent="."]
+offset_left = 95.0
+offset_top = 199.0
+offset_right = 140.0
+offset_bottom = 230.0
+text = "Back"
+
+[connection signal="pressed" from="backButton" to="." method="_on_back_button_pressed"]

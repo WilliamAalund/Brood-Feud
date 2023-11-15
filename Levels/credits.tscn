@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b122t1mognxff"]
+[gd_scene load_steps=3 format=3 uid="uid://ck6gvw0l14fs6"]
 
 [ext_resource type="Script" path="res://Levels/credits.gd" id="1_w2wpq"]
 [ext_resource type="Script" path="res://label.gd" id="2_w4vsd"]

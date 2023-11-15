@@ -29,7 +29,6 @@ platform_on_leave = 2
 script = ExtResource("2_sf0vd")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
-debug_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(-0.499999, -12.5)

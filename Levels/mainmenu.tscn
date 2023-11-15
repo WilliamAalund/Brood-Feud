@@ -42,6 +42,10 @@ theme_override_constants/separation = 30
 layout_mode = 2
 text = "Play"
 
+[node name="directionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuOptions"]
+layout_mode = 2
+text = "How to play"
+
 [node name="creditsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuOptions"]
 layout_mode = 2
 text = "Credits
@@ -59,5 +63,6 @@ layout_mode = 2
 texture = ExtResource("2_es7fj")
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/startButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/directionsButton" to="." method="_on_directions_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/creditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/quitButton" to="." method="_on_quit_button_pressed"]
