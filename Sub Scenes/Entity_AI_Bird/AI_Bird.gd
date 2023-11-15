@@ -8,7 +8,7 @@ const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const BLEED_RATE = 0.04
 const MAXIMUM_FOOD_IN_TUMMY_ALLOWED = 2
 
-@export var satiation = 100
+@export var satiation = 2
 @export var starvationThreshold = 30 # Currently unused, doesn't have a good place in the state logic right now
 @export var lowerAngryThreshold = 50
 @export var upperAngryThreshold = 150
@@ -186,6 +186,14 @@ func _on_bird_control_birds_increment_hunger():
 		isDead = true
 		$CharacterBody2D/eater_zone.remove_from_group("eater")
 		$CharacterBody2D/Sprite2D.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
+		$CharacterBody2D/Sprite2D.visible = false
+		$CharacterBody2D/dead_bird_sprite.visible = true
+		$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
+		#if level >= LEVEL_NEEDED_TO_CHANGE_SPRITE:
+#		var newBird = preload("res://Visuals/Art Assets/draft_player_older_bird.png")
+#		$character_bird/body_sprite.texture = newBird
+#	if level >= LEVEL_NEEDED_TO_WIN_THE_GAME:
+#		emit_signal("player_grew_up")
 	if damage > 0:
 		damage -= 1
 

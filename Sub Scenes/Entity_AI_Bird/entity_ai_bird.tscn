@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqc0vbl1gl11m"]
+[gd_scene load_steps=10 format=3 uid="uid://cqc0vbl1gl11m"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd" id="1_g4xov"]
 [ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd" id="2_sf0vd"]
 [ext_resource type="Texture2D" uid="uid://p4bk5tdue3ta" path="res://Visuals/Art Assets/draft_sibling_bird.png" id="3_ddn7a"]
+[ext_resource type="Texture2D" uid="uid://dt7qp18imoqyy" path="res://Visuals/Art Assets/dead_sibling.png" id="3_ukxu6"]
 [ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="4_uem5o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kx41x"]
@@ -32,6 +33,14 @@ debug_enabled = true
 position = Vector2(-0.499999, -12.5)
 scale = Vector2(0.0395508, 0.034668)
 texture = ExtResource("3_ddn7a")
+
+[node name="dead_bird_sprite" type="Sprite2D" parent="CharacterBody2D"]
+visible = false
+position = Vector2(0, -15)
+scale = Vector2(0.0324346, 0.0457911)
+texture = ExtResource("3_ukxu6")
+region_enabled = true
+region_rect = Rect2(137.815, 260.094, 1875.97, 1256.97)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_kx41x")
