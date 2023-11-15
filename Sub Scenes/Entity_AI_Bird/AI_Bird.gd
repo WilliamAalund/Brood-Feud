@@ -45,6 +45,12 @@ var isStupid = false
 var inSunlight = false
 var isDead = false
 
+var predator_spot = Vector2(0,0) #(0,0) is null, and means birds don't know where pred is. sets when
+#predator shows itself
+
+
+
+
 func _ready(): # Will be removed later on when the bird should actually start in the nest
 	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
@@ -78,6 +84,7 @@ func eat(): # Function called to increase satiation when you eat.
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:
 		satiation = 0
+		print("starved 1")
 		isDead = true
 		$CharacterBody2D/eater_zone.remove_from_group("eater")
 		$CharacterBody2D/Sprite2D.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
@@ -183,6 +190,7 @@ func _on_bird_control_birds_increment_hunger():
 	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight) + BLEED_RATE * int(bool(damage))
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
 	if satiation <= 0: # Prevent dead bodies from eating food
+		print("starved")
 		isDead = true
 		$CharacterBody2D/eater_zone.remove_from_group("eater")
 		$CharacterBody2D/Sprite2D.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
@@ -215,6 +223,9 @@ func _on_body_zone_area_exited(area):
 
 func _on_bird_control_birds_toggle_predator_notice():
 	noticedPredator = !noticedPredator
+	$CharacterBody2D.predator_place = Vector2(0,0) #resets to null
+	
+
 
 func _on_bird_control_birds_toggle_momma_bird_notice():
 	noticedMom = !noticedMom
@@ -230,3 +241,20 @@ func _on_eater_detector_zone_area_entered(area): # When the bird detects that it
 			$CharacterBody2D.beakInteract()
 		elif area.is_in_group("player") and aggroVal > lowerAngryThreshold:
 			$CharacterBody2D.beakInteract()
+
+
+func _on_bird_control_pred_spot(spot):
+	predator_spot = spot
+	$CharacterBody2D.predator_place = spot
+
+
+func _on_bird_control_kill(bird):
+	print("kill switch recieved")
+	if(bird == $CharacterBody2D/body_zone):
+		print("bleh")
+		isDead = true
+	print("I'm alive!!")
+
+
+
+

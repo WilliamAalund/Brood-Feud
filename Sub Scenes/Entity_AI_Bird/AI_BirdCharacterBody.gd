@@ -24,6 +24,8 @@ var idleTarget
 var playerTarget
 var isInteracting = false
 
+var predator_place = Vector2(0,0)
+
 func _physics_process(delta): # Main pathfinding loop
 		Callable(self, "state" + str(state)).call(delta) # Calls the associated lambda function
 func moveToTarget(_delta, myTarget):
@@ -53,6 +55,35 @@ func moveToTarget(_delta, myTarget):
 #		rotation = move_dir.angle_to(myTarget)
 #	elif rad_to_deg((2*PI) - rad_diff) < rot_dead_zone:
 #		rotation = (2*PI) - move_dir.angle_to(myTarget)
+
+
+func moveFromTarget(_delta, myTarget): #ran for running away from things. like preditor
+	nav.target_position = myTarget # Sets target position
+	
+	var move_dir = Vector2(0, 0)
+	move_dir = Vector2(0, - 1).rotated(rotation) # Angles movement vector to current direction
+	
+	velocity = move_dir * speed # Vector time scalar is vector quantity
+	move_and_slide()
+	
+	
+	direction = nav.get_next_path_position() - global_position
+	direction = direction.normalized()
+	direction *= Vector2(-1,-1) #KEY LINE: reverses target direction, making bird turn and run instead of go forward
+	
+	var move_rad = move_dir.angle()
+	var dir_rad = direction.angle()
+	var rad_diff = dir_rad - move_rad
+	if (rad_diff > PI): #this means that the angles are closer than math would indicate. modulus stuff
+		rad_diff = dir_rad - ((2*PI)-move_rad)
+	if rad_to_deg(rad_diff) < (0-rot_dead_zone): #right turn
+		rotation -= rotspeed
+	elif rad_to_deg(rad_diff) > (0+rot_dead_zone): #left turn
+		rotation += rotspeed
+	
+
+
+
 func ensureClipping(_delta): # Ran when the bird is not doing anything, but still needs to make sure that it collides properly
 	velocity = Vector2(0,0)
 	move_and_slide()
@@ -97,7 +128,12 @@ func state4(delta): # Will move to sunray
 	if !get_parent().inSunlight:
 		moveToTarget(delta, sunrayTarget)
 func state5(delta): # Will run to edge of nest
+	if (predator_place == Vector2(0,0)):
+		moveToTarget(delta,Vector2(0,0))
+	else :
+		moveFromTarget(delta,predator_place)
 	ensureClipping(delta)
+	
 func state6(delta): # Will remain entirely immobile. Dead
 	ensureClipping(delta)
 func state7(_delta): # Debugger state

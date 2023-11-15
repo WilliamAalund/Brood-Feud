@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dwitdkiendap8" path="res://Sub Scenes/Manager_Birds/Manager_Birds.tscn" id="7_jxroq"]
 [ext_resource type="PackedScene" uid="uid://j6dpmc2nhd23" path="res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn" id="8_khyrq"]
 [ext_resource type="PackedScene" uid="uid://cwui7idexgcb2" path="res://Sub Scenes/UI_Game_Over/ui_game_over.tscn" id="9_g8uvl"]
-[ext_resource type="PackedScene" uid="uid://c2q3lmimxr2ox" path="res://Sub Scenes/UI_hud/ui_hud.tscn" id="9_hbv22"]
+[ext_resource type="PackedScene" uid="uid://c2q3lmimxr2ox" path="res://Sub Scenes/UI_hud/UI_hud.tscn" id="9_hbv22"]
 [ext_resource type="PackedScene" uid="uid://0fxvg4swlxgr" path="res://Sub Scenes/Helper_Sunspots/manager_sunspots.tscn" id="10_k0xh1"]
 
 [node name="Game Level" type="Node2D"]
@@ -60,7 +60,9 @@ visible = false
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_sunspots" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="process_predator" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="game_over_ocurred" from="manager_game_over" to="." method="_on_manager_game_over_game_over_ocurred"]
+[connection signal="bird_eaten" from="process_predator" to="manager_birds" method="_on_process_predator_bird_eaten"]
 [connection signal="player_eaten" from="process_predator" to="manager_game_over" method="_on_process_predator_player_eaten"]
+[connection signal="pred_position" from="process_predator" to="manager_birds" method="_on_process_predator_pred_position"]
 [connection signal="predator_leaves_nest" from="process_predator" to="manager_birds" method="_on_process_predator_predator_leaves_nest"]
 [connection signal="toggle_predator_approach" from="process_predator" to="manager_birds" method="_on_process_predator_toggle_predator_approach"]
 [connection signal="toggle_predator_presence" from="process_predator" to="process_momma_bird" method="_on_process_predator_toggle_predator_presence"]
