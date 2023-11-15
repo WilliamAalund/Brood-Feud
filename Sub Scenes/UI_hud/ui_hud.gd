@@ -1,5 +1,6 @@
 extends Control
 
+# Satiation bar value, and hud icons are handled in the Main Level script
 
 func _ready():
 	$damage_overlay.modulate.a = 0
