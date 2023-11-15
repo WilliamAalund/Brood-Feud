@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cwtxxxhlmsx4m" path="res://Sub Scenes/Rig_Momma_Bird/rig_momma_bird.tscn" id="3_8cupb"]
 
 [node name="Momma_Bird" type="Node2D"]
+z_index = 2
 script = ExtResource("1_44ueo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

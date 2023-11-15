@@ -85,9 +85,7 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:
 		satiation = 0
 		print("starved 1")
-		isDead = true
-		$CharacterBody2D/eater_zone.remove_from_group("eater")
-		$CharacterBody2D/Sprite2D.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
+		killBird()
 	else:
 		satiation -= value
 
@@ -107,6 +105,14 @@ func bleed(value):
 	stunVal += 15
 	#print("Queued damage: ", totalDamageIncurred)
 
+func killBird():
+	isDead = true
+	$CharacterBody2D/eater_zone.remove_from_group("eater")
+	$CharacterBody2D/Sprite2D.visible = false
+	$CharacterBody2D/dead_bird_sprite.visible = true # Indicate to the player that the bird is dead
+	$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1)
+	$CharacterBody2D/CollisionShape2D.queue_free()
+	self.z_index = 0
 # -- STATE DESCRIPTIONS --
 # 1 - Idle
 # 2 - Focused on food
@@ -179,7 +185,7 @@ func _on_bird_control_ai_bird_move(target_position):
 
 func _on_timer_timeout():
 	$CharacterBody2D.state = updatedState()
-	$CharacterBody2D/Debug_AI_State.text = str($CharacterBody2D.state) + " #:" + str(numSunlightSpotsInside)
+	$CharacterBody2D/Debug_AI_State.text = str($CharacterBody2D.state)
 
 	$CharacterBody2D/boolean_tag.text = str(foodInTummy)
 	if aggroVal > 0:
@@ -252,7 +258,7 @@ func _on_bird_control_kill(bird):
 	print("kill switch recieved")
 	if(bird == $CharacterBody2D/body_zone):
 		print("bleh")
-		isDead = true
+		killBird()
 	print("I'm alive!!")
 
 

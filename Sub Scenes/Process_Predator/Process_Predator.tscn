@@ -9,6 +9,7 @@
 radius = 296.204
 
 [node name="Predator" type="Node2D"]
+z_index = 2
 script = ExtResource("1_tnf4g")
 LandingTime = 1.5
 

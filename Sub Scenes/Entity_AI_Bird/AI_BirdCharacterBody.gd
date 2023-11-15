@@ -122,18 +122,14 @@ func state2(delta): # Will move towards and look for food
 		ensureClipping(delta)
 func state3(delta): # Follows player
 	moveToTarget(delta, playerTarget)
-#	if (self.position - playerTarget).length() > AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER:
-#		moveToTarget(delta, playerTarget)
 func state4(delta): # Will move to sunray
 	if !get_parent().inSunlight:
 		moveToTarget(delta, sunrayTarget)
 func state5(delta): # Will run to edge of nest
 	if (predator_place == Vector2(0,0)):
-		moveToTarget(delta,Vector2(0,0))
+		moveToTarget(delta,Vector2(0,100))
 	else :
 		moveFromTarget(delta,predator_place)
-	ensureClipping(delta)
-	
 func state6(delta): # Will remain entirely immobile. Dead
 	ensureClipping(delta)
 func state7(_delta): # Debugger state

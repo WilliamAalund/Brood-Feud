@@ -19,9 +19,11 @@ height = 24.0
 radius = 169.027
 
 [node name="AI_Bird" type="Node2D"]
+z_index = 1
 script = ExtResource("1_g4xov")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_mask = 7
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("2_sf0vd")
@@ -92,7 +94,7 @@ offset_right = 20.0
 
 [node name="Debug_AI_State" type="Label" parent="CharacterBody2D"]
 visible = false
-modulate = Color(0.619608, 0, 0.141176, 1)
+modulate = Color(0.980392, 0, 0.247059, 1)
 offset_left = -19.0
 offset_top = -46.0
 offset_right = 21.0
