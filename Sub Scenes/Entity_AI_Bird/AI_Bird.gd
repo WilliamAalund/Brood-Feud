@@ -45,6 +45,11 @@ var isStupid = false
 var inSunlight = false
 var isDead = false
 
+var predator_spot = Vector2(0,0) #(0,0) is null, and means birds don't know where pred is. sets when
+#predator shows itself
+
+
+
 func _ready(): # Will be removed later on when the bird should actually start in the nest
 	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
@@ -179,6 +184,8 @@ func _on_timer_timeout():
 		aggroVal -= 1
 	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
 
+
+
 func _on_bird_control_birds_increment_hunger():
 	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight) + BLEED_RATE * int(bool(damage))
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
@@ -207,6 +214,8 @@ func _on_body_zone_area_exited(area):
 
 func _on_bird_control_birds_toggle_predator_notice():
 	noticedPredator = !noticedPredator
+	$CharacterBody2D.predator_place = Vector2(0,0) #resets to null
+	
 
 func _on_bird_control_birds_toggle_momma_bird_notice():
 	noticedMom = !noticedMom
@@ -222,3 +231,14 @@ func _on_eater_detector_zone_area_entered(area): # When the bird detects that it
 			$CharacterBody2D.beakInteract()
 		elif area.is_in_group("player") and aggroVal > lowerAngryThreshold:
 			$CharacterBody2D.beakInteract()
+
+
+func _on_bird_control_pred_spot(spot):
+	predator_spot = spot
+	$CharacterBody2D.predator_place = spot
+
+
+func _on_bird_control_kill(bird):
+	if(bird == $CharacterBody2D/body_zone):
+		$CharacterBody2D/Sprite2D.visible = false
+		isDead = true
