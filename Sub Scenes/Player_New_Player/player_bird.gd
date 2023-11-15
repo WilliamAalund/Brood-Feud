@@ -75,7 +75,7 @@ func bleed(value):
 	emit_signal("player_attacked")
 	damage += value
 	var totalDamageIncurred = damage * BLEED_RATE
-	Input.start_joy_vibration(.5, 1, 0, 0.3)
+	Input.start_joy_vibration(.5, 1, 0, 0.2)
 	print("Queued damage: ", totalDamageIncurred)
 
 func decrementSatiation(): # Decreases the bird's satiation value

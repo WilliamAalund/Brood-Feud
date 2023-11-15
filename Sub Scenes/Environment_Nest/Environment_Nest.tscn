@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bshdn3dwrgrbt"]
+[gd_scene load_steps=4 format=3 uid="uid://bshdn3dwrgrbt"]
 
 [ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://Visuals/Placeholder Graphics/circle.png" id="1_cdbf3"]
+[ext_resource type="Texture2D" uid="uid://ls1xjumxcg5u" path="res://Visuals/Art Assets/draft_nest.png" id="1_rlxan"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cyoeg"]
 vertices = PackedVector2Array(86, -237, 123, -219, 155, -198, 175, -180, 192, -161, 222, -120, 241, -71, 250, -20, 251, 11, 248, 40, 242, 67, 232, 98, 211, 136, 184, 171, 149, 202, 108, 227, 77, 239, 37, 248, 0, 250, -43, 247, -77, 239, -95, 232, -131, 214, -169, 186, -194, 159, -205, 144, -217, 126, -230, 100, -244, 57, -250, 23, -250, -23, -243, -62, -232, -96, -222, -116, -206, -143, -186, -169, -154, -198, -128, -216, -100, -230, -63, -243, -21, -250, 31, -249, 59, -244)
@@ -14,7 +15,13 @@ cell_size = 41.86
 collision_layer = 4
 collision_mask = 7
 
+[node name="nest_sprite" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-0.500026, -2.00001)
+scale = Vector2(0.299697, 0.299608)
+texture = ExtResource("1_rlxan")
+
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+visible = false
 texture = ExtResource("1_cdbf3")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]

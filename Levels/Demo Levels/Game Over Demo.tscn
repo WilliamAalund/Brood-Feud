@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccnxeflln2bmm"]
 
-[ext_resource type="PackedScene" uid="uid://j6dpmc2nhd23" path="res://Sub Scenes/Manager_Game_Over/manager_game_over.tscn" id="1_lwdst"]
+[ext_resource type="PackedScene" uid="uid://j6dpmc2nhd23" path="res://Sub Scenes/Manager_Game_Over/Manager_Game_Over.tscn" id="1_lwdst"]
 [ext_resource type="PackedScene" uid="uid://dmuddbset2mpi" path="res://Sub Scenes/Manager_Satiation/Manager_Satiation.tscn" id="2_kia8w"]
 
 [node name="Game Over Demo" type="Node2D"]
