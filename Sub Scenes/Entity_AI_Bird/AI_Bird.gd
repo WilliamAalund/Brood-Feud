@@ -8,7 +8,7 @@ const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const BLEED_RATE = 0.04
 const MAXIMUM_FOOD_IN_TUMMY_ALLOWED = 2
 
-@export var satiation = 2
+@export var satiation = 100
 @export var starvationThreshold = 30 # Currently unused, doesn't have a good place in the state logic right now
 @export var lowerAngryThreshold = 50
 @export var upperAngryThreshold = 150
