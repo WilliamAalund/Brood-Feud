@@ -19,11 +19,14 @@ var momIsHome = false
 var foundDumbBird = false
 var foundPlayerBird = false
 var foundBird = false
+var target = null #bird to be eaten
 
 signal toggle_predator_approach
 signal toggle_predator_presence # Indicates to other nodes that the predator is at the nest.
 signal predator_leaves_nest
 signal player_eaten
+signal pred_position
+signal bird_eaten
 
 func _ready():
 	predatorLoop()
@@ -83,10 +86,13 @@ func birdDetectorCircleAnimation():
 func evaluateObject(object):
 	if object.is_in_group("dumb"):
 		foundDumbBird = true
+		target = object
 	else: if object.is_in_group("player") and !foundDumbBird:
 		foundPlayerBird = true
+		target = object
 	else: if object.is_in_group("bird") and !foundDumbBird and !foundPlayerBird:
 		foundBird = true
+		target = object
 		
 func predatorEatDecision(): # Signal output / functions handling actually eating the birds will go here
 	if foundDumbBird:
@@ -98,19 +104,22 @@ func predatorEatDecision(): # Signal output / functions handling actually eating
 		print("Predator wants to eat the ai bird")
 	else:
 		print("Predator doesn't notice any birds")
+	emit_signal("bird_eaten", target)
 
 func headToNest():
 	predIsHome = true # Prevents predator loop from continuing
 	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
 	await get_tree().create_timer(LandingTime).timeout
 	birdDetectorCircleAnimation() # Indicates to player what area isn't safe
+	emit_signal("pred_position", $bird_detector/Sprite2D.position) #sends pixel position to RUN AWAY FROM
+	#CHANGE THIS VALUE TO INCREASE PREDATOR MOVEMENTS
 	# Booleans that are used in predatorEatDecision()
 	foundBird = false
 	foundPlayerBird = false
 	foundDumbBird = false
+	await get_tree().create_timer(StayLength).timeout
 	for object in $bird_detector.get_overlapping_areas(): # Grabs all birds in detection range, evaluates them
 		evaluateObject(object)
-	await get_tree().create_timer(StayLength).timeout
 	predatorEatDecision() # Given previous booleans, figure out which bird to eat, if any
 	emit_signal("toggle_predator_presence")
 	predIsHome = false

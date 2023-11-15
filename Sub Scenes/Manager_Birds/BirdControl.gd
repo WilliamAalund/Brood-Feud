@@ -15,6 +15,8 @@ signal player_grew_up
 signal player_attacked
 signal birds_toggle_predator_notice
 signal birds_toggle_momma_bird_notice
+signal kill
+signal pred_spot
 
 
 func _ready():
@@ -42,3 +44,11 @@ func _on_player_bird_player_grew_up():
 
 func _on_player_bird_player_attacked():
 	emit_signal("player_attacked")
+
+func _on_process_predator_pred_position(place):
+	emit_signal("pred_spot",place)
+
+
+func _on_process_predator_bird_eaten(bird):
+	print("kill switch sent")
+	emit_signal("kill",bird)
