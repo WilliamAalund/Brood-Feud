@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2q3lmimxr2ox"]
+[gd_scene load_steps=13 format=3 uid="uid://c2q3lmimxr2ox"]
 
 [ext_resource type="Script" path="res://Sub Scenes/UI_hud/ui_hud.gd" id="1_2o14y"]
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://brn66pryq76xx" path="res://Visuals/Art Assets/draft_hud_stomach.png" id="4_vsnun"]
 [ext_resource type="Texture2D" uid="uid://baveosqywq5ni" path="res://Visuals/Art Assets/Worm_Food.png" id="5_ortuu"]
 [ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="9_8vvss"]
+[ext_resource type="Texture2D" uid="uid://dgl80s2rjfsg5" path="res://Visuals/Art Assets/draft2_hud_bird.png" id="10_5v6jl"]
+[ext_resource type="Texture2D" uid="uid://bh8llnxsvjrk8" path="res://Visuals/Art Assets/draft2_hud_stomach.png" id="11_rd008"]
+[ext_resource type="Script" path="res://Sub Scenes/UI_hud/stomach_bar2.gd" id="12_x7eli"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -63,6 +66,7 @@ offset_bottom = 760.0
 rotation = -0.149906
 
 [node name="hud_bird" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1299, 680)
 rotation = 0.879766
 scale = Vector2(0.137369, 0.120407)
@@ -90,12 +94,12 @@ offset_top = -828.0
 offset_right = 2371.0
 offset_bottom = 1506.0
 step = 0.1
+value = 50.0
 fill_mode = 1
 texture_under = ExtResource("4_vsnun")
 texture_progress = ExtResource("4_vsnun")
 tint_under = Color(0.435294, 0.435294, 0.435294, 1)
 tint_progress = Color(1, 0.815686, 1, 1)
-script = ExtResource("4_6pag5")
 
 [node name="food_eaten_progress_bar" type="TextureProgressBar" parent="."]
 visible = false
@@ -109,9 +113,46 @@ step = 100.0
 value = 100.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_ortuu")
+script = ExtResource("4_6pag5")
 
 [node name="damage_overlay" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.752941, 0.027451, 0.388235, 1)
 position = Vector2(864, 432)
 scale = Vector2(2.64965, 1.98432)
 texture = ExtResource("9_8vvss")
+
+[node name="hud_bird_2" type="Sprite2D" parent="."]
+position = Vector2(1308, 667)
+scale = Vector2(0.0823971, 0.106972)
+texture = ExtResource("10_5v6jl")
+
+[node name="Sunlight Symbol" type="Sprite2D" parent="hud_bird_2"]
+self_modulate = Color(1, 1, 1, 0.862745)
+position = Vector2(-352, -1411)
+rotation = 0.0518076
+scale = Vector2(0.584853, 0.533668)
+skew = 0.0185421
+texture = ExtResource("2_6da3i")
+
+[node name="bleeding_symbol" type="Sprite2D" parent="hud_bird_2"]
+self_modulate = Color(1, 1, 1, 0.862745)
+position = Vector2(-1250.15, -719)
+rotation = -0.133193
+scale = Vector2(0.231147, 0.205797)
+skew = 0.100325
+texture = ExtResource("2_hdwa6")
+
+[node name="stomach_bar2" type="TextureProgressBar" parent="hud_bird_2"]
+offset_left = -1379.0
+offset_top = -1810.0
+offset_right = 1171.0
+offset_bottom = 1490.0
+step = 0.1
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("11_rd008")
+texture_progress = ExtResource("11_rd008")
+tint_under = Color(0.470588, 0.345098, 0.337255, 1)
+tint_progress = Color(0.886275, 0.0862745, 0.419608, 1)
+script = ExtResource("12_x7eli")
