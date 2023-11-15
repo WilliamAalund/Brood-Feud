@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/Main Level.gd" id="1_ai4xj"]
 [ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="2_1iti4"]
-[ext_resource type="Texture2D" uid="uid://b6vstbt6jbopq" path="res://Visuals/Art Assets/draft_background.png" id="2_2qlac"]
+[ext_resource type="Texture2D" uid="uid://3ihlavjckq8v" path="res://Visuals/Art Assets/MockBackground (1).png" id="2_14buk"]
 [ext_resource type="PackedScene" uid="uid://b6f2ildgxylks" path="res://Sub Scenes/Helper_Food_Spawner/Helper_Food_Spawner.tscn" id="5_slw61"]
 [ext_resource type="PackedScene" uid="uid://cudu6vf7uwwve" path="res://Sub Scenes/Process_Momma_Bird/Process_Momma_Bird.tscn" id="5_ucfnu"]
 [ext_resource type="PackedScene" uid="uid://bx0asr7ljxkpl" path="res://Sub Scenes/Process_Predator/Process_Predator.tscn" id="6_63o2m"]
@@ -16,9 +16,9 @@
 script = ExtResource("1_ai4xj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(11, 0.499992)
-scale = Vector2(0.36, 0.260784)
-texture = ExtResource("2_2qlac")
+position = Vector2(8.49998, 10.5)
+scale = Vector2(0.525847, 0.451829)
+texture = ExtResource("2_14buk")
 
 [node name="environment_nest" parent="." instance=ExtResource("2_1iti4")]
 
@@ -60,9 +60,7 @@ visible = false
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_sunspots" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="process_predator" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="game_over_ocurred" from="manager_game_over" to="." method="_on_manager_game_over_game_over_ocurred"]
-[connection signal="bird_eaten" from="process_predator" to="manager_birds" method="_on_process_predator_bird_eaten"]
 [connection signal="player_eaten" from="process_predator" to="manager_game_over" method="_on_process_predator_player_eaten"]
-[connection signal="pred_position" from="process_predator" to="manager_birds" method="_on_process_predator_pred_position"]
 [connection signal="predator_leaves_nest" from="process_predator" to="manager_birds" method="_on_process_predator_predator_leaves_nest"]
 [connection signal="toggle_predator_approach" from="process_predator" to="manager_birds" method="_on_process_predator_toggle_predator_approach"]
 [connection signal="toggle_predator_presence" from="process_predator" to="process_momma_bird" method="_on_process_predator_toggle_predator_presence"]

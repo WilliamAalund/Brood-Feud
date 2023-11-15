@@ -5,13 +5,9 @@ extends Node2D
 func _process(_delta):
 	$Camera2D.position.x = $manager_birds/player_bird/character_bird.global_position.x / Camera2DScale
 	$Camera2D.position.y = $manager_birds/player_bird/character_bird.global_position.y / Camera2DScale
-	#$CanvasLayer/ui_hud/hud_bird/stomach_bar.value = $manager_birds/player_bird.satiation
-	$CanvasLayer/ui_hud/hud_bird_2/stomach_bar2.hungerValue = $manager_birds/player_bird.satiation
-	$"CanvasLayer/ui_hud/hud_bird_2/Sunlight Symbol".modulate.a = .6 * int($manager_birds/player_bird.inSunlight)
-	$CanvasLayer/ui_hud/hud_bird_2/bleeding_symbol.modulate.a = .6 * int(bool($manager_birds/player_bird.damage))
-	
-	#$CanvasLayer/ui_hud/hud_bird/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
-	#$CanvasLayer/ui_hud/hud_bird/bleeding_symbol.modulate.a = .5 * int(bool($manager_birds/player_bird.damage))
+	$CanvasLayer/ui_hud/hud_bird/stomach_bar.actualValue = $manager_birds/player_bird.satiation 
+	$CanvasLayer/ui_hud/hud_bird/"Sunlight Symbol".modulate.a = .5 * int($manager_birds/player_bird.inSunlight)
+	$CanvasLayer/ui_hud/hud_bird/bleeding_symbol.modulate.a = .5 * int(bool($manager_birds/player_bird.damage))
 	#$CanvasLayer/ui_hud/bleeding_symbol.scale = Vector2(max(1,$manager_birds/player_bird.damage / 100),max(1,$manager_birds/player_bird.damage / 100))
 
 
