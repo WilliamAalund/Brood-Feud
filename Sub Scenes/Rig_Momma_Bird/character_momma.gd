@@ -27,10 +27,12 @@ func _physics_process(_delta):
 	if (self.position - roost_target_position).length() <= 0.5:
 		self.position = roost_target_position
 		$CollisionShape2D.disabled = false
+		$CollisionShape2D2.disabled = false
   
 func flyIn():
 	flyingIn = true
 	$CollisionShape2D.disabled = false
+	$CollisionShape2D2.disabled = false
 	self.visible = true
 	self.position.y = -600
 	
@@ -38,6 +40,7 @@ func flyIn():
 func flyOut():
 	flyingIn = false
 	$CollisionShape2D.disabled = true
+	$CollisionShape2D2.disabled = true
 
 
 

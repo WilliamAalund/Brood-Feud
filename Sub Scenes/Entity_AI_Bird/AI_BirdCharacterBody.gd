@@ -127,7 +127,7 @@ func state4(delta): # Will move to sunray
 		moveToTarget(delta, sunrayTarget)
 func state5(delta): # Will run to edge of nest
 	if (predator_place == Vector2(0,0)):
-		moveToTarget(delta,Vector2(0,100))
+		moveToTarget(delta,Vector2(0,210))
 	else :
 		moveFromTarget(delta,predator_place)
 func state6(delta): # Will remain entirely immobile. Dead

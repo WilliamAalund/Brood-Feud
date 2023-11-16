@@ -16,8 +16,8 @@ position = Vector2(674, 306)
 [node name="Label" type="Label" parent="."]
 offset_left = 95.0
 offset_top = 94.0
-offset_right = 332.0
-offset_bottom = 198.0
+offset_right = 471.0
+offset_bottom = 276.0
 text = "How to play:
 W,S/Left joystick: Move forward, backwards
 A,D/Right joystick: Turn while moving
@@ -28,10 +28,10 @@ position = Vector2(575, 323)
 zoom = Vector2(0.9, 0.9)
 
 [node name="backButton" type="Button" parent="."]
-offset_left = 95.0
-offset_top = 199.0
-offset_right = 140.0
-offset_bottom = 230.0
+offset_left = 96.0
+offset_top = 198.0
+offset_right = 141.0
+offset_bottom = 229.0
 text = "Back"
 
 [connection signal="pressed" from="backButton" to="." method="_on_back_button_pressed"]

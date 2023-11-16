@@ -28,3 +28,14 @@ offset_left = 422.0
 offset_top = 263.0
 offset_right = 462.0
 offset_bottom = 286.0
+
+[node name="returntomainmenubutton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 326.0
+offset_right = 594.0
+offset_bottom = 357.0
+text = "Return to main menu
+"
+
+[connection signal="pressed" from="returntomainmenubutton" to="." method="_on_returntomainmenubutton_pressed"]
