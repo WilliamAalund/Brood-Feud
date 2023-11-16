@@ -7,7 +7,7 @@ const LEVEL_UP_SCALE_INCREASE = 0.2
 const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const LEVEL_NEEDED_TO_CHANGE_SPRITE = 6
 const LEVEL_NEEDED_TO_WIN_THE_GAME = 8
-const BLEED_RATE = 0.04
+const BLEED_RATE = 0.03
 
 @export var hasInfiniteFood = false
 
@@ -83,7 +83,7 @@ func decrementSatiation(): # Decreases the bird's satiation value
 	if hasInfiniteFood:
 		satiation = 100
 	else:
-		satiation = satiation - (get_parent().idleSatiationDrainRate - 0.01) - (level / 100.0) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
+		satiation = satiation - (get_parent().idleSatiationDrainRate - 0.02) - (level / 100.0) - get_parent().sunRate * int(inSunlight) - BLEED_RATE * int(bool(damage))
 		$character_bird/debugger_satiation.text = str(satiation).substr(0,5)
 		if satiation < 0:
 			emit_signal("playerStarved")

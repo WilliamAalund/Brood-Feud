@@ -51,6 +51,8 @@ var predator_spot = Vector2(0,0) #(0,0) is null, and means birds don't know wher
 func _ready(): # Will be removed later on when the bird should actually start in the nest
 	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
+	if !$bruh:
+		print("okay buddy")
 	#$CharacterBody2D/Debug_Satiation_Label.text = "DG"
 	if isStupid:
 		makeBirdStupid()
@@ -114,7 +116,8 @@ func killBird():
 	$CharacterBody2D/dead_bird_sprite.visible = true # Indicate to the player that the bird is dead
 	$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1)
 	$CharacterBody2D/body_zone.remove_from_group("dumb")
-	$CharacterBody2D/CollisionShape2D.queue_free()
+	if $CharacterBody2D/CollisionShape2D:
+		$CharacterBody2D/CollisionShape2D.queue_free()
 	self.z_index = 0
 
 # -- STATE DESCRIPTIONS --
@@ -202,16 +205,7 @@ func _on_bird_control_birds_increment_hunger():
 	if satiation <= 0: # Prevent dead bodies from eating food
 		print("starved")
 		isDead = true
-		$CharacterBody2D/eater_zone.remove_from_group("eater")
-		$CharacterBody2D/Sprite2D.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
-		$CharacterBody2D/Sprite2D.visible = false
-		$CharacterBody2D/dead_bird_sprite.visible = true
-		$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1) # Indicate to the player that the bird is dead
-		#if level >= LEVEL_NEEDED_TO_CHANGE_SPRITE:
-#		var newBird = preload("res://Visuals/Art Assets/draft_player_older_bird.png")
-#		$character_bird/body_sprite.texture = newBird
-#	if level >= LEVEL_NEEDED_TO_WIN_THE_GAME:
-#		emit_signal("player_grew_up")
+		killBird()
 	if damage > 0:
 		damage -= 1
 
