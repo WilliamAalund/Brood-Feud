@@ -51,9 +51,6 @@ var predator_spot = Vector2(0,0) #(0,0) is null, and means birds don't know wher
 func _ready(): # Will be removed later on when the bird should actually start in the nest
 	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
-	if !$bruh:
-		print("okay buddy")
-	#$CharacterBody2D/Debug_Satiation_Label.text = "DG"
 	if isStupid:
 		makeBirdStupid()
 
