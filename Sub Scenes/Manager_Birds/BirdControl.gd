@@ -50,7 +50,16 @@ func _on_player_bird_player_attacked():
 func _on_process_predator_pred_position(place):
 	emit_signal("pred_spot",place)
 
-
 func _on_process_predator_bird_eaten(bird):
 	print("kill switch sent")
 	emit_signal("kill",bird)
+
+# Signals from the final version of the player bird
+func _on_player_bird_2_player_grew_up():
+	emit_signal("player_grew_up")
+
+func _on_player_bird_2_player_starved():
+	emit_signal("player_starved")
+
+func _on_player_bird_2_player_attacked():
+	emit_signal("player_attacked")

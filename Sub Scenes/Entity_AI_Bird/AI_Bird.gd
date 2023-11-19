@@ -7,11 +7,12 @@ const LEVEL_UP_SCALE_INCREASE = 0.1
 const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const BLEED_RATE = 0.04
 const MAXIMUM_FOOD_IN_TUMMY_ALLOWED = 2
+const MAXIMUM_AGGRO_VALUE = 100
 
 @export var satiation = 100
 @export var starvationThreshold = 30 # Currently unused, doesn't have a good place in the state logic right now
 @export var lowerAngryThreshold = 50
-@export var upperAngryThreshold = 150
+@export var upperAngryThreshold = 85
 
 var age = 1
 var experience = 0
@@ -27,7 +28,7 @@ var sunrayTargetsArray = []
 
 # --- VALUES USED IN STATE CALCULATIONS
 var aggroVal = 0 # Bird begins with no aggro value
-var aggroTarget
+var numberOfTimesAttacked = 0
 var sunspotTarget
 var numSunlightSpotsInside = 0
 var numSunlightSpotsNoticed = 0
@@ -101,8 +102,11 @@ func ageUp():
 
 func bleed(value):
 	damage += value
+	numberOfTimesAttacked += 1
+	aggroVal += min(value * numberOfTimesAttacked, 50)
+	if aggroVal > MAXIMUM_AGGRO_VALUE:
+		aggroVal = 100
 	#var totalDamageIncurred = damage * BLEED_RATE
-	Input.start_joy_vibration(.5, 1, 0, 0.2)
 	stunVal += 15
 	#print("Queued damage: ", totalDamageIncurred)
 
@@ -213,8 +217,7 @@ func _on_body_zone_area_entered(area):
 		if numSunlightSpotsInside > 0:
 			inSunlight = true
 	else: if area.is_in_group("attacker"):
-		aggroVal += 100
-		bleed(45)
+		bleed(35)
 
 func _on_body_zone_area_exited(area):
 	if area.is_in_group("sunray"):
@@ -226,7 +229,6 @@ func _on_bird_control_birds_toggle_predator_notice():
 	noticedPredator = !noticedPredator
 	$CharacterBody2D.predator_place = Vector2(0,0) #resets to null
 	
-
 
 func _on_bird_control_birds_toggle_momma_bird_notice():
 	noticedMom = !noticedMom

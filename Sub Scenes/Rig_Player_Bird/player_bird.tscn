@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://7cm2864l68b7"]
+
+[ext_resource type="Script" path="res://Sub Scenes/Rig_Player_Bird/player_bird.gd" id="1_x6cey"]
+[ext_resource type="Script" path="res://Sub Scenes/Rig_Player_Bird/bird_body.gd" id="2_r24o2"]
+[ext_resource type="Texture2D" uid="uid://c3frapks115w2" path="res://Visuals/Art Assets/draft_player_bird.png" id="3_vpphk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_geec5"]
+radius = 12.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y83pd"]
+radius = 9.0
+height = 26.0
+
+[node name="player_bird" type="Node2D"]
+script = ExtResource("1_x6cey")
+
+[node name="bird_body" type="CharacterBody2D" parent="."]
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("2_r24o2")
+
+[node name="bird_body_collider" type="CollisionShape2D" parent="bird_body"]
+shape = SubResource("CapsuleShape2D_geec5")
+
+[node name="bird_body_sprite" type="Sprite2D" parent="bird_body/bird_body_collider"]
+position = Vector2(0.100991, 1.93045)
+scale = Vector2(0.0332191, 0.0332773)
+texture = ExtResource("3_vpphk")
+region_enabled = true
+region_rect = Rect2(458.213, 909.339, 1150.64, 1086.85)
+
+[node name="bird_body_area" type="Area2D" parent="bird_body" groups=["bird", "player"]]
+
+[node name="bird_body_collider" type="CollisionShape2D" parent="bird_body/bird_body_area" groups=["bird"]]
+shape = SubResource("CapsuleShape2D_geec5")
+
+[node name="bird_head" type="Area2D" parent="bird_body" groups=["attacker", "eater"]]
+position = Vector2(0, -11)
+monitoring = false
+monitorable = false
+
+[node name="bird_head_collider" type="CollisionShape2D" parent="bird_body/bird_head"]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_y83pd")
+
+[node name="bird_head_sprite" type="Sprite2D" parent="bird_body/bird_head/bird_head_collider"]
+position = Vector2(1.26218e-29, 0.5)
+scale = Vector2(0.0331126, 0.0343075)
+texture = ExtResource("3_vpphk")
+region_enabled = true
+region_rect = Rect2(734.743, 109.352, 604.148, 787.118)
+
+[node name="debugger_label" type="Label" parent="bird_body"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="player_attacks" from="bird_body" to="." method="_on_bird_body_player_attacks"]
+[connection signal="area_entered" from="bird_body/bird_body_area" to="." method="_on_bird_body_area_area_entered"]
+[connection signal="area_exited" from="bird_body/bird_body_area" to="." method="_on_bird_body_area_area_exited"]
+[connection signal="area_entered" from="bird_body/bird_head" to="." method="_on_bird_head_area_entered"]

@@ -59,6 +59,7 @@ visible = false
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_birds" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="manager_sunspots" method="_on_process_momma_bird_toggle_mom_presence"]
 [connection signal="toggle_mom_presence" from="process_momma_bird" to="process_predator" method="_on_process_momma_bird_toggle_mom_presence"]
+[connection signal="new_food_position" from="helper_food_spawner" to="process_momma_bird" method="_on_helper_food_spawner_new_food_position"]
 [connection signal="game_over_ocurred" from="manager_game_over" to="." method="_on_manager_game_over_game_over_ocurred"]
 [connection signal="bird_eaten" from="process_predator" to="manager_birds" method="_on_process_predator_bird_eaten"]
 [connection signal="player_eaten" from="process_predator" to="manager_game_over" method="_on_process_predator_player_eaten"]

@@ -76,9 +76,9 @@ func predatorLoop():
 func birdDetectorCircleAnimation():
 	$bird_detector/Sprite2D.visible = true
 	$bird_detector/Sprite2D.modulate.a = 1
-	var i = 20
+	var i = 40
 	while i > 0:
-		$bird_detector/Sprite2D.modulate.a -= .05
+		$bird_detector/Sprite2D.modulate.a -= .02
 		await get_tree().create_timer(0.04).timeout
 		i -= 1
 	$bird_detector/Sprite2D.visible = false

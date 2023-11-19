@@ -15,6 +15,7 @@ var timesLandedAtNest = 0
 signal mom_drops_food
 signal toggle_mom_presence
 signal momma_win_condition
+signal new_food_position_for_rig(foodpos)
 
 func set_SecondsToReturn(value): # Handles the progress bar changing when the export value changes
 	SecondsToReturn = value
@@ -62,5 +63,5 @@ func momReturns(): # Hand
 func _on_process_predator_toggle_predator_presence():
 	predatorIsHome = !predatorIsHome
 
-#func _on_predator_toggle_predator_presence():
-	#predatorIsHome = !predatorIsHome
+func _on_helper_food_spawner_new_food_position(foodpos):
+	emit_signal("new_food_position_for_rig", foodpos)

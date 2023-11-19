@@ -1,17 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwtxxxhlmsx4m"]
+[gd_scene load_steps=5 format=3 uid="uid://cwtxxxhlmsx4m"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Rig_Momma_Bird/rig_momma_bird.gd" id="1_ebopd"]
 [ext_resource type="Script" path="res://Sub Scenes/Rig_Momma_Bird/character_momma.gd" id="2_dikm0"]
-[ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="3_heqqq"]
 [ext_resource type="Texture2D" uid="uid://2i2bfbkgi8uu" path="res://Visuals/Art Assets/draft_ai_older_bird.png" id="4_qkod7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okuqj"]
 radius = 57.0
-height = 292.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dg2lx"]
-radius = 9.0
-height = 44.0
+height = 264.0
 
 [node name="rig_momma_bird" type="Node2D"]
 script = ExtResource("1_ebopd")
@@ -28,28 +23,8 @@ collision_mask = 0
 motion_mode = 1
 script = ExtResource("2_dikm0")
 
-[node name="momma_pill_sprite" type="Sprite2D" parent="character_momma"]
-visible = false
-modulate = Color(0.0313726, 0.247059, 0.776471, 1)
-position = Vector2(-3.33786e-06, -1.14441e-05)
-scale = Vector2(0.116667, 0.221667)
-texture = ExtResource("3_heqqq")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="character_momma/momma_pill_sprite"]
-offset_left = -489.0
-offset_top = -402.0
-offset_right = 474.0
-offset_bottom = 203.0
-theme_override_font_sizes/normal_font_size = 102
-text = "MOMMA BIRD PLACEHOLDER
-I AM MOMMA BIRD HELLO"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character_momma"]
 shape = SubResource("CapsuleShape2D_okuqj")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="character_momma"]
-position = Vector2(-1, 156)
-shape = SubResource("CapsuleShape2D_dg2lx")
 
 [node name="bird_detector_area" type="Area2D" parent="character_momma" groups=["momma"]]
 
@@ -66,7 +41,8 @@ region_enabled = true
 region_rect = Rect2(108.607, 803.968, 1849.38, 1215.2)
 
 [node name="momma_head" type="Sprite2D" parent="character_momma/momma_body"]
-position = Vector2(0, -779.531)
+position = Vector2(0, -717.4)
+scale = Vector2(1.1029, 0.977738)
 texture = ExtResource("4_qkod7")
 region_enabled = true
 region_rect = Rect2(723.061, -8.19658, 606.936, 806.654)

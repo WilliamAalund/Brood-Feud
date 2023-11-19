@@ -1,20 +1,12 @@
 extends CharacterBody2D
 
-#const ROOST_TARGET_POSITION_Y = 100
-#const ROOST_TARGET_POSITION_X = 0
-#const ROOST_TARGET_POSITION = Vector2(ROOST_TARGET_POSITION_X,ROOST_TARGET_POSITION_Y)
-
-var roost_target_position = Vector2(0,0)
+var roost_target_position = Vector2(0,0) # Both of these variables are managed by the rig_momma_bird node.
 var fly_off_target_position = Vector2(0,0)
+var foodTargetPosition = Vector2(0,0)
 
 var move_speed = 4
 var flyingIn = false
-
-#func _ready():
-#	print(roost_target_position)
-#	flyIn()
-#	await get_tree().create_timer(5).timeout
-#	flyOut()
+var rotationSpeed = 0.05
 
 func _physics_process(_delta):
 	var fly_direction
@@ -27,22 +19,21 @@ func _physics_process(_delta):
 	if (self.position - roost_target_position).length() <= 0.5:
 		self.position = roost_target_position
 		$CollisionShape2D.disabled = false
-		$CollisionShape2D2.disabled = false
+		# I don't know what I am doing. help me
+#	if abs(get_angle_to(foodTargetPosition - $momma_body/momma_head.global_position) * 4) > 1:
+#		print("bruh") 
+#		$momma_body/momma_head.rotation += rotationSpeed
+	$momma_body/momma_head.rotation = get_angle_to(foodTargetPosition - $momma_body/momma_head.global_position) * 4
   
 func flyIn():
 	flyingIn = true
 	$CollisionShape2D.disabled = false
-	$CollisionShape2D2.disabled = false
 	self.visible = true
 	self.position.y = -600
-	
 
 func flyOut():
 	flyingIn = false
 	$CollisionShape2D.disabled = true
-	$CollisionShape2D2.disabled = true
-
-
 
 func _on_rig_momma_bird_toggle_fly():
 	if !flyingIn:

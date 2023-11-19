@@ -41,6 +41,7 @@ func eat(): # Function called to increase satiation when you eat.
 		else:
 			satiation += get_parent().foodRestore
 		Input.start_joy_vibration(0, 1, 0, 0.15)
+		print("eat")
 	experience += 1
 	if experience >= EXP_TO_LEVEL_UP:
 		levelUp()
@@ -77,6 +78,7 @@ func bleed(value):
 	damage += value
 	var totalDamageIncurred = damage * BLEED_RATE
 	Input.start_joy_vibration(.5, 1, 0, 0.2)
+	print("bleed")
 	print("Queued damage: ", totalDamageIncurred)
 
 func decrementSatiation(): # Decreases the bird's satiation value

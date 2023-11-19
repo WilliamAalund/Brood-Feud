@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bx0asr7ljxkpl"]
+[gd_scene load_steps=5 format=3 uid="uid://bx0asr7ljxkpl"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Process_Predator/Predator.gd" id="1_tnf4g"]
-[ext_resource type="Texture2D" uid="uid://pcpg3edo3nkg" path="res://Visuals/Placeholder Graphics/icon.svg" id="2_rwa4k"]
 [ext_resource type="PackedScene" uid="uid://bfd3fy6bkqojr" path="res://Sub Scenes/Process_Predator/rig_predator.tscn" id="3_0yjp0"]
 [ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="4_qhvhc"]
 
@@ -12,11 +11,6 @@ radius = 296.204
 z_index = 2
 script = ExtResource("1_tnf4g")
 LandingTime = 1.5
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.4, 0.41)
-texture = ExtResource("2_rwa4k")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false

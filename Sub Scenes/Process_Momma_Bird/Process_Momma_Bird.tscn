@@ -36,5 +36,6 @@ text = "Mama"
 
 [node name="rig_momma_bird" parent="." instance=ExtResource("3_8cupb")]
 
+[connection signal="new_food_position_for_rig" from="." to="rig_momma_bird" method="_on_momma_bird_new_food_position_for_rig"]
 [connection signal="toggle_mom_presence" from="." to="rig_momma_bird" method="_on_momma_bird_toggle_mom_presence"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

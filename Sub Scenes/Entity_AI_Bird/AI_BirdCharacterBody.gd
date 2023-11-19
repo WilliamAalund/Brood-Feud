@@ -103,9 +103,9 @@ func beakInteract():
 	$eater_zone/hitbox_sprite.visible = false
 	# Wait a bit after attack
 	await get_tree().create_timer(INTERACT_COOLDOWN).timeout
-	isInteracting = false
 	$eater_detector_zone.monitoring = false
 	$eater_detector_zone.monitoring = true
+	isInteracting = false
 
 # --- STATE FUNCTIONS ---
 func state1(delta): # Remains idle
@@ -121,6 +121,7 @@ func state2(delta): # Will move towards and look for food
 		moveToTarget(delta, Vector2(0.0,-70)) # Code to get the bird to crowd around momma bird
 		ensureClipping(delta)
 func state3(delta): # Follows player
+	print("")
 	moveToTarget(delta, playerTarget)
 func state4(delta): # Will move to sunray
 	if !get_parent().inSunlight:
