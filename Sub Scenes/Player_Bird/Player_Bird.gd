@@ -36,12 +36,11 @@ func eat(): # Function called to increase satiation when you eat.
 		print("Satiation: maxed out")
 	else:
 		satiation += foodRestore
-		#print("Satiation: increased by {}".format(foodRestore))
 		
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:
 		satiation = 0
-		print("Satiation: equals 0")
+		print("Satiation depleted upon expending ", value, " satiation")
 	else:
 		satiation -= value
 		print("Satiation: decreased by {}".format(value))

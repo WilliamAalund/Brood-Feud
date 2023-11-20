@@ -86,7 +86,6 @@ func eat(): # Function called to increase satiation when you eat.
 func expend(value): # Immedeately decreases satiation by a specified amount.
 	if satiation - value < 0:
 		satiation = 0
-		print("starved 1")
 		killBird()
 	else:
 		satiation -= value
@@ -198,12 +197,11 @@ func _on_timer_timeout():
 	$CharacterBody2D/boolean_tag.text = str(foodInTummy)
 	if aggroVal > 0:
 		aggroVal -= 1
-	#print("AI bird  : state updated to: " + str($CharacterBody2D.state))
 
 func _on_bird_control_birds_increment_hunger():
 	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight) + BLEED_RATE * int(bool(damage))
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
-	if satiation <= 0: # Prevent dead bodies from eating food
+	if satiation <= 0 and !isDead: # Prevent dead bodies from eating food
 		print("starved")
 		isDead = true
 		killBird()

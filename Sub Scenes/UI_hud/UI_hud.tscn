@@ -63,6 +63,7 @@ offset_right = 538.0
 offset_bottom = 760.0
 
 [node name="hud" type="Node2D" parent="."]
+position = Vector2(941, 552)
 rotation = -0.149906
 
 [node name="hud_bird" type="Sprite2D" parent="."]
@@ -127,6 +128,20 @@ position = Vector2(1308, 667)
 scale = Vector2(0.0823971, 0.106972)
 texture = ExtResource("10_5v6jl")
 
+[node name="hud_bird_progress_bar" type="TextureProgressBar" parent="hud_bird_2"]
+visible = false
+offset_left = -1274.32
+offset_top = -1645.29
+offset_right = 1275.68
+offset_bottom = 1654.71
+scale = Vector2(1.00182, 1.00112)
+max_value = 4.0
+value = 2.0
+fill_mode = 3
+texture_under = ExtResource("10_5v6jl")
+texture_progress = ExtResource("10_5v6jl")
+tint_under = Color(0.721569, 0.721569, 0.721569, 1)
+
 [node name="Sunlight Symbol" type="Sprite2D" parent="hud_bird_2"]
 self_modulate = Color(1, 1, 1, 0.862745)
 position = Vector2(-352, -1411)
@@ -156,3 +171,6 @@ texture_progress = ExtResource("11_rd008")
 tint_under = Color(0.470588, 0.345098, 0.337255, 1)
 tint_progress = Color(0.886275, 0.0862745, 0.419608, 1)
 script = ExtResource("12_x7eli")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(941, 552)

@@ -121,7 +121,6 @@ func state2(delta): # Will move towards and look for food
 		moveToTarget(delta, Vector2(0.0,-70)) # Code to get the bird to crowd around momma bird
 		ensureClipping(delta)
 func state3(delta): # Follows player
-	print("")
 	moveToTarget(delta, playerTarget)
 func state4(delta): # Will move to sunray
 	if !get_parent().inSunlight:
