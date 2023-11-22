@@ -10,6 +10,7 @@ const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const BIRD_HEAD_ROTATION_ABSOLUTE_MAXIMUM_BOUND = 0.33
 
 var isInteracting = false
+var isFull = false
 var move_speed = 80 # Adjust this value to control movement speed
 var rotate_speed = 0.05  # Adjust this value to control the rotation speed
 var push_force = 2400.0 # Value used when calculating impulse to apply
@@ -56,6 +57,8 @@ func _input(event):
 		isInteracting = true
 		await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
 		# Attack
+		if !isFull:
+			$bird_head.add_to_group("eater")
 		$bird_head.monitorable = true
 		$bird_head.monitoring = true
 		$bird_head/bird_head_collider/bird_head_sprite.modulate = Color(1,.8,.8,1)
@@ -66,6 +69,7 @@ func _input(event):
 		$bird_head.monitoring = false
 		$bird_head/bird_head_collider/bird_head_sprite.modulate = Color(1,1,1,1)
 		# Wait a bit after attack
+		$bird_head.remove_from_group("eater")
 		await get_tree().create_timer(INTERACT_COOLDOWN).timeout
 		isInteracting = false
 

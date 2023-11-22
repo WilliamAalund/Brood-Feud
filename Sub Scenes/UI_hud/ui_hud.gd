@@ -7,7 +7,7 @@ func _ready():
 	levelUpHudAnimation()
 #	damageOverlayAnimation()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if $damage_overlay.modulate.a > 0:
 		$damage_overlay.modulate.a -= 0.02
 

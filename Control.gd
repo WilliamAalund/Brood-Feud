@@ -9,7 +9,7 @@ func _ready():
 	# Assuming your button is a direct child of the Control node.
 	# Replace "startButton" with the actual name of your button node.
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("interact"): # If the player uses the interact key instead of the mouse
 		match buttonFocused:
 			1:

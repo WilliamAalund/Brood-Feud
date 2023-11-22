@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2q3lmimxr2ox"]
+[gd_scene load_steps=15 format=3 uid="uid://c2q3lmimxr2ox"]
 
 [ext_resource type="Script" path="res://Sub Scenes/UI_hud/ui_hud.gd" id="1_2o14y"]
 [ext_resource type="Script" path="res://Levels/FPSLabel.gd" id="1_cpjkg"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dgl80s2rjfsg5" path="res://Visuals/Art Assets/draft2_hud_bird.png" id="10_5v6jl"]
 [ext_resource type="Texture2D" uid="uid://bh8llnxsvjrk8" path="res://Visuals/Art Assets/draft2_hud_stomach.png" id="11_rd008"]
 [ext_resource type="Script" path="res://Sub Scenes/UI_hud/stomach_bar2.gd" id="12_x7eli"]
+[ext_resource type="Script" path="res://Sub Scenes/UI_hud/worm_symbols_manager.gd" id="13_1lonc"]
+[ext_resource type="Texture2D" uid="uid://cx7uh3vswt6qx" path="res://Visuals/Art Assets/Worm_Food_2.png" id="13_8dwok"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -171,6 +173,50 @@ texture_progress = ExtResource("11_rd008")
 tint_under = Color(0.470588, 0.345098, 0.337255, 1)
 tint_progress = Color(0.886275, 0.0862745, 0.419608, 1)
 script = ExtResource("12_x7eli")
+
+[node name="worm_symbols_manager" type="Node2D" parent="hud_bird_2"]
+script = ExtResource("13_1lonc")
+
+[node name="worm_1" type="Sprite2D" parent="hud_bird_2/worm_symbols_manager"]
+visible = false
+position = Vector2(450.111, 560.625)
+rotation = 1.18363
+scale = Vector2(0.13347, 0.10314)
+texture = ExtResource("13_8dwok")
+
+[node name="worm_2" type="Sprite2D" parent="hud_bird_2/worm_symbols_manager"]
+visible = false
+position = Vector2(327.68, 327.188)
+rotation = -0.531083
+scale = Vector2(0.13347, 0.10314)
+texture = ExtResource("13_8dwok")
+
+[node name="worm_3" type="Sprite2D" parent="hud_bird_2/worm_symbols_manager"]
+visible = false
+position = Vector2(-328.453, 533.044)
+rotation = -2.95405
+scale = Vector2(0.13347, 0.10314)
+texture = ExtResource("13_8dwok")
+
+[node name="worm_4" type="Sprite2D" parent="hud_bird_2/worm_symbols_manager"]
+visible = false
+position = Vector2(-375.984, 312.5)
+rotation = 0.937834
+scale = Vector2(0.13347, 0.10314)
+texture = ExtResource("13_8dwok")
+
+[node name="worm_5" type="Sprite2D" parent="hud_bird_2/worm_symbols_manager"]
+visible = false
+position = Vector2(-716.047, -102.832)
+scale = Vector2(0.13347, 0.10314)
+texture = ExtResource("13_8dwok")
+
+[node name="worm_6" type="Sprite2D" parent="hud_bird_2/worm_symbols_manager"]
+visible = false
+position = Vector2(-655.047, -276.375)
+rotation = 2.87408
+scale = Vector2(0.13347, 0.10314)
+texture = ExtResource("13_8dwok")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(941, 552)

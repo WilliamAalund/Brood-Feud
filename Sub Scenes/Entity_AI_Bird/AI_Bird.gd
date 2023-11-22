@@ -199,8 +199,10 @@ func _on_timer_timeout():
 		aggroVal -= 1
 
 func _on_bird_control_birds_increment_hunger():
+	
 	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight) + BLEED_RATE * int(bool(damage))
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
+	$CharacterBody2D/hunger_deficit_label.text = str(satiation - 100).substr(0,5)
 	if satiation <= 0 and !isDead: # Prevent dead bodies from eating food
 		print("starved")
 		isDead = true
@@ -256,6 +258,5 @@ func _on_bird_control_kill(bird):
 		killBird()
 	print("I'm alive!!")
 
-
-
-
+func _on_bird_control_ai_birds_enter_debug_mode():
+	debug = true

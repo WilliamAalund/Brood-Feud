@@ -77,7 +77,6 @@ shape = SubResource("CircleShape2D_kx41x")
 shape = SubResource("CircleShape2D_cyhn5")
 
 [node name="Debug_Satiation_Label" type="Label" parent="CharacterBody2D"]
-visible = false
 modulate = Color(0.945098, 0.121569, 0.156863, 1)
 offset_left = -19.0
 offset_top = -2.0
@@ -98,6 +97,12 @@ offset_left = -19.0
 offset_top = -46.0
 offset_right = 21.0
 offset_bottom = -23.0
+
+[node name="hunger_deficit_label" type="Label" parent="CharacterBody2D"]
+offset_left = -59.0
+offset_top = -35.0
+offset_right = -19.0
+offset_bottom = -12.0
 
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.1

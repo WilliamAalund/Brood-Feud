@@ -2,7 +2,7 @@ extends Node2D
 
 # Values that each of the birds can refer to in order to make decisions about themselves/what they want to do.
 @export var foodRestore = 12
-@export var idleSatiationDrainRate = 0.06
+@export var idleSatiationDrainRate = 0.04
 @export var sunRate = -0.03 # The rate at which the satiation drain of birds is decreased when in sunlight.
 @export var debug = false
 
@@ -17,11 +17,13 @@ signal birds_toggle_predator_notice
 signal birds_toggle_momma_bird_notice
 signal kill
 signal pred_spot
+signal ai_birds_enter_debug_mode
 
 
 func _ready():
 	if debug:
-		$AI_Bird.debug = true
+		emit_signal("ai_birds_enter_debug_mode")
+		#$AI_Bird.debug = true
 	var dumbBird = get_child(4)
 	dumbBird.makeBirdStupid()
 
