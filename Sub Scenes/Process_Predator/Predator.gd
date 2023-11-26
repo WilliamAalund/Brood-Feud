@@ -22,6 +22,10 @@ signal bird_eaten
 func _ready():
 	predatorLoop()
 	#detectionAnimation()
+	
+func _physics_process(_delta): # If the predator is in the nest, scan any bird object in the detector zone, and flip booleans for detection depending on the type of bird
+	if predIsHome:
+		analyzeBirdsInPredatorSightZone()
 
 # --- PREDATOR LOOP ---
 # Always running in the background
@@ -74,6 +78,10 @@ func birdDetectorCircleAnimation():
 		i -= 1
 	$bird_detector/Sprite2D.visible = false
 
+func analyzeBirdsInPredatorSightZone():
+	for object in $bird_detector.get_overlapping_areas(): # Grabs all birds in detection range, evaluates them
+		evaluateObject(object)
+
 func evaluateObject(object):
 	if object.is_in_group("dumb"):
 		foundDumbBird = true
@@ -84,7 +92,12 @@ func evaluateObject(object):
 	else: if object.is_in_group("bird") and !foundDumbBird and !foundPlayerBird:
 		foundBird = true
 		target = object
-		
+
+func resetDetectionBooleans(): # Called when predator begins to scan the nest
+	foundDumbBird = false
+	foundBird = false
+	foundPlayerBird = false
+
 func predatorEatDecision(): # Signal output / functions handling actually eating the birds will go here
 	if foundDumbBird:
 		print("Predator wants to eat the dumb bird")
@@ -101,16 +114,10 @@ func headToNest():
 	predIsHome = true # Prevents predator loop from continuing
 	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
 	await get_tree().create_timer(LandingTime).timeout
+	resetDetectionBooleans() # Booleans that are used in predatorEatDecision()
 	birdDetectorCircleAnimation() # Indicates to player what area isn't safe
 	emit_signal("pred_position", $bird_detector/Sprite2D.position) #sends pixel position to RUN AWAY FROM
-	#CHANGE THIS VALUE TO INCREASE PREDATOR MOVEMENTS
-	# Booleans that are used in predatorEatDecision()
-	foundBird = false
-	foundPlayerBird = false
-	foundDumbBird = false
 	await get_tree().create_timer(Game_Parameters.TIME_TO_STAY_AT_NEST).timeout
-	for object in $bird_detector.get_overlapping_areas(): # Grabs all birds in detection range, evaluates them
-		evaluateObject(object)
 	predatorEatDecision() # Given previous booleans, figure out which bird to eat, if any
 	emit_signal("toggle_predator_presence")
 	predIsHome = false

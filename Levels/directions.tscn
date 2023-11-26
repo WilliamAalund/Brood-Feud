@@ -10,11 +10,25 @@ script = ExtResource("1_5p8t1")
 [node name="object_nest" parent="." instance=ExtResource("1_ihvtn")]
 position = Vector2(753, 319)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 323)
+zoom = Vector2(0.9, 0.9)
+
+[node name="backButton" type="Button" parent="."]
+offset_left = 74.0
+offset_top = 412.0
+offset_right = 119.0
+offset_bottom = 443.0
+text = "Back"
+
+[node name="player_bird" parent="." instance=ExtResource("3_qqnoq")]
+position = Vector2(752, 374)
+
 [node name="Label" type="Label" parent="."]
-offset_left = 73.0
-offset_top = 47.0
-offset_right = 407.0
-offset_bottom = 411.0
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 376.0
+offset_bottom = 366.0
 text = "How to play:
 W,S/Left joystick: 
 Move forward, backwards
@@ -29,19 +43,5 @@ Eat/Attack/Select
 
 E/Left Trigger/Left Bumper/B button: 
 Chirp/Back"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(575, 323)
-zoom = Vector2(0.9, 0.9)
-
-[node name="backButton" type="Button" parent="."]
-offset_left = 74.0
-offset_top = 412.0
-offset_right = 119.0
-offset_bottom = 443.0
-text = "Back"
-
-[node name="player_bird" parent="." instance=ExtResource("3_qqnoq")]
-position = Vector2(752, 374)
 
 [connection signal="pressed" from="backButton" to="." method="_on_back_button_pressed"]

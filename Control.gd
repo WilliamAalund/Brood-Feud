@@ -5,7 +5,6 @@ var buttonFocused = 1 # Represents which button is focused on
 func _ready():
 	print("Ready function called")
 	$MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/directionsButton.grab_focus()
-	
 	# Assuming your button is a direct child of the Control node.
 	# Replace "startButton" with the actual name of your button node.
 

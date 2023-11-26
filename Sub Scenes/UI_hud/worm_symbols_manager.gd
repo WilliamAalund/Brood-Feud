@@ -11,7 +11,7 @@ var stomachCapacity = 0
 #	wormsInStomach = 2
 #	updateWorms()
 
-func _process(delta):
+func _process(_delta):
 	updateWorms()
 
 func updateWorms():

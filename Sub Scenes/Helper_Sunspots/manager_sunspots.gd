@@ -25,8 +25,8 @@ func spawnSunray():
 	var newSunrayPosition = newRandomPosition()
 	var sunray_instance = sunray_scene.instantiate()
 	sunray_instance.position = newSunrayPosition
-	var scale = randf_range(MIN_SUNRAY_SCALE_VALUE, MAX_SUNRAY_SCALE_VALUE)
-	sunray_instance.scale = Vector2(scale,scale)
+	var randScale = randf_range(MIN_SUNRAY_SCALE_VALUE, MAX_SUNRAY_SCALE_VALUE)
+	sunray_instance.scale = Vector2(randScale,randScale)
 	self.add_child(sunray_instance)
 
 func spawnSunrays():
