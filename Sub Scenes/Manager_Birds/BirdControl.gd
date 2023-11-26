@@ -1,9 +1,6 @@
 extends Node2D
 
 # Values that each of the birds can refer to in order to make decisions about themselves/what they want to do.
-@export var foodRestore = 12
-@export var idleSatiationDrainRate = 0.04
-@export var sunRate = -0.03 # The rate at which the satiation drain of birds is decreased when in sunlight.
 @export var debug = false
 
 var isSunspot = false # Toggled in the Main Level scene's attached script.

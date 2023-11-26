@@ -1,16 +1,5 @@
 extends Node2D
 
-const STARTING_LEVEL = 0
-const EXP_TO_LEVEL_UP = 4 # Default value is 4
-const LEVEL_UP_PUSH_FORCE_INCREASE = 400
-const LEVEL_UP_SCALE_INCREASE = 0.2
-const LEVEL_UP_MOVE_SPEED_INCREASE = 10
-const LEVEL_NEEDED_TO_CHANGE_SPRITE = 6
-const LEVEL_NEEDED_TO_WIN_THE_GAME = 8
-const BLEED_RATE = 0.03
-const BASE_STOMACH_CAPACITY = 3 # Default value is 3
-const MAXIMUM_STOMACH_CAPACITY = 6
-
 @export var hasInfiniteFood = false
 
 var level = 1
@@ -28,7 +17,7 @@ signal player_attacked
 signal player_grew_up
 
 func _ready():
-	stomachCapacity = BASE_STOMACH_CAPACITY
+	stomachCapacity = Game_Parameters.BASE_STOMACH_CAPACITY
 	updateDebuggerLabel()
 
 func _process(_delta):
@@ -40,29 +29,28 @@ func updateDebuggerLabel():
 	$bird_body/debugger_label.text += " d:" + str(damage)
 
 func eat(): # Function called to increase satiation when you eat.
-	if "foodRestore" in get_parent():
-		if satiation + get_parent().foodRestore > 100:
-			satiation = 100
-		else:
-			satiation += get_parent().foodRestore
-		Input.start_joy_vibration(0, 1, 0, 0.15)
-		print("Vibration: RigPlayerBirdplayerbird2")
+	if satiation + Game_Parameters.FOOD_RESTORE > 100:
+		satiation = 100
+	else:
+		satiation += Game_Parameters.FOOD_RESTORE
+	Input.start_joy_vibration(0, 1, 0, 0.15)
+	print("Vibration: RigPlayerBirdplayerbird2")
 	foodInStomach += 1
 	if foodInStomach >= stomachCapacity:
 		$bird_body.isFull = true # If true, bird beak cannot eat any food, as it will not be in the "eater" group
 	else:
 		$bird_body.isFull = false
 	experience += 1
-	if experience >= EXP_TO_LEVEL_UP:
+	if experience >= Game_Parameters.PLAYER_EXPERIENCE_TO_LEVEL_UP:
 		ageUp()
 
 func ageUp():
 	level += 1 # Level up
 	experience = 0 # Reset experience
-	if level % 2 == 0 and stomachCapacity < MAXIMUM_STOMACH_CAPACITY:
+	if level % 2 == 0 and stomachCapacity < Game_Parameters.MAXIMUM_STOMACH_CAPACITY:
 		stomachCapacity += 1
 	$bird_body.ageUpBody()
-	if level >= LEVEL_NEEDED_TO_WIN_THE_GAME:
+	if level >= Game_Parameters.LEVEL_NEEDED_TO_WIN_THE_GAME:
 		emit_signal("player_grew_up")
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
@@ -73,7 +61,7 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 
 func increaseDamageAmount(value): # for each 1 of damage, satiation will be decrease at an increased rate of BLEED_RATE
 	damage += value
-	var totalDamageIncurred = damage * BLEED_RATE
+	var totalDamageIncurred = damage * Game_Parameters.PLAYER_BIRD_BLEED_RATE
 	Input.start_joy_vibration(.5, 1, 0, 0.2)
 	print("Vibration: RigPlayerBirdplayerbird")
 	print("Queued damage: ", totalDamageIncurred)
@@ -82,13 +70,13 @@ func decrementSatiation(): # Decreases the bird's satiation value
 	if hasInfiniteFood:
 		pass
 	else:
-		satiation -= (get_parent().idleSatiationDrainRate - 0.02) + (level / 100.0) + get_parent().sunRate * int(inSunlight) + BLEED_RATE * int(bool(damage))
+		satiation -= (Game_Parameters.IDLE_SATIATION_DRAIN_RATE - 0.02) + (level / 100.0) + Game_Parameters.SUN_RATE * int(inSunlight) + Game_Parameters.PLAYER_BIRD_BLEED_RATE * int(bool(damage))
 		if satiation < 0:
 			emit_signal("player_starved")
 		if damage > 0:
 			damage -= 1
 
-# ---------- SIGNAL DETECTION ----------
+# --- SIGNAL DETECTION ---
 
 func _on_bird_body_area_area_exited(area): # Detect when the bird leaves sunlight
 	if area.is_in_group("sunray"):

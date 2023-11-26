@@ -1,14 +1,5 @@
 extends Node2D
 
-const STARTING_LEVEL = 0
-const EXPERIENCE_TO_LEVEL_UP = 3
-const LEVEL_UP_PUSH_FORCE_INCREASE = 400
-const LEVEL_UP_SCALE_INCREASE = 0.1
-const LEVEL_UP_MOVE_SPEED_INCREASE = 10
-const BLEED_RATE = 0.04
-const MAXIMUM_FOOD_IN_TUMMY_ALLOWED = 2
-const MAXIMUM_AGGRO_VALUE = 100
-
 @export var satiation = 100
 @export var starvationThreshold = 30 # Currently unused, doesn't have a good place in the state logic right now
 @export var lowerAngryThreshold = 50
@@ -64,7 +55,7 @@ func _physics_process(_delta):
 	updateTargetArraysAndClosestPositions()
 	updateDecisionBooleans()
 	if sizeExperience > 0:
-		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 20,LEVEL_UP_SCALE_INCREASE / 20)
+		self.scale += Vector2(Game_Parameters.AI_BIRD_LEVEL_UP_SCALE_INCREASE / 20,Game_Parameters.AI_BIRD_LEVEL_UP_SCALE_INCREASE / 20)
 		$CharacterBody2D.modulate = Color(.5 + (sizeExperience / 20.0),1,.5 + (sizeExperience / 20.0),1)
 		sizeExperience -= 1
 		if sizeExperience <= 0:
@@ -75,12 +66,12 @@ func _physics_process(_delta):
 
 func eat(): # Function called to increase satiation when you eat.
 	foodInTummy += 1
-	if satiation + get_parent().foodRestore > 100:
+	if satiation + Game_Parameters.FOOD_RESTORE > 100:
 		satiation = 100
 	else:
-		satiation += get_parent().foodRestore
+		satiation += Game_Parameters.FOOD_RESTORE
 	experience += 1
-	if experience >= EXPERIENCE_TO_LEVEL_UP:
+	if experience >= Game_Parameters.AI_BIRD_EXPERIENCE_TO_LEVEL_UP:
 		ageUp()
 
 func expend(value): # Immedeately decreases satiation by a specified amount.
@@ -94,8 +85,8 @@ func ageUp():
 	age += 1
 	experience = 0
 	#self.scale += Vector2(LEVEL_UP_SCALE_INCREASE,LEVEL_UP_SCALE_INCREASE)
-	$CharacterBody2D.push_force += LEVEL_UP_PUSH_FORCE_INCREASE
-	$CharacterBody2D.speed += LEVEL_UP_MOVE_SPEED_INCREASE
+	$CharacterBody2D.push_force += Game_Parameters.LEVEL_UP_PUSH_FORCE_INCREASE
+	$CharacterBody2D.speed += Game_Parameters.LEVEL_UP_MOVE_SPEED_INCREASE
 	$CharacterBody2D.modulate = Color(.5,1,.5,1)
 	sizeExperience += 20
 
@@ -103,7 +94,7 @@ func bleed(value):
 	damage += value
 	numberOfTimesAttacked += 1
 	aggroVal += min(value * numberOfTimesAttacked, 50)
-	if aggroVal > MAXIMUM_AGGRO_VALUE:
+	if aggroVal > Game_Parameters.MAXIMUM_AGGRO_VALUE:
 		aggroVal = 100
 	#var totalDamageIncurred = damage * BLEED_RATE
 	stunVal += 15
@@ -178,7 +169,7 @@ func findClosestTarget(array):
 	return closestPosition
 
 func updateDecisionBooleans():
-	if foodTargetsArray.size() > 0 and foodInTummy < MAXIMUM_FOOD_IN_TUMMY_ALLOWED:
+	if foodTargetsArray.size() > 0 and foodInTummy < Game_Parameters.MAXIMUM_FOOD_IN_TUMMY_ALLOWED:
 		noticedFood = true
 	else:
 		noticedFood = false
@@ -200,7 +191,7 @@ func _on_timer_timeout():
 
 func _on_bird_control_birds_increment_hunger():
 	
-	satiation -= get_parent().idleSatiationDrainRate + get_parent().sunRate * int(inSunlight) + BLEED_RATE * int(bool(damage))
+	satiation -= Game_Parameters.IDLE_SATIATION_DRAIN_RATE + Game_Parameters.SUN_RATE * int(inSunlight) + Game_Parameters.AI_BIRD_BLEED_RATE * int(bool(damage))
 	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
 	$CharacterBody2D/hunger_deficit_label.text = str(satiation - 100).substr(0,5)
 	if satiation <= 0 and !isDead: # Prevent dead bodies from eating food
@@ -235,7 +226,7 @@ func _on_bird_control_birds_toggle_momma_bird_notice():
 	foodInTummy = 0
 
 func _on_eater_zone_area_entered(area): # When the bird is interacting, and its beak collides with an area
-	if area.is_in_group("food") and foodInTummy < MAXIMUM_FOOD_IN_TUMMY_ALLOWED:
+	if area.is_in_group("food") and foodInTummy < Game_Parameters.MAXIMUM_FOOD_IN_TUMMY_ALLOWED:
 		eat()
 
 func _on_eater_detector_zone_area_entered(area): # When the bird detects that its beak could hit something

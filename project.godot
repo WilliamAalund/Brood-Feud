@@ -15,6 +15,10 @@ run/main_scene="res://Levels/mainmenu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://Visuals/Placeholder Graphics/icon.svg"
 
+[autoload]
+
+Game_Parameters="*res://Sub Scenes/Game_Parameters/game_parameters.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

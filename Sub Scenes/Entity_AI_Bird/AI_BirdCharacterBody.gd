@@ -1,9 +1,6 @@
 extends CharacterBody2D
 
 const AGGRESSIVE_DISTANCE_AWAY_FROM_PLAYER = 45 # Distance bird will keep itself from the player when attacking
-const INTERACT_INPUT_DELAY = 0.2 # In seconds
-const INTERACT_LENGTH = 0.2 # In seconds
-const INTERACT_COOLDOWN = 1.3 # In seconds
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 #how fast this dude can spin
@@ -92,17 +89,17 @@ func createIdlePosition():
 func beakInteract():
 	#emit_signal("ai_bird_attacks")
 	isInteracting = true
-	await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
+	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_INPUT_DELAY).timeout
 	# Attack
 	$eater_zone.monitorable = true
 	$eater_zone.monitoring = true
 	$eater_zone/hitbox_sprite.visible = true
-	await get_tree().create_timer(INTERACT_LENGTH).timeout
+	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_LENGTH).timeout
 	$eater_zone.monitorable = false
 	$eater_zone.monitoring = false
 	$eater_zone/hitbox_sprite.visible = false
 	# Wait a bit after attack
-	await get_tree().create_timer(INTERACT_COOLDOWN).timeout
+	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_COOLDOWN).timeout
 	$eater_detector_zone.monitoring = false
 	$eater_detector_zone.monitoring = true
 	isInteracting = false

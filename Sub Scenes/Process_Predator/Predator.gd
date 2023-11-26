@@ -1,15 +1,6 @@
 extends Node2D
 
-# All of these values are in seconds
-const BASE_TIME_AWAY_FROM_NEST = 55 # The base time that the predator will wait intil approaching the nest
-const TIME_AWAY_STALL = 4 # The time that the predator will wait after attempting to approach, but being blocked by momma bird
-const TIME_AWAY_VARIANCE = 5 # The maximum amount of variance in the time that the predator will wait to approach the nest
-const TIME_APPROACHED_MIN = 2 # The minimum amount of time the predator will stay approached before heading to the nest
-const TIME_APPROACHED_MAX = 4 # The maximum amount of time the predator will stay approached before heading to the nest
-const TIME_APPROACHED_STALL = 4 # The time that the predator will wait after attempting to head to the nest, but was blocked by momma bird
-
 @export var LandingTime = 0.5
-@export var StayLength = 3
 
 var timeAwayFromNest
 var timeUntilHeadToNest
@@ -40,12 +31,12 @@ func _ready():
 # The predator will then spend between 2 to 5 seconds "approached" before actually heading to the nest. The predator will not approach if they were blocked by momma bird
 # Then the predator will head to the nest, and run the script handing that event.
 # After the predator leaves the nest, the time until the next predator approach (excluding variance) will be decreased
-# TOTAL TIME FOR A SINGLE LOOP: timeAwayFromNest + timeUntilHeadToNest + LandingTime + StayLength
+# TOTAL TIME FOR A SINGLE LOOP: timeAwayFromNest + timeUntilHeadToNest + LandingTime + TIME_TO_STAY_AT_NEST
 # Future feature: Predator could respond to noise
 
 func predatorLoop():
 	while 1 == 1:
-		timeAwayFromNest = BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease - randi_range(0, TIME_AWAY_VARIANCE)
+		timeAwayFromNest = Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease - randi_range(0, Game_Parameters.TIME_AWAY_VARIANCE)
 		$ProgressBar.max_value = timeAwayFromNest
 		while timeAwayFromNest >= 0 or momIsHome:
 			await $Timer.timeout
@@ -53,16 +44,16 @@ func predatorLoop():
 			$ProgressBar.value = $ProgressBar.max_value - timeAwayFromNest
 			if timeAwayFromNest == 0 and momIsHome:
 				print("Predator: momma bird preventing approach to nest")
-				timeAwayFromNest = TIME_AWAY_STALL
+				timeAwayFromNest = Game_Parameters.TIME_AWAY_STALL
 		# Predator approaches the nest
 		emit_signal("toggle_predator_approach")
 		print("Predator: Approaches nest")
-		timeUntilHeadToNest = randi_range(TIME_APPROACHED_MIN, TIME_APPROACHED_MAX)
+		timeUntilHeadToNest = randi_range(Game_Parameters.TIME_APPROACHED_MIN, Game_Parameters.TIME_APPROACHED_MAX)
 		while timeUntilHeadToNest >= 0 or momIsHome:
 			await $Timer.timeout
 			if momIsHome:
 				print("Predator: momma bird preventing head to nest")
-				timeUntilHeadToNest = TIME_APPROACHED_STALL
+				timeUntilHeadToNest = Game_Parameters.TIME_APPROACHED_STALL
 			else:
 				timeUntilHeadToNest -= 1
 		print("Predator: Heads to nest")
@@ -70,7 +61,7 @@ func predatorLoop():
 		while (predIsHome):
 			await $Timer.timeout
 		emit_signal("predator_leaves_nest")
-		aggressionTimeDecrease += (BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
+		aggressionTimeDecrease += (Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
 
 func birdDetectorCircleAnimation():
@@ -117,7 +108,7 @@ func headToNest():
 	foundBird = false
 	foundPlayerBird = false
 	foundDumbBird = false
-	await get_tree().create_timer(StayLength).timeout
+	await get_tree().create_timer(Game_Parameters.TIME_TO_STAY_AT_NEST).timeout
 	for object in $bird_detector.get_overlapping_areas(): # Grabs all birds in detection range, evaluates them
 		evaluateObject(object)
 	predatorEatDecision() # Given previous booleans, figure out which bird to eat, if any

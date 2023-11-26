@@ -10,7 +10,7 @@ func updateHud():
 	$Camera2D.position.y = $manager_birds/player_bird2/bird_body.global_position.y / Camera2DScale
 	$CanvasLayer/ui_hud/hud_bird_2/stomach_bar2.hungerValue = $manager_birds/player_bird2.satiation # Satiation
 	$CanvasLayer/ui_hud/hud_bird_2/hud_bird_progress_bar.value = $manager_birds/player_bird2.experience # Exp bar (Not implemented intentionally)
-	if $manager_birds/player_bird2.experience == $manager_birds/player_bird2.EXP_TO_LEVEL_UP: # Level up animation
+	if $manager_birds/player_bird2.experience == Game_Parameters.PLAYER_EXPERIENCE_TO_LEVEL_UP: # Level up animation
 		$CanvasLayer/ui_hud.levelUpHudAnimation()
 	$"CanvasLayer/ui_hud/hud_bird_2/Sunlight Symbol".modulate.a = .6 * int($manager_birds/player_bird2.inSunlight) # Sunlight hud symbol
 	$CanvasLayer/ui_hud/hud_bird_2/bleeding_symbol.modulate.a = .6 * int(bool($manager_birds/player_bird2.damage)) # Bleeding hud symbol

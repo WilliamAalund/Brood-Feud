@@ -1,12 +1,5 @@
 extends CharacterBody2D
 
-const INTERACT_INPUT_DELAY = 0.1 # In seconds
-const INTERACT_LENGTH = 0.2 # In seconds
-const INTERACT_COOLDOWN = 0.2 # In seconds
-const LEVEL_NEEDED_TO_CHANGE_SPRITE = 6
-const LEVEL_UP_PUSH_FORCE_INCREASE = 400
-const LEVEL_UP_SCALE_INCREASE = 0.2
-const LEVEL_UP_MOVE_SPEED_INCREASE = 10
 const BIRD_HEAD_ROTATION_ABSOLUTE_MAXIMUM_BOUND = 0.33
 
 var isInteracting = false
@@ -45,7 +38,7 @@ func _physics_process(_delta):
 		$bird_head.rotation = -BIRD_HEAD_ROTATION_ABSOLUTE_MAXIMUM_BOUND
 		
 	if sizeExperience > 0:
-		self.scale += Vector2(LEVEL_UP_SCALE_INCREASE / 20,LEVEL_UP_SCALE_INCREASE / 20)
+		self.scale += Vector2(Game_Parameters.LEVEL_UP_SCALE_INCREASE / 20,Game_Parameters.LEVEL_UP_SCALE_INCREASE / 20)
 		self.modulate = Color(.5 + (sizeExperience / 20.0),1,.5 + (sizeExperience / 20.0),1)
 		sizeExperience -= 1
 		if sizeExperience <= 0:
@@ -55,7 +48,7 @@ func _input(event):
 	if event.is_action_pressed("interact") && !isInteracting: # Makes sure script can't run while the player is already interacting
 		emit_signal("player_attacks")
 		isInteracting = true
-		await get_tree().create_timer(INTERACT_INPUT_DELAY).timeout
+		await get_tree().create_timer(Game_Parameters.INTERACT_INPUT_DELAY).timeout
 		# Attack
 		if !isFull:
 			$bird_head.add_to_group("eater")
@@ -64,13 +57,13 @@ func _input(event):
 		$bird_head/bird_head_collider/bird_head_sprite.modulate = Color(1,.8,.8,1)
 		Input.start_joy_vibration(0, 0, 1, 0.2)
 		print("Vibration: RigPlayerBirdbirdbody")
-		await get_tree().create_timer(INTERACT_LENGTH).timeout
+		await get_tree().create_timer(Game_Parameters.INTERACT_LENGTH).timeout
 		$bird_head.monitorable = false
 		$bird_head.monitoring = false
 		$bird_head/bird_head_collider/bird_head_sprite.modulate = Color(1,1,1,1)
 		# Wait a bit after attack
 		$bird_head.remove_from_group("eater")
-		await get_tree().create_timer(INTERACT_COOLDOWN).timeout
+		await get_tree().create_timer(Game_Parameters.INTERACT_COOLDOWN).timeout
 		isInteracting = false
 
 func ageUpBody():
@@ -78,8 +71,8 @@ func ageUpBody():
 	sizeExperience += 20
 
 func levelUpStats():
-	push_force += LEVEL_UP_PUSH_FORCE_INCREASE # Increase stats
-	move_speed += LEVEL_UP_MOVE_SPEED_INCREASE
+	push_force += Game_Parameters.LEVEL_UP_PUSH_FORCE_INCREASE # Increase stats
+	move_speed += Game_Parameters.LEVEL_UP_MOVE_SPEED_INCREASE
 
 func levelUpAnimation():
 	pass

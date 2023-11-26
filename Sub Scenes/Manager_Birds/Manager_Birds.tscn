@@ -6,7 +6,6 @@
 
 [node name="BirdControl" type="Node2D"]
 script = ExtResource("1_nqp0i")
-foodRestore = 10
 
 [node name="player_bird2" parent="." instance=ExtResource("4_w3r8b")]
 z_index = 1
