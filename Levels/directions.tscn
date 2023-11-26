@@ -26,9 +26,9 @@ position = Vector2(752, 374)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 74.0
-offset_top = 2.0
+offset_top = 39.0
 offset_right = 376.0
-offset_bottom = 366.0
+offset_bottom = 403.0
 text = "How to play:
 W,S/Left joystick: 
 Move forward, backwards
