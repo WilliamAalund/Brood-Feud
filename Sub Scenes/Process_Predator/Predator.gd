@@ -26,6 +26,12 @@ func _ready():
 func _physics_process(_delta): # If the predator is in the nest, scan any bird object in the detector zone, and flip booleans for detection depending on the type of bird
 	if predIsHome:
 		analyzeBirdsInPredatorSightZone()
+		
+func printDebugLabels():
+#	$bird_booleans.text = foundDumbBird + "\n" + foundBird + "\n" + foundPlayerBird
+	print("Dumb fird found?   ", foundDumbBird)
+	print("Bird found?        ", foundBird)
+	print("Player bird found? ", foundPlayerBird)
 
 # --- PREDATOR LOOP ---
 # Always running in the background
@@ -83,13 +89,13 @@ func analyzeBirdsInPredatorSightZone():
 		evaluateObject(object)
 
 func evaluateObject(object):
-	if object.is_in_group("dumb"):
+	if object.is_in_group("dumb") and not object.is_in_group("carcus"):
 		foundDumbBird = true
 		target = object
-	else: if object.is_in_group("player") and !foundDumbBird:
+	else: if object.is_in_group("player") and not object.is_in_group("carcus") and not foundDumbBird:
 		foundPlayerBird = true
 		target = object
-	else: if object.is_in_group("bird") and !foundDumbBird and !foundPlayerBird:
+	else: if object.is_in_group("bird") and not object.is_in_group("carcus") and not foundDumbBird and not foundPlayerBird:
 		foundBird = true
 		target = object
 
@@ -99,16 +105,18 @@ func resetDetectionBooleans(): # Called when predator begins to scan the nest
 	foundPlayerBird = false
 
 func predatorEatDecision(): # Signal output / functions handling actually eating the birds will go here
+	printDebugLabels()
 	if foundDumbBird:
 		print("Predator wants to eat the dumb bird")
+		emit_signal("bird_eaten", target)
 	else: if foundPlayerBird:
 		print("Predator wants to eat the player")
 		emit_signal("player_eaten")
 	else: if foundBird:
 		print("Predator wants to eat the ai bird")
+		emit_signal("bird_eaten", target)
 	else:
 		print("Predator doesn't notice any birds")
-	emit_signal("bird_eaten", target)
 
 func headToNest():
 	predIsHome = true # Prevents predator loop from continuing

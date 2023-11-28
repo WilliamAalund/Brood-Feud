@@ -106,6 +106,7 @@ func killBird():
 	$CharacterBody2D/Sprite2D.visible = false
 	$CharacterBody2D/dead_bird_sprite.visible = true # Indicate to the player that the bird is dead
 	$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1)
+	$CharacterBody2D/body_zone.add_to_group("carcus")
 	$CharacterBody2D/body_zone.remove_from_group("dumb")
 	if $CharacterBody2D/CollisionShape2D:
 		$CharacterBody2D/CollisionShape2D.queue_free()
