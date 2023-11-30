@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://df4tfmrv4l3u"]
+[gd_scene load_steps=3 format=3 uid="uid://bmvuixv315c7w"]
 
 [ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="1_h5i21"]
 [ext_resource type="PackedScene" uid="uid://buc4ei3c7xex1" path="res://Sub Scenes/Player_Bird/Player_Bird.tscn" id="2_10ix3"]

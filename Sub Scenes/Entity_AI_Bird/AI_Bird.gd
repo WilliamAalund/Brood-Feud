@@ -98,7 +98,7 @@ func bleed(value):
 		aggroVal = 100
 	#var totalDamageIncurred = damage * BLEED_RATE
 	stunVal += 15
-	#print("Queued damage: ", totalDamageIncurred)
+	
 
 func killBird():
 	isDead = true

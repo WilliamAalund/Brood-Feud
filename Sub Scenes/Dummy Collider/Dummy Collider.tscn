@@ -16,3 +16,5 @@ shape = SubResource("RectangleShape2D_rg6ot")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/CollisionShape2D"]
 texture = ExtResource("1_1ak08")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
