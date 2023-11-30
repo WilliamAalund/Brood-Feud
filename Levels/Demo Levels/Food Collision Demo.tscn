@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bshdn3dwrgrbt" path="res://Sub Scenes/Environment_Nest/Environment_Nest.tscn" id="1_xmlk6"]
 [ext_resource type="Texture2D" uid="uid://pcpg3edo3nkg" path="res://Visuals/Placeholder Graphics/icon.svg" id="2_qrdpa"]
+[ext_resource type="Script" path="res://Levels/Demo Levels/CharacterBody2D.gd" id="3_72gsp"]
 [ext_resource type="PackedScene" uid="uid://di5tsn67yt3vc" path="res://Sub Scenes/Helper_Food_Spawner/Entity_Food/entity_food.tscn" id="4_gin1k"]
-[ext_resource type="Script" path="res://Sub Scenes/Player_New_Player/CharacterBody2D.gd" id="5_w5m70"]
 [ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="6_tigg1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xl275"]
@@ -42,7 +42,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_mask = 7
 motion_mode = 1
-script = ExtResource("5_w5m70")
+script = ExtResource("3_72gsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_wpbiy")
