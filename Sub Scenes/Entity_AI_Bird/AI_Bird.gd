@@ -1,9 +1,10 @@
 extends Node2D
 
+const starvationThreshold = 35 # Used to determine when AI birds take on a sickly appearance
+const lowerAngryThreshold = 40
+const upperAngryThreshold = 85
+
 @export var satiation = 100
-@export var starvationThreshold = 35 # Used to determine when AI birds take on a sickly appearance
-@export var lowerAngryThreshold = 40
-@export var upperAngryThreshold = 85
 
 var age = 1
 var experience = 0
@@ -17,11 +18,9 @@ var damageTint = 0
 var foodTargetsArray = []
 var sunrayTargetsArray = []
 
-
 # --- VALUES USED IN STATE CALCULATIONS
 var aggroVal = 0 # Bird begins with no aggro value
 var numberOfTimesAttacked = 0
-var sunspotTarget
 var numSunlightSpotsInside = 0
 var numSunlightSpotsNoticed = 0
 var numFoodsNoticed = 0
@@ -62,13 +61,13 @@ func _physics_process(_delta):
 		if sizeExperience <= 0:
 			$CharacterBody2D.modulate = Color(1,1,1,1)
 	# Next code controls modulation value to indicate status of bird to the player
-	if damageTint > 0:
+	if damageTint > 0 and !noticedPredator:
 		$CharacterBody2D.modulate += Color(.025,.015,.015,0)
 		damageTint -= 1
 	if aggroVal >= lowerAngryThreshold and damageTint <= 0:
 		$CharacterBody2D.modulate = Color(0.9,0.75,0.75,1)
 	if damageTint <= 0 and aggroVal < lowerAngryThreshold:
-		if satiation <= starvationThreshold:
+		if satiation <= starvationThreshold and !isDead:
 			$CharacterBody2D.modulate = Color(0.9,0.9,0.8,1)
 		else:
 			$CharacterBody2D.modulate = Color(1,1,1,1)
@@ -209,16 +208,16 @@ func _on_timer_timeout():
 		aggroVal -= 1
 
 func _on_bird_control_birds_increment_hunger():
-	
-	satiation -= Game_Parameters.IDLE_SATIATION_DRAIN_RATE + Game_Parameters.AI_BIRD_IDLE_SATIATION_DRAIN_RATE_AGE_INCREASE * (age - 1) + Game_Parameters.SUN_RATE * int(inSunlight) + Game_Parameters.AI_BIRD_BLEED_RATE * int(bool(damage))
-	$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
-	$CharacterBody2D/hunger_deficit_label.text = str(satiation - 100).substr(0,5)
-	if satiation <= 0 and !isDead: # Prevent dead bodies from eating food
-		print("starved")
-		isDead = true
-		killBird()
-	if damage > 0:
-		damage -= 1
+	if !isDead:
+		satiation -= Game_Parameters.IDLE_SATIATION_DRAIN_RATE + Game_Parameters.AI_BIRD_IDLE_SATIATION_DRAIN_RATE_AGE_INCREASE * (age - 1) + Game_Parameters.SUN_RATE * int(inSunlight) + Game_Parameters.AI_BIRD_BLEED_RATE * int(bool(damage))
+		$CharacterBody2D/Debug_Satiation_Label.text = str(satiation).substr(0,5)
+		$CharacterBody2D/hunger_deficit_label.text = str(satiation - 100).substr(0,5)
+		if satiation <= 0 and !isDead: # Prevent dead bodies from eating food
+			print("starved")
+			isDead = true
+			killBird()
+		if damage > 0:
+			damage -= 1
 
 func _on_body_zone_area_entered(area):
 	if area.is_in_group("sunray"):

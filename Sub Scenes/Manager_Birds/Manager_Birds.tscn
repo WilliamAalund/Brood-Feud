@@ -10,49 +10,50 @@ script = ExtResource("1_nqp0i")
 [node name="player_bird2" parent="." instance=ExtResource("4_w3r8b")]
 z_index = 1
 position = Vector2(0, 60)
+hasInfiniteFood = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
 
-[node name="AI_Bird4" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(-20, 157)
+[node name="AI_Bird" parent="." instance=ExtResource("3_aebak")]
+position = Vector2(-89, 51)
 
 [node name="AI_Bird2" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(99, 110)
-
-[node name="AI_Bird" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(-60, 103)
+position = Vector2(-53, 92)
 
 [node name="AI_Bird3" parent="." instance=ExtResource("3_aebak")]
-position = Vector2(44, 153)
+position = Vector2(37, 95)
+
+[node name="AI_Bird4" parent="." instance=ExtResource("3_aebak")]
+position = Vector2(78, 53)
 
 [connection signal="Birds_Increment_Hunger" from="." to="player_bird2" method="_on_bird_control_birds_increment_hunger"]
-[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird4" method="_on_bird_control_birds_increment_hunger"]
-[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird2" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="Birds_Increment_Hunger" from="." to="AI_Bird" method="_on_bird_control_birds_increment_hunger"]
+[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird2" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="Birds_Increment_Hunger" from="." to="AI_Bird3" method="_on_bird_control_birds_increment_hunger"]
-[connection signal="ai_birds_enter_debug_mode" from="." to="AI_Bird4" method="_on_bird_control_ai_birds_enter_debug_mode"]
-[connection signal="ai_birds_enter_debug_mode" from="." to="AI_Bird2" method="_on_bird_control_ai_birds_enter_debug_mode"]
+[connection signal="Birds_Increment_Hunger" from="." to="AI_Bird4" method="_on_bird_control_birds_increment_hunger"]
 [connection signal="ai_birds_enter_debug_mode" from="." to="AI_Bird" method="_on_bird_control_ai_birds_enter_debug_mode"]
+[connection signal="ai_birds_enter_debug_mode" from="." to="AI_Bird2" method="_on_bird_control_ai_birds_enter_debug_mode"]
 [connection signal="ai_birds_enter_debug_mode" from="." to="AI_Bird3" method="_on_bird_control_ai_birds_enter_debug_mode"]
+[connection signal="ai_birds_enter_debug_mode" from="." to="AI_Bird4" method="_on_bird_control_ai_birds_enter_debug_mode"]
 [connection signal="birds_toggle_momma_bird_notice" from="." to="player_bird2" method="_on_bird_control_birds_toggle_momma_bird_notice"]
-[connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird4" method="_on_bird_control_birds_toggle_momma_bird_notice"]
-[connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_momma_bird_notice"]
 [connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird" method="_on_bird_control_birds_toggle_momma_bird_notice"]
+[connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_momma_bird_notice"]
 [connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird3" method="_on_bird_control_birds_toggle_momma_bird_notice"]
-[connection signal="birds_toggle_predator_notice" from="." to="AI_Bird4" method="_on_bird_control_birds_toggle_predator_notice"]
-[connection signal="birds_toggle_predator_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_predator_notice"]
+[connection signal="birds_toggle_momma_bird_notice" from="." to="AI_Bird4" method="_on_bird_control_birds_toggle_momma_bird_notice"]
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird" method="_on_bird_control_birds_toggle_predator_notice"]
+[connection signal="birds_toggle_predator_notice" from="." to="AI_Bird2" method="_on_bird_control_birds_toggle_predator_notice"]
 [connection signal="birds_toggle_predator_notice" from="." to="AI_Bird3" method="_on_bird_control_birds_toggle_predator_notice"]
-[connection signal="kill" from="." to="AI_Bird4" method="_on_bird_control_kill"]
-[connection signal="kill" from="." to="AI_Bird2" method="_on_bird_control_kill"]
+[connection signal="birds_toggle_predator_notice" from="." to="AI_Bird4" method="_on_bird_control_birds_toggle_predator_notice"]
 [connection signal="kill" from="." to="AI_Bird" method="_on_bird_control_kill"]
+[connection signal="kill" from="." to="AI_Bird2" method="_on_bird_control_kill"]
 [connection signal="kill" from="." to="AI_Bird3" method="_on_bird_control_kill"]
-[connection signal="pred_spot" from="." to="AI_Bird4" method="_on_bird_control_pred_spot"]
-[connection signal="pred_spot" from="." to="AI_Bird2" method="_on_bird_control_pred_spot"]
+[connection signal="kill" from="." to="AI_Bird4" method="_on_bird_control_kill"]
 [connection signal="pred_spot" from="." to="AI_Bird" method="_on_bird_control_pred_spot"]
+[connection signal="pred_spot" from="." to="AI_Bird2" method="_on_bird_control_pred_spot"]
 [connection signal="pred_spot" from="." to="AI_Bird3" method="_on_bird_control_pred_spot"]
+[connection signal="pred_spot" from="." to="AI_Bird4" method="_on_bird_control_pred_spot"]
 [connection signal="player_attacked" from="player_bird2" to="." method="_on_player_bird_2_player_attacked"]
 [connection signal="player_grew_up" from="player_bird2" to="." method="_on_player_bird_2_player_grew_up"]
 [connection signal="player_starved" from="player_bird2" to="." method="_on_player_bird_2_player_starved"]

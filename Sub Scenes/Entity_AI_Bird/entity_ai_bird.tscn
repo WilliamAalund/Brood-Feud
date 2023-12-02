@@ -62,7 +62,7 @@ scale = Vector2(0.0324346, 0.0457911)
 texture = ExtResource("3_ukxu6")
 region_rect = Rect2(137.815, 260.094, 1875.97, 1256.97)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_y002n")
 
