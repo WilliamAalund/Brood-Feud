@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwui7idexgcb2"]
+[gd_scene load_steps=5 format=3 uid="uid://cwui7idexgcb2"]
 
 [ext_resource type="Script" path="res://Sub Scenes/UI_Game_Over/ui_game_over.gd" id="1_8l0d2"]
 [ext_resource type="Texture2D" uid="uid://ndt5ew10f15g" path="res://Visuals/Placeholder Graphics/circle.png" id="1_q638a"]
+[ext_resource type="Texture2D" uid="uid://dt7qp18imoqyy" path="res://Visuals/Art Assets/dead_sibling.png" id="3_yfeqx"]
+[ext_resource type="Texture2D" uid="uid://dqd0dv1jbirv1" path="res://Visuals/Art Assets/draft_player_older_bird.png" id="4_2q4vg"]
 
 [node name="ui_game_over" type="Control"]
 layout_mode = 3
@@ -12,6 +14,20 @@ script = ExtResource("1_8l0d2")
 position = Vector2(576, 338)
 scale = Vector2(2.91, 2.25333)
 texture = ExtResource("1_q638a")
+
+[node name="Dead_bird" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.247059)
+position = Vector2(524, 345)
+scale = Vector2(0.29834, 0.276367)
+texture = ExtResource("3_yfeqx")
+
+[node name="Cuckoo" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.454902)
+position = Vector2(481, 303)
+scale = Vector2(0.311523, 0.274414)
+texture = ExtResource("4_2q4vg")
 
 [node name="game_over" type="Label" parent="."]
 layout_mode = 0

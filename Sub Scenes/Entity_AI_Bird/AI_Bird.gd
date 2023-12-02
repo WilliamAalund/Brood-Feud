@@ -61,7 +61,7 @@ func _physics_process(_delta):
 		if sizeExperience <= 0:
 			$CharacterBody2D.modulate = Color(1,1,1,1)
 	# Next code controls modulation value to indicate status of bird to the player
-	if damageTint > 0 and !noticedPredator:
+	if damageTint > 0:
 		$CharacterBody2D.modulate += Color(.025,.015,.015,0)
 		damageTint -= 1
 	if aggroVal >= lowerAngryThreshold and damageTint <= 0:

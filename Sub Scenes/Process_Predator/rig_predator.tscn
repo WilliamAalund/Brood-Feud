@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Sub Scenes/Process_Predator/rig_predator.gd" id="1_wh23j"]
 [ext_resource type="Texture2D" uid="uid://bvnidxbbhmjoe" path="res://Visuals/Art Assets/Predator_Shadow_Mockup.png" id="2_4x8mj"]
-[ext_resource type="Texture2D" uid="uid://16qwckh3r6x7" path="res://Visuals/Placeholder Graphics/mommabirdplaceholder.png" id="3_whuwo"]
+[ext_resource type="Texture2D" uid="uid://bu4agvp0w1rrm" path="res://Visuals/Art Assets/merlin_body.png" id="3_uoa7b"]
 
 [node name="rig_predator" type="Node2D"]
 script = ExtResource("1_wh23j")
@@ -15,9 +15,8 @@ texture = ExtResource("2_4x8mj")
 
 [node name="predator_body" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(0.45098, 0.027451, 0.0980392, 1)
-position = Vector2(-6, 228)
-scale = Vector2(0.598413, 0.624)
-texture = ExtResource("3_whuwo")
+position = Vector2(-64.4445, 286.468)
+scale = Vector2(0.251519, 0.251434)
+texture = ExtResource("3_uoa7b")
 
 [node name="Camera2D" type="Camera2D" parent="."]

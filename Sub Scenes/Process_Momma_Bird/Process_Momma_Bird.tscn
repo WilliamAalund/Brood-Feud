@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://16qwckh3r6x7" path="res://Visuals/Placeholder Graphics/mommabirdplaceholder.png" id="2_gvgd0"]
 [ext_resource type="PackedScene" uid="uid://cwtxxxhlmsx4m" path="res://Sub Scenes/Rig_Momma_Bird/rig_momma_bird.tscn" id="3_8cupb"]
 [ext_resource type="AudioStream" uid="uid://t6gd3hbacmqh" path="res://birdNoises/mommabird.mp3" id="4_jaal2"]
-[ext_resource type="AudioStream" uid="uid://t6gd3hbacmqh" path="res://birdNoises/mommabird.mp3" id="4_jaal2"]
 [ext_resource type="AudioStream" uid="uid://010jbhxi81q5" path="res://birdNoises/siblingsCall.mp3" id="5_tx4g5"]
 [ext_resource type="AudioStream" uid="uid://b4qtlc4fcfrb7" path="res://birdNoises/babybird.mp3" id="6_8isa0"]
 [ext_resource type="AudioStream" uid="uid://tr8iby88xql2" path="res://birdNoises/mamaWings.mp3" id="7_ljx0b"]
