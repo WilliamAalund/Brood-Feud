@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx0asr7ljxkpl"]
+[gd_scene load_steps=9 format=3 uid="uid://bx0asr7ljxkpl"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Process_Predator/Predator.gd" id="1_tnf4g"]
 [ext_resource type="PackedScene" uid="uid://bfd3fy6bkqojr" path="res://Sub Scenes/Process_Predator/rig_predator.tscn" id="3_0yjp0"]
 [ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="4_qhvhc"]
 [ext_resource type="AudioStream" uid="uid://cc6e14htl23et" path="res://birdNoises/merlinfar.mp3" id="4_y6x0a"]
 [ext_resource type="AudioStream" uid="uid://coe88pe5tcq1u" path="res://birdNoises/merlin.mp3" id="5_emmkj"]
+[ext_resource type="AudioStream" uid="uid://bo6ss2ufrch56" path="res://birdNoises/merlinFlyIn.mp3" id="6_esa3j"]
+[ext_resource type="AudioStream" uid="uid://beiqf32okhnfo" path="res://birdNoises/merlinFlyAway.mp3" id="7_2sfpb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpgnr"]
 radius = 296.204
@@ -70,6 +72,16 @@ stream = ExtResource("4_y6x0a")
 
 [node name="merlin_close" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_emmkj")
+volume_db = 1.486
+
+[node name="merlin_fly_in" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_esa3j")
+volume_db = -3.466
+
+[node name="merlin_fly_out" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_2sfpb")
+volume_db = -3.466
 
 [connection signal="toggle_predator_approach" from="." to="rig_predator" method="_on_predator_toggle_predator_approach"]
 [connection signal="toggle_predator_presence" from="." to="rig_predator" method="_on_predator_toggle_predator_presence"]
+[connection signal="ready" from="merlin_close" to="." method="_fadeStep"]

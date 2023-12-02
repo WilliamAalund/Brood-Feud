@@ -19,4 +19,5 @@ func _on_manager_birds_player_starved():
 
 
 func _on_manager_birds_player_grew_up():
+	$victory_screech.play()
 	pass # Replace with function body.

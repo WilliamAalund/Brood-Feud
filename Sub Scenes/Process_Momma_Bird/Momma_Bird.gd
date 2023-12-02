@@ -31,17 +31,24 @@ func _on_timer_timeout(): # Function runs every 0.1 seconds
 
 func momReturns(): 
 	emit_signal("toggle_mom_presence")
+	$momma_fly.play()
 	$mommabird.play()
 	await get_tree().create_timer(Game_Parameters.TIME_TO_LAND_IN_SECONDS).timeout
 	var foodDropped = 0
+	
 	while foodDropped < Game_Parameters.FOOD_PIECES_TO_DROP: # Drop a certain amount of food pieces
 		emit_signal("mom_drops_food")
 		foodDropped += 1
+		if(foodDropped >= 1 and not $babies_call.is_playing()):
+			$babies_call.play()
+			$player_call.play();
 		await get_tree().create_timer(Game_Parameters.FOOD_DROP_INTERVAL_IN_SECONDS).timeout
 	isHome = false
 	goneTimer = 0
+	
 	emit_signal("toggle_mom_presence")
 	print("Momma bird leaves")
+	$momma_fly.play()
 	timesLandedAtNest += 1
 
 func _on_process_predator_toggle_predator_presence():

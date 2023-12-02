@@ -76,6 +76,7 @@ func predatorLoop():
 		emit_signal("predator_leaves_nest")
 		aggressionTimeDecrease += (Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
+		$merlin_fly_out.play()
 
 func birdDetectorCircleAnimation():
 	$bird_detector/Sprite2D.visible = true
@@ -124,8 +125,9 @@ func predatorEatDecision(): # Signal output / functions handling actually eating
 func headToNest():
 	predIsHome = true # Prevents predator loop from continuing
 	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
-	$merlin_distance.stop()
+	fadeOutAudio(1.0)
 	$merlin_close.play()
+	$merlin_fly_in.play()
 	await get_tree().create_timer(LandingTime).timeout
 	resetDetectionBooleans() # Booleans that are used in predatorEatDecision()
 	birdDetectorCircleAnimation() # Indicates to player what area isn't safe
@@ -137,3 +139,14 @@ func headToNest():
 	
 func _on_process_momma_bird_toggle_mom_presence():
 	momIsHome = !momIsHome
+	
+func fadeOutAudio(duration: float):
+	var initialVolume = $merlin_distance.volume_db
+	var targetVolume = -80.0  # Adjust this value based on the desired minimum volume
+	
+	while $merlin_distance.volume_db > targetVolume:
+		$merlin_distance.volume_db -= (initialVolume / duration) * get_process_delta_time()
+		await(get_tree().create_timer(0.0, false).timeout)
+		
+	$merlin_distance.stop()
+

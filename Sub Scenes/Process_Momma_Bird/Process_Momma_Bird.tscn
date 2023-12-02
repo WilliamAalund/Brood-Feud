@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cudu6vf7uwwve"]
+[gd_scene load_steps=8 format=3 uid="uid://cudu6vf7uwwve"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Process_Momma_Bird/Momma_Bird.gd" id="1_44ueo"]
 [ext_resource type="Texture2D" uid="uid://16qwckh3r6x7" path="res://Visuals/Placeholder Graphics/mommabirdplaceholder.png" id="2_gvgd0"]
 [ext_resource type="PackedScene" uid="uid://cwtxxxhlmsx4m" path="res://Sub Scenes/Rig_Momma_Bird/rig_momma_bird.tscn" id="3_8cupb"]
 [ext_resource type="AudioStream" uid="uid://t6gd3hbacmqh" path="res://birdNoises/mommabird.mp3" id="4_jaal2"]
+[ext_resource type="AudioStream" uid="uid://010jbhxi81q5" path="res://birdNoises/siblingsCall.mp3" id="5_tx4g5"]
+[ext_resource type="AudioStream" uid="uid://b4qtlc4fcfrb7" path="res://birdNoises/babybird.mp3" id="6_8isa0"]
+[ext_resource type="AudioStream" uid="uid://tr8iby88xql2" path="res://birdNoises/mamaWings.mp3" id="7_ljx0b"]
 
 [node name="Momma_Bird" type="Node2D"]
 z_index = 2
@@ -40,6 +43,24 @@ text = "Mama"
 [node name="mommabird" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_jaal2")
 volume_db = -23.276
+
+[node name="babies_call" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tx4g5")
+volume_db = -12.876
+pitch_scale = 1.34
+autoplay = true
+
+[node name="player_call" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_8isa0")
+volume_db = -13.866
+pitch_scale = 1.34
+autoplay = true
+
+[node name="momma_fly" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ljx0b")
+volume_db = -0.495
+pitch_scale = 1.34
+autoplay = true
 
 [connection signal="new_food_position_for_rig" from="." to="rig_momma_bird" method="_on_momma_bird_new_food_position_for_rig"]
 [connection signal="toggle_mom_presence" from="." to="rig_momma_bird" method="_on_momma_bird_toggle_mom_presence"]
