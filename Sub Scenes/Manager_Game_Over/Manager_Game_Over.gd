@@ -10,7 +10,7 @@ func _ready():
 func _on_process_predator_player_eaten():
 	gameOver = true
 	$Label.visible = true
-	emit_signal("game_over_ocurred", "Don't let the predator see you when it comes to the nest.")
+	emit_signal("game_over_ocurred", "Don't let the merlin see you when it comes to the nest.")
 
 func _on_manager_birds_player_starved():
 	gameOver = true

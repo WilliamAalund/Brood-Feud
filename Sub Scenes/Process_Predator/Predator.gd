@@ -46,7 +46,7 @@ func printDebugLabels():
 
 func predatorLoop():
 	while 1 == 1:
-		timeAwayFromNest = Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease - randi_range(0, Game_Parameters.TIME_AWAY_VARIANCE)
+		timeAwayFromNest = max(Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease - randi_range(0, Game_Parameters.TIME_AWAY_VARIANCE), 15) # Time away from nest will always be at least 15 seconds
 		$ProgressBar.max_value = timeAwayFromNest
 		while timeAwayFromNest >= 0 or momIsHome:
 			await $Timer.timeout
@@ -74,7 +74,8 @@ func predatorLoop():
 		while (predIsHome):
 			await $Timer.timeout
 		emit_signal("predator_leaves_nest")
-		aggressionTimeDecrease += (Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
+		if Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease > 15:
+			aggressionTimeDecrease += (Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
 
 func birdDetectorCircleAnimation():

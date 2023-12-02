@@ -20,6 +20,7 @@ func updateHud():
 func _on_manager_game_over_game_over_ocurred(reason):
 	$CanvasLayer/ui_game_over.visible = true
 	$CanvasLayer/ui_game_over/death_reason.text = reason
+	$CanvasLayer/ui_game_over/final_age.text = "Final age: " + str($manager_birds/player_bird2.level)
 	$CanvasLayer/ui_game_over/returntomainmenubutton.grab_focus()
 
 func _on_process_momma_bird_momma_win_condition():
