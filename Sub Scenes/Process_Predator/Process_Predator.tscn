@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx0asr7ljxkpl"]
+[gd_scene load_steps=5 format=3 uid="uid://bx0asr7ljxkpl"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Process_Predator/Predator.gd" id="1_tnf4g"]
 [ext_resource type="PackedScene" uid="uid://bfd3fy6bkqojr" path="res://Sub Scenes/Process_Predator/rig_predator.tscn" id="3_0yjp0"]
 [ext_resource type="Texture2D" uid="uid://c2mqomq4b07u4" path="res://Visuals/Placeholder Graphics/sunray_placeholder.png" id="4_qhvhc"]
-[ext_resource type="AudioStream" uid="uid://cc6e14htl23et" path="res://birdNoises/merlinfar.mp3" id="4_y6x0a"]
-[ext_resource type="AudioStream" uid="uid://coe88pe5tcq1u" path="res://birdNoises/merlin.mp3" id="5_emmkj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpgnr"]
 radius = 296.204
@@ -64,12 +62,6 @@ texture = ExtResource("4_qhvhc")
 visible = false
 position = Vector2(0, -144)
 shape = SubResource("CircleShape2D_vpgnr")
-
-[node name="merlin_distance" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_y6x0a")
-
-[node name="merlin_close" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_emmkj")
 
 [connection signal="toggle_predator_approach" from="." to="rig_predator" method="_on_predator_toggle_predator_approach"]
 [connection signal="toggle_predator_presence" from="." to="rig_predator" method="_on_predator_toggle_predator_presence"]
