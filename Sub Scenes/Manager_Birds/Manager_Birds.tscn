@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Sub Scenes/Manager_Birds/BirdControl.gd" id="1_nqp0i"]
 [ext_resource type="PackedScene" uid="uid://cqc0vbl1gl11m" path="res://Sub Scenes/Entity_AI_Bird/entity_ai_bird.tscn" id="3_aebak"]
-[ext_resource type="PackedScene" uid="uid://7cm2864l68b7" path="res://Sub Scenes/Rig_Player_Bird/player_bird.tscn" id="4_w3r8b"]
+[ext_resource type="PackedScene" uid="uid://7cm2864l68b7" path="res://Sub Scenes/Entity_Player_Bird/player_bird.tscn" id="4_w3r8b"]
 
 [node name="BirdControl" type="Node2D"]
 script = ExtResource("1_nqp0i")
