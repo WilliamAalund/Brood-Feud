@@ -93,11 +93,13 @@ func beakInteract():
 	# Attack
 	$eater_zone.monitorable = true
 	$eater_zone.monitoring = true
-	$eater_zone/hitbox_sprite.visible = true
+	#$eater_zone/hitbox_sprite.visible = true
+	$bird_sprite_body/bird_sprite_head.modulate = Color(1,1,.70,1)
 	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_LENGTH).timeout
 	$eater_zone.monitorable = false
 	$eater_zone.monitoring = false
-	$eater_zone/hitbox_sprite.visible = false
+	#$eater_zone/hitbox_sprite.visible = false
+	$bird_sprite_body/bird_sprite_head.modulate = Color(1,1,1,1)
 	# Wait a bit after attack
 	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_COOLDOWN).timeout
 	$eater_detector_zone.monitoring = false
