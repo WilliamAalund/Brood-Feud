@@ -85,7 +85,10 @@ func decrementSatiation(): # Decreases the bird's satiation value
 	else:
 		satiation -= Game_Parameters.PLAYER_DEFAULT_IDLE_SATIATION_DRAIN_RATE + ((age - 1) * Game_Parameters.PLAYER_IDLE_SATIATION_DRAIN_RATE_AGE_INCREASE) + Game_Parameters.SUN_RATE * int(inSunlight) + Game_Parameters.PLAYER_BIRD_BLEED_RATE * int(bool(damage))
 		if satiation < 0:
-			emit_signal("player_starved")
+			if damage > 0:
+				emit_signal("player_killed_by_ai_bird")
+			else:
+				emit_signal("player_starved")
 		if damage > 0:
 			damage -= 1
 
