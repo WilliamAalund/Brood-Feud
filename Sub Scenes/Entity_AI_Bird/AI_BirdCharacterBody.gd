@@ -88,23 +88,27 @@ func createIdlePosition():
 	return Vector2(self.position.x + randi_range(-20,20),self.position.y + randi_range(-20,20))
 func beakInteract():
 	#emit_signal("ai_bird_attacks")
-	isInteracting = true
-	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_INPUT_DELAY).timeout
-	# Attack
-	$eater_zone.monitorable = true
-	$eater_zone.monitoring = true
-	#$eater_zone/hitbox_sprite.visible = true
-	$bird_sprite_body/bird_sprite_head.modulate = Color(1,1,.70,1)
-	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_LENGTH).timeout
-	$eater_zone.monitorable = false
-	$eater_zone.monitoring = false
-	#$eater_zone/hitbox_sprite.visible = false
-	$bird_sprite_body/bird_sprite_head.modulate = Color(1,1,1,1)
-	# Wait a bit after attack
-	await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_COOLDOWN).timeout
-	$eater_detector_zone.monitoring = false
-	$eater_detector_zone.monitoring = true
-	isInteracting = false
+	if !isInteracting:
+		isInteracting = true
+		$AnimationPlayer.play("ai_peck")
+		await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_INPUT_DELAY).timeout
+		# Attack
+		$eater_zone.monitorable = true
+		$eater_zone.monitoring = true
+		#$eater_zone/hitbox_sprite.visible = true
+		$bird_sprite_body/bird_sprite_head.modulate = Color(1,1,.70,1)
+		await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_LENGTH).timeout
+		$eater_zone.monitorable = false
+		$eater_zone.monitoring = false
+		#$eater_zone/hitbox_sprite.visible = false
+		$bird_sprite_body/bird_sprite_head.modulate = Color(1,1,1,1)
+		# Wait a bit after attack
+		await get_tree().create_timer(Game_Parameters.AI_BIRD_INTERACT_COOLDOWN).timeout
+		$eater_detector_zone.monitoring = false
+		$eater_detector_zone.monitoring = true
+		isInteracting = false
+	else:
+		print("Beak interact failed: Beak is already activated")
 
 # --- STATE FUNCTIONS ---
 func state1(delta): # Remains idle

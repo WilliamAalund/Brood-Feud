@@ -31,32 +31,33 @@ texture = ExtResource("4_2q4vg")
 
 [node name="game_over" type="Label" parent="."]
 layout_mode = 0
-offset_left = 421.0
+offset_left = 221.0
 offset_top = 238.0
-offset_right = 508.0
+offset_right = 308.0
 offset_bottom = 264.0
 text = "Game Over
 "
 
 [node name="death_reason" type="Label" parent="."]
 layout_mode = 0
-offset_left = 422.0
+offset_left = 222.0
 offset_top = 263.0
-offset_right = 462.0
-offset_bottom = 286.0
+offset_right = 293.0
+offset_bottom = 289.0
+text = "sdfsdfds"
 
 [node name="final_age" type="Label" parent="."]
 layout_mode = 0
-offset_left = 422.0
+offset_left = 222.0
 offset_top = 289.0
-offset_right = 462.0
+offset_right = 340.0
 offset_bottom = 315.0
 
 [node name="returntomainmenubutton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 420.0
+offset_left = 220.0
 offset_top = 326.0
-offset_right = 594.0
+offset_right = 394.0
 offset_bottom = 357.0
 text = "Return to main menu
 "

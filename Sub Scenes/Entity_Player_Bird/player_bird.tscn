@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://7cm2864l68b7"]
+[gd_scene load_steps=11 format=3 uid="uid://7cm2864l68b7"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Entity_Player_Bird/player_bird.gd" id="1_x6cey"]
 [ext_resource type="Script" path="res://Sub Scenes/Entity_Player_Bird/bird_body.gd" id="2_r24o2"]
 [ext_resource type="Texture2D" uid="uid://c3frapks115w2" path="res://Visuals/Art Assets/draft_player_bird.png" id="3_vpphk"]
+[ext_resource type="Texture2D" uid="uid://dqd0dv1jbirv1" path="res://Visuals/Art Assets/draft_player_older_bird.png" id="4_3uv1c"]
+[ext_resource type="Animation" uid="uid://dojk8e1r5npp6" path="res://Sub Scenes/Animations/peck.res" id="5_nq472"]
+[ext_resource type="Script" path="res://Sub Scenes/Entity_Player_Bird/bird_head.gd" id="5_wysog"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_geec5"]
 radius = 12.0
@@ -11,6 +14,27 @@ height = 32.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y83pd"]
 radius = 9.0
 height = 26.0
+
+[sub_resource type="Animation" id="Animation_rku6s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bird_body/bird_head/bird_head_collider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -14)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3jck"]
+_data = {
+"RESET": SubResource("Animation_rku6s"),
+"peck": ExtResource("5_nq472")
+}
 
 [node name="player_bird" type="Node2D"]
 script = ExtResource("1_x6cey")
@@ -31,6 +55,15 @@ texture = ExtResource("3_vpphk")
 region_enabled = true
 region_rect = Rect2(458.213, 909.339, 1150.64, 1086.85)
 
+[node name="older_bird_body_sprite" type="Sprite2D" parent="bird_body/bird_body_collider"]
+visible = false
+position = Vector2(0, 12)
+scale = Vector2(0.0344936, 0.0362214)
+texture = ExtResource("4_3uv1c")
+offset = Vector2(0, -150)
+region_enabled = true
+region_rect = Rect2(132.557, 801.068, 1788.28, 1232.46)
+
 [node name="bird_body_area" type="Area2D" parent="bird_body" groups=["bird", "player"]]
 
 [node name="bird_body_collider" type="CollisionShape2D" parent="bird_body/bird_body_area" groups=["bird"]]
@@ -40,24 +73,42 @@ shape = SubResource("CapsuleShape2D_geec5")
 position = Vector2(0, -11)
 monitoring = false
 monitorable = false
+script = ExtResource("5_wysog")
 
 [node name="bird_head_collider" type="CollisionShape2D" parent="bird_body/bird_head"]
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_y83pd")
 
 [node name="bird_head_sprite" type="Sprite2D" parent="bird_body/bird_head/bird_head_collider"]
-position = Vector2(1.26218e-29, 0.5)
+position = Vector2(0, 1.65934)
 scale = Vector2(0.0331126, 0.0343075)
 texture = ExtResource("3_vpphk")
 region_enabled = true
 region_rect = Rect2(734.743, 109.352, 604.148, 787.118)
+
+[node name="older_bird_head_sprite" type="Sprite2D" parent="bird_body/bird_head/bird_head_collider"]
+visible = false
+scale = Vector2(0.0357895, 0.0346378)
+texture = ExtResource("4_3uv1c")
+region_enabled = true
+region_rect = Rect2(734.743, 20.2954, 582.876, 779.492)
 
 [node name="debugger_label" type="Label" parent="bird_body"]
 visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bird_body"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_b3jck")
+}
+
+[node name="DigestionTimer" type="Timer" parent="."]
+wait_time = 12.0
+
 [connection signal="player_attacks" from="bird_body" to="." method="_on_bird_body_player_attacks"]
 [connection signal="area_entered" from="bird_body/bird_body_area" to="." method="_on_bird_body_area_area_entered"]
 [connection signal="area_exited" from="bird_body/bird_body_area" to="." method="_on_bird_body_area_area_exited"]
 [connection signal="area_entered" from="bird_body/bird_head" to="." method="_on_bird_head_area_entered"]
+[connection signal="timeout" from="DigestionTimer" to="." method="_on_digestion_timer_timeout"]

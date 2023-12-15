@@ -4,7 +4,7 @@ const BIRD_HEAD_ROTATION_ABSOLUTE_MAXIMUM_BOUND = 0.33
 
 var isInteracting = false
 var isFull = false
-var move_speed = 80 # Adjust this value to control movement speed
+var move_speed = 70 # Adjust this value to control movement speed
 var rotate_speed = 0.05  # Adjust this value to control the rotation speed
 var push_force = 2400.0 # Value used when calculating impulse to apply
 var sizeExperience = 0
@@ -48,6 +48,7 @@ func _input(event):
 	if event.is_action_pressed("interact") && !isInteracting: # Makes sure script can't run while the player is already interacting
 		emit_signal("player_attacks")
 		isInteracting = true
+		$AnimationPlayer.play("peck")
 		await get_tree().create_timer(Game_Parameters.INTERACT_INPUT_DELAY).timeout
 		# Attack
 		if !isFull:
@@ -56,7 +57,7 @@ func _input(event):
 		$bird_head.monitoring = true
 		$bird_head/bird_head_collider/bird_head_sprite.modulate = Color(1,.8,.8,1)
 		Input.start_joy_vibration(0, 0, 1, 0.2)
-		print("Vibration: RigPlayerBirdbirdbody")
+		#print("Vibration: RigPlayerBirdbirdbody")
 		await get_tree().create_timer(Game_Parameters.INTERACT_LENGTH).timeout
 		$bird_head.monitorable = false
 		$bird_head.monitoring = false

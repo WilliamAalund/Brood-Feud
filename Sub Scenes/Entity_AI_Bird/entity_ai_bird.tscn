@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqc0vbl1gl11m"]
+[gd_scene load_steps=15 format=3 uid="uid://cqc0vbl1gl11m"]
 
 [ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_Bird.gd" id="1_g4xov"]
 [ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/AI_BirdCharacterBody.gd" id="2_sf0vd"]
 [ext_resource type="Texture2D" uid="uid://p4bk5tdue3ta" path="res://Visuals/Art Assets/draft_sibling_bird.png" id="3_ddn7a"]
 [ext_resource type="Texture2D" uid="uid://dt7qp18imoqyy" path="res://Visuals/Art Assets/dead_sibling.png" id="3_ukxu6"]
 [ext_resource type="Texture2D" uid="uid://28v4ug0v4asp" path="res://Visuals/Placeholder Graphics/protoBody.png" id="4_uem5o"]
+[ext_resource type="Script" path="res://Sub Scenes/Entity_AI_Bird/eater_zone.gd" id="5_qgt2p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y002n"]
 radius = 13.0
@@ -22,6 +23,67 @@ height = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cyhn5"]
 radius = 169.027
+
+[sub_resource type="Animation" id="Animation_eixkr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eater_zone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bird_sprite_body/bird_sprite_head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4.76837e-06, -824.207)]
+}
+
+[sub_resource type="Animation" id="Animation_71aru"]
+resource_name = "ai_peck"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eater_zone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bird_sprite_body/bird_sprite_head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(0.466517, 2.63902, 0.277392, 1),
+"update": 0,
+"values": [Vector2(4.76837e-06, -824.207), Vector2(0, -770), Vector2(0, -850), Vector2(0, -823)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5mlbk"]
+_data = {
+"RESET": SubResource("Animation_eixkr"),
+"ai_peck": SubResource("Animation_71aru")
+}
 
 [node name="AI_Bird" type="Node2D"]
 z_index = 1
@@ -75,6 +137,7 @@ shape = SubResource("CapsuleShape2D_82nrl")
 [node name="eater_zone" type="Area2D" parent="CharacterBody2D" groups=["ai_attacker", "eater"]]
 monitoring = false
 monitorable = false
+script = ExtResource("5_qgt2p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/eater_zone"]
 position = Vector2(0, -26)
@@ -126,6 +189,11 @@ offset_left = -59.0
 offset_top = -35.0
 offset_right = -19.0
 offset_bottom = -12.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_5mlbk")
+}
 
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.1

@@ -56,5 +56,6 @@ position = Vector2(78, 53)
 [connection signal="pred_spot" from="." to="AI_Bird4" method="_on_bird_control_pred_spot"]
 [connection signal="player_attacked" from="player_bird2" to="." method="_on_player_bird_2_player_attacked"]
 [connection signal="player_grew_up" from="player_bird2" to="." method="_on_player_bird_2_player_grew_up"]
+[connection signal="player_killed_by_ai_bird" from="player_bird2" to="." method="_on_player_bird_2_player_killed_by_ai_bird"]
 [connection signal="player_starved" from="player_bird2" to="." method="_on_player_bird_2_player_starved"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

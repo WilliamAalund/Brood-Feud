@@ -55,12 +55,14 @@ func predatorLoop():
 			if timeAwayFromNest == 0 and momIsHome:
 				print("Predator: momma bird preventing approach to nest")
 				timeAwayFromNest = Game_Parameters.TIME_AWAY_STALL
-				$merlin_distance.play()
+				if Game_Parameters.gameOccurring:
+					$merlin_distance.play()
 		# Predator approaches the nest
 		emit_signal("toggle_predator_approach")
 		print("Predator: Approaches nest")
 		timeUntilHeadToNest = randi_range(Game_Parameters.TIME_APPROACHED_MIN, Game_Parameters.TIME_APPROACHED_MAX)
-		$merlin_distance.play()
+		if Game_Parameters.gameOccurring:
+			$merlin_distance.play()
 		
 		while timeUntilHeadToNest >= 0 or momIsHome:
 			await $Timer.timeout
@@ -77,7 +79,8 @@ func predatorLoop():
 		if Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease > 15:
 			aggressionTimeDecrease += (Game_Parameters.BASE_TIME_AWAY_FROM_NEST - aggressionTimeDecrease) / 9.0 # This will shorten the time until the next predator approach
 		print("Predator: Leaves nest")
-		$merlin_fly_out.play()
+		if Game_Parameters.gameOccurring:
+			$merlin_fly_out.play()
 
 func birdDetectorCircleAnimation():
 	$bird_detector/Sprite2D.visible = true
@@ -127,8 +130,9 @@ func headToNest():
 	predIsHome = true # Prevents predator loop from continuing
 	emit_signal("toggle_predator_presence") # Sent to other nodes, makes rig visible
 	fadeOutAudio(1.0)
-	$merlin_close.play()
-	$merlin_fly_in.play()
+	if Game_Parameters.gameOccurring:
+		$merlin_close.play()
+		$merlin_fly_in.play()
 	await get_tree().create_timer(LandingTime).timeout
 	resetDetectionBooleans() # Booleans that are used in predatorEatDecision()
 	birdDetectorCircleAnimation() # Indicates to player what area isn't safe

@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://beiqf32okhnfo" path="res://birdNoises/merlinFlyAway.mp3" id="7_2sfpb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpgnr"]
-radius = 296.204
+radius = 291.062
 
 [node name="Predator" type="Node2D"]
 z_index = 2
@@ -63,7 +63,6 @@ scale = Vector2(0.444548, -0.356583)
 texture = ExtResource("4_qhvhc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bird_detector"]
-visible = false
 position = Vector2(0, -144)
 shape = SubResource("CircleShape2D_vpgnr")
 

@@ -2,7 +2,7 @@ extends Node2D
 
 const starvationThreshold = 35 # Used to determine when AI birds take on a sickly appearance
 const lowerAngryThreshold = 40
-const upperAngryThreshold = 85
+const upperAngryThreshold = 60
 
 @export var satiation = 100
 
@@ -41,6 +41,7 @@ var predator_spot = Vector2(0,0) #(0,0) is null, and means birds don't know wher
 #predator shows itself
 
 func _ready(): # Will be removed later on when the bird should actually start in the nest
+	$CharacterBody2D/eater_zone.attackPower = age
 	updateTargetArraysAndClosestPositions()
 	$CharacterBody2D.state = updatedState()
 	if isStupid:
@@ -61,16 +62,22 @@ func _physics_process(_delta):
 		if sizeExperience <= 0:
 			$CharacterBody2D.modulate = Color(1,1,1,1)
 	# Next code controls modulation value to indicate status of bird to the player
-	if damageTint > 0:
+	if !isDead and damageTint <= 0:
+		$CharacterBody2D.modulate = Color(1 - 0.5 * ((100.0 - satiation) / 100.0), 1 - 0.5 * ((100 - satiation) / 100.0), 1 - 0.6 * ((100.0 - satiation) / 100), 1)
+	if damageTint > 0 and !isDead:
 		$CharacterBody2D.modulate += Color(.025,.015,.015,0)
 		damageTint -= 1
-	if aggroVal >= lowerAngryThreshold and damageTint <= 0:
-		$CharacterBody2D.modulate = Color(0.9,0.75,0.75,1)
-	if damageTint <= 0 and aggroVal < lowerAngryThreshold:
-		if satiation <= starvationThreshold and !isDead:
-			$CharacterBody2D.modulate = Color(0.9,0.9,0.8,1)
-		else:
-			$CharacterBody2D.modulate = Color(1,1,1,1)
+	if aggroVal >= lowerAngryThreshold and damageTint <= 0 and !isDead:
+		$CharacterBody2D.modulate.r += 0.3
+		#$CharacterBody2D.modulate = Color(0.9,0.75,0.75,1)
+#	if damageTint <= 0 and aggroVal < lowerAngryThreshold:
+#		# $CharacterBody2D.modulate = Color(1 - 0.2 * ((100 - satiation) / 100), 1 - 0.2 * ((100 - satiation) / 100), 1 - 0.2 * ((100 - satiation) / 100), 1)
+#		if !isDead:
+#			$CharacterBody2D.modulate = Color(1 - 0.3 * ((100 - satiation) / 100), 1 - 0.3 * ((100 - satiation) / 100), 1 - 0.4 * ((100 - satiation) / 100), 1)
+##		if satiation <= starvationThreshold and !isDead:
+##			$CharacterBody2D.modulate = Color(0.9,0.9,0.8,1)
+##		else:
+##			$CharacterBody2D.modulate = Color(1,1,1,1)
 	if stunVal > 0:
 		stunVal -= 1
 	
@@ -94,6 +101,7 @@ func expend(value): # Immedeately decreases satiation by a specified amount.
 
 func ageUp():
 	age += 1
+	$CharacterBody2D/eater_zone.attackPower = age
 	experience = 0
 	#self.scale += Vector2(LEVEL_UP_SCALE_INCREASE,LEVEL_UP_SCALE_INCREASE)
 	$CharacterBody2D.push_force += Game_Parameters.LEVEL_UP_PUSH_FORCE_INCREASE
@@ -101,20 +109,32 @@ func ageUp():
 	$CharacterBody2D.modulate = Color(.5,1,.5,1)
 	sizeExperience += 20
 
-func bleed(value):
+func bleed(value, attackPower = 1):
 	if !isDead:
+		var damageReceived = max(Game_Parameters.BIRD_ATTACKED_DAMAGE_CHUNK + 2 * (attackPower - age), 1)
+		print("AI bird receives: ", damageReceived, " damage")
+		#Game_Parameters.BIRD_ATTACKED_DAMAGE_CHUNK + (attackerLevel - myLevel)
+		if satiation - damageReceived < 0:
+			satiation = 0
+		else:
+			satiation -= damageReceived
 		damage += value
 		numberOfTimesAttacked += 1
 		aggroVal += min(value * numberOfTimesAttacked, 60)
+		if aggroVal > lowerAngryThreshold:
+			$CharacterBody2D/eater_detector_zone.monitoring = false
+			$CharacterBody2D/eater_detector_zone.monitoring = true
 		if aggroVal > Game_Parameters.MAXIMUM_AGGRO_VALUE:
-			aggroVal = 100
+			aggroVal = Game_Parameters.MAXIMUM_AGGRO_VALUE
 		#var totalDamageIncurred = damage * BLEED_RATE
-		stunVal += 15
-		damageAnimation()
+		stunVal += max(15 + 5 * (attackPower - age), 0)
+		damageAnimation(attackPower)
 	
-func damageAnimation():
-	$CharacterBody2D.modulate = Color(0.5,0.3,0.3,1)
-	damageTint = 25
+func damageAnimation(attackPower):
+	$CharacterBody2D.modulate = Color(0.5 - (attackPower - age) / 10.0,0.3 - (attackPower - age) / 10.0,0.3 - (attackPower - age) / 10.0,1)
+	damageTint = max(25 + (attackPower - age) * 15, 1)
+	# max(25 + (attackPower - age) * 5, 1)
+	# modval - (attackPower - age) / 10
 
 func killBird():
 	isDead = true
@@ -122,7 +142,7 @@ func killBird():
 	$CharacterBody2D/Sprite2D.visible = false
 	$CharacterBody2D/bird_sprite_body.visible = false
 	$CharacterBody2D/dead_bird_sprite.visible = true # Indicate to the player that the bird is dead
-	$CharacterBody2D/dead_bird_sprite.modulate = Color(.5,.3,.3,1)
+	$CharacterBody2D/dead_bird_sprite.modulate = Color(.6,.4,.4,1)
 	$CharacterBody2D/body_zone.add_to_group("carcus")
 	$CharacterBody2D/body_zone.remove_from_group("dumb")
 	if $CharacterBody2D/CollisionShape2D:
@@ -226,7 +246,7 @@ func _on_body_zone_area_entered(area):
 		if numSunlightSpotsInside > 0:
 			inSunlight = true
 	else: if area.is_in_group("attacker"):
-		bleed(35)
+		bleed(20, area.attackPower)
 
 func _on_body_zone_area_exited(area):
 	if area.is_in_group("sunray"):

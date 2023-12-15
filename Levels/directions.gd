@@ -12,7 +12,7 @@ func _ready():
 		print("User is playing with an Xbox controller.")
 		$"Xbox Directions".visible = true
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("secondaryinteract"): # If the player uses the interact key instead of the mouse
 		_on_back_button_pressed()
 

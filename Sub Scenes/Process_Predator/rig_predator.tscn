@@ -15,7 +15,7 @@ texture = ExtResource("2_4x8mj")
 
 [node name="predator_body" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-64.4445, 286.468)
+position = Vector2(177, 247)
 scale = Vector2(0.251519, 0.251434)
 texture = ExtResource("3_uoa7b")
 

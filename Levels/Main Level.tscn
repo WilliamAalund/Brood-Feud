@@ -53,6 +53,8 @@ visible = false
 
 [connection signal="player_attacked" from="manager_birds" to="." method="_on_manager_birds_player_attacked"]
 [connection signal="player_grew_up" from="manager_birds" to="." method="_on_manager_birds_player_grew_up"]
+[connection signal="player_grew_up" from="manager_birds" to="manager_game_over" method="_on_manager_birds_player_grew_up"]
+[connection signal="player_killed_by_ai_bird" from="manager_birds" to="manager_game_over" method="_on_manager_birds_player_killed_by_ai_bird"]
 [connection signal="player_starved" from="manager_birds" to="manager_game_over" method="_on_manager_birds_player_starved"]
 [connection signal="mom_drops_food" from="process_momma_bird" to="helper_food_spawner" method="_on_momma_bird_mom_drops_food"]
 [connection signal="momma_win_condition" from="process_momma_bird" to="." method="_on_process_momma_bird_momma_win_condition"]

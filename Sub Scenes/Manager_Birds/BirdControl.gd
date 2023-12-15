@@ -10,6 +10,7 @@ signal Birds_Increment_Hunger()
 signal player_starved
 signal player_grew_up
 signal player_attacked
+signal player_killed_by_ai_bird
 signal birds_toggle_predator_notice
 signal birds_toggle_momma_bird_notice
 signal kill
@@ -62,3 +63,6 @@ func _on_player_bird_2_player_starved():
 
 func _on_player_bird_2_player_attacked():
 	emit_signal("player_attacked")
+
+func _on_player_bird_2_player_killed_by_ai_bird():
+	emit_signal("player_killed_by_ai_bird")
